@@ -2,7 +2,7 @@ import React from 'react'
 import Home from '../Home/Home'
 function Main() {
   return (
-    <main className='scroll-container'>
+    <main className=''>
         <div>
             <Home/>
         </div>
