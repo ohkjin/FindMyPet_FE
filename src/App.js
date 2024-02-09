@@ -19,7 +19,7 @@ function App() {
             <Route path="/home" element={<Home/>}/>
             <Route path="/user/login" element={<Login/>}/>
             <Route path="/user/join" element={<Join/>}/>
-            <Route path="/mypage" element={<MyPage/>}/>
+            <Route path="/user/mypage" element={<MyPage/>}/>
         </Routes>
       </RecoilRoot>
       </BrowserRouter>
