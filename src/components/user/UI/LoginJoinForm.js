@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 
 export default function LoginJoinForm({kakao,handleButton, functionText, inputMap}) {
 const [emailLogin,setEmailLogin] = useState(false);
-// const Mappedinput = Array.from(inputMap).map(([key, value]) => (
-//     <input type={value} ref={``} placeholder={key} className='mt-3 p-3 w-[300px] h-[42px] text-slate-100 border-b border-slate-200' />
-// ));
+const Mappedinput = Array.from(inputMap).map(([key, value]) => (
+    <input type={value}  placeholder={key} className='mt-3 p-3 w-[300px] h-[42px] text-slate-600 border-b border-slate-200' />
+));
   const handleEmail = () => {
     if (emailLogin === false) setEmailLogin(true);
     if (emailLogin === true) setEmailLogin(false);
@@ -26,7 +26,7 @@ const [emailLogin,setEmailLogin] = useState(false);
                         </button>
                         {emailLogin ? (
                             <form className='flex flex-col my-5'>
-                                {/* {Mappedinput?Mappedinput:''} */}
+                                {Mappedinput?Mappedinput:''}
                                 {/* <input type='email' placeholder='이메일' className='mt-10 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
                                 <input type='password' placeholder='비밀번호' className='mt-3 mb-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' /> */}
                                 <button type='submit' onClick={handleButton} className='mt-5 w-[300px] h-[42px] rounded-xl text-sm font-bold border-2 border-yellow-300 text-yellow-400'>{functionText}</button>
