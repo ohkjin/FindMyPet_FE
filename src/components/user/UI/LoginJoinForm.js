@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
-export default function LoginJoinForm({kakao,handleButton, functionText, inputMap}) {
-const [emailLogin,setEmailLogin] = useState(false);
-const Mappedinput = Array.from(inputMap).map(([key, value]) => (
-    <input type={value}  placeholder={key} className='mt-3 p-3 w-[300px] h-[42px] text-slate-600 border-b border-slate-200' />
-));
-  const handleEmail = () => {
-    if (emailLogin === false) setEmailLogin(true);
+export default function LoginJoinForm({kakao,handleButton, functionText, inputs, emailShown}) {
+const [emailLogin,setEmailLogin] = useState(emailShown);
+const formRef = useRef();
+// const Mappedinput = Array.from(inputMap).map(([key, value]) => (
+//     <input type={value}  placeholder={key} className='mt-3 p-3 w-[300px] h-[42px] text-slate-600 border-b border-slate-200' />
+// ));
+  const handleEmailSection = () => {
+    if (emailLogin === false) {
+        setEmailLogin(true);
+        // formRef.current.scrollTo({top:1000,behavior:'smooth'})
+    }
     if (emailLogin === true) setEmailLogin(false);
   }
     return (
@@ -20,22 +24,20 @@ const Mappedinput = Array.from(inputMap).map(([key, value]) => (
                     </button>
                 </div>
                 <div className='Main py-5 flex flex-col justify-center items-center'>
-                    <div className='Email'>
-                        <button onClick={handleEmail} className='bg-slate-200 w-[300px] h-[42px] rounded-xl text-sm'>
+                    <div className='Email' >
+                        <button onClick={handleEmailSection} ref = {formRef}  className='bg-slate-200 w-[300px] h-[42px] rounded-xl text-sm'>
                              이메일로 {functionText}
                         </button>
                         {emailLogin ? (
-                            <form className='flex flex-col my-5'>
-                                {Mappedinput?Mappedinput:''}
-                                {/* <input type='email' placeholder='이메일' className='mt-10 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
-                                <input type='password' placeholder='비밀번호' className='mt-3 mb-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' /> */}
-                                <button type='submit' onClick={handleButton} className='mt-5 w-[300px] h-[42px] rounded-xl text-sm font-bold border-2 border-yellow-300 text-yellow-400'>{functionText}</button>
+                            <form className='flex flex-col my-5' method='post' >
+                            {inputs}
+                            <button type='submit' onClick={handleButton} className='mt-5 w-[300px] h-[42px] rounded-xl text-sm font-bold border-2 border-yellow-300 text-yellow-400'>회원가입</button>
                             </form>
                         ) : (
                             <></>
                         )}
                     </div>
-                </div>
+                </div >
             </div>
         </>
     )
