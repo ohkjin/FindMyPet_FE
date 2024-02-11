@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 
 export default function LoginJoinForm({kakao,handleButton, functionText, inputs, emailShown}) {
 const [emailLogin,setEmailLogin] = useState(emailShown);
-const formRef = useRef();
+
 // const Mappedinput = Array.from(inputMap).map(([key, value]) => (
 //     <input type={value}  placeholder={key} className='mt-3 p-3 w-[300px] h-[42px] text-slate-600 border-b border-slate-200' />
 // ));
@@ -25,7 +25,7 @@ const formRef = useRef();
                 </div>
                 <div className='Main py-5 flex flex-col justify-center items-center'>
                     <div className='Email' >
-                        <button onClick={handleEmailSection} ref = {formRef}  className='bg-slate-200 w-[300px] h-[42px] rounded-xl text-sm'>
+                        <button onClick={handleEmailSection} className='bg-slate-200 w-[300px] h-[42px] rounded-xl text-sm'>
                              이메일로 {functionText}
                         </button>
                         {emailLogin ? (
