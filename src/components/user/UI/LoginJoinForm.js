@@ -31,7 +31,7 @@ const [emailLogin,setEmailLogin] = useState(emailShown);
                         {emailLogin ? (
                             <form className='flex flex-col my-5' method='post' >
                             {inputs}
-                            <button type='submit' onClick={handleButton} className='mt-5 w-[300px] h-[42px] rounded-xl text-sm font-bold border-2 border-yellow-300 text-yellow-400'>회원가입</button>
+                            <button type='submit' onClick={handleButton} className='mt-5 w-[300px] h-[42px] rounded-xl text-sm font-bold border-2 border-yellow-300 text-yellow-400'>{functionText}</button>
                             </form>
                         ) : (
                             <></>
