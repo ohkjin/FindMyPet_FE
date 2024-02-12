@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 
 export default function LoginJoinForm({kakao,handleButton, functionText, inputs, emailShown}) {
 const [emailLogin,setEmailLogin] = useState(emailShown);
