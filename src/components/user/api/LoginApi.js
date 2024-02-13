@@ -10,8 +10,8 @@ export const userLogin = async (email, pwd) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            params: {
-                email: email,
+            body: {
+                userId: email,
                 password: pwd
             }
         })

@@ -24,9 +24,9 @@ function Join() {
   })
 
   const userDetail = {
-    email: email,
+    userId: email,
     password: pwd,
-    username: username
+    nickname: username
   }
   const handleEmail = (e) => {
     e.preventDefault();
@@ -61,34 +61,57 @@ function Join() {
     e.preventDefault();
     userJoin(userDetail)
       .then(data => {
-        if (data.code === 1) {
-          setPopup({
+        setPopup({
             open: true,
             title: 'Confirm',
             message: '회원가입 성공!',
             callback: function () { navigate('/user/login') }
           })
-        } else {
-          let message = data.message;
-          if (data.code === 0) {
-            message = '중복된 유저입니다'
-          }
+        // if (data.code === 1) {
+        //   setPopup({
+        //     open: true,
+        //     title: 'Confirm',
+        //     message: '회원가입 성공!',
+        //     callback: function () { navigate('/user/login') }
+        //   })
+        // } else {
+        //   let message = data.message;
+        //   if (data.code === 0) {
+        //     message = '중복된 유저입니다'
+        //   }
+        //   setPopup({
+        //     open: true,
+        //     title: 'Error',
+        //     message: message
+        //   })
+        // }
+      }).catch(err => {
+        if(err.response){
           setPopup({
             open: true,
             title: 'Error',
-            message: message
+            message:err.response.status
           })
+        }else if(err.request){
+          console.log(err.request)
+        }else{
+          console.log('Error',err.message)
         }
-      }).catch(err => console.log(err))
+        console.log(err.config)
+      })
+  }
+
+  const handleKakaoJoin = () => {
+
   }
   const inputs =  <>
   <input type='email' ref={emailRef} onChange={handleEmail} placeholder='이메일' className='mt-10 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
-  <div className='text-sm text-red-500'>{emailAlert}</div>
+  <div className='text-xs text-red-500 w-[300px]'>{emailAlert}</div>
   <input type='text' onChange={e => setUsername(e.target.value)} placeholder='닉네임' className='mt-3 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
   <input type='password' onChange={handlePwd} placeholder='비밀번호' className='mt-3 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
-  <div className='text-sm text-red-500'>{pwdAlert}</div>
+  <div className='text-xs text-red-500 w-[300px]'>{pwdAlert}</div>
   <input type='password' onChange={handlePwdCheck} placeholder='비밀번호 확인' className='mt-3 mb-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
-  <div className='text-sm text-red-500'>{pwdCheckAlert}</div>
+  <div className='text-xs text-red-500 w-[300px]'>{pwdCheckAlert}</div>
 </>
 
 
@@ -106,7 +129,7 @@ function Join() {
           callback={popup.callback}
           />
         )}
-        <LoginJoinForm kakao={kakao} functionText={'회원가입'}  inputs = {inputs} handleButton={handleJoin} emailShown={true}/>
+        <LoginJoinForm kakao={kakao} handleKakao={handleKakaoJoin} functionText={'회원가입'}  inputs = {inputs} handleButton={handleJoin} emailShown={true}/>
       </div>
     </div>
   )

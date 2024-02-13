@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function LoginJoinForm({kakao,handleButton, functionText, inputs, emailShown}) {
+export default function LoginJoinForm({kakao, handleKakao, handleButton, functionText, inputs, emailShown}) {
 const [emailLogin,setEmailLogin] = useState(emailShown);
 
 // const Mappedinput = Array.from(inputMap).map(([key, value]) => (
@@ -19,7 +19,7 @@ const [emailLogin,setEmailLogin] = useState(emailShown);
             <div className='Subtitle font-thin text-slate-400 text-sm '>간편하게 SNS {functionText}</div>
             <div className='Cate divide-y divide-slate-300'>
                 <div className='Aouth2 pt-2 pb-5 '>
-                    <button>
+                    <button onClick={handleKakao}>
                         <img src={kakao} alt='kakao login' className='rounded-xl'/>
                     </button>
                 </div>

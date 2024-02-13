@@ -47,7 +47,8 @@ export default function Login() {
         })
       }
     }).catch(err=>console.log(err))
-    
+  }
+  const handleKakaoLogin = () => {
     
   }
   return (
@@ -64,7 +65,7 @@ export default function Login() {
           callback={popup.callback}
           />
         )}
-        <LoginJoinForm kakao={kakao} functionText={'로그인'}  inputs = {inputs} handleButton={handleLogin} emailShown={false}/>
+        <LoginJoinForm kakao={kakao} handleKakao={handleKakaoLogin} functionText={'로그인'}  inputs = {inputs} handleButton={handleLogin} emailShown={false}/>
         {/* <div className='login_title'></div>
         <div className='login_cate divide-y divide-slate-300'>
           <div className='login_Aouth2 py-5 '>
