@@ -1,5 +1,4 @@
 import React from 'react'
-import LoginJoinForm from '../UI/LoginJoinForm'
 
 export default function FindPwd() {
 

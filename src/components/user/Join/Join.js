@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import LoginJoinForm from '../UI/LoginJoinForm'
 import kakao from '../../../assets/images/oauth/kakao_join_medium_wide.png'
 // import welsh from '../../../assets/images/welcome/tricatwelcome.jpg'
@@ -11,11 +11,10 @@ function Join() {
   const [email, setEmail] = useState('');
   const [emailAlert,setEmailAlert] = useState('');
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-  const emailRef = useRef();
   const [pwd,setPwd] = useState('');
   const [pwdAlert,setPwdAlert] = useState('');
   const [pwdCheckAlert,setPwdCheckAlert] = useState('');
-  const [username, setUsername] = useState('');
+  const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
   const [errMessage,setErrMessage] = useState(<></>);
   const [popup,setPopup] = useState({
@@ -28,7 +27,7 @@ function Join() {
   const userDetail = {
     "userId": email,
     "password": pwd,
-    "nickname": username
+    "nickname": nickname
   }
   const handleEmail = (e) => {
     e.preventDefault();
@@ -61,6 +60,10 @@ function Join() {
  
   const handleJoin = (e) => {
     e.preventDefault();
+    if(email===''||nickname===''||pwd===''||emailAlert!==''||pwdAlert!==''||pwdCheckAlert!==''){
+      setErrMessage(<div className='text-red-500'>모든 칸은 입력되어야하며 에러사항이 없도록 확인해주세요</div>)
+      return
+    }
     try{
     userJoin(userDetail)
       .then(data => {
@@ -90,12 +93,12 @@ function Join() {
 
   }
   const inputs =  <>
-  <input type='email' ref={emailRef} onChange={handleEmail} placeholder='이메일' className='mt-10 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
+  <input type='email' maxLength={30} onChange={handleEmail} placeholder='이메일' className='mt-10 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
   <div className='text-xs text-red-500 w-[300px]'>{emailAlert}</div>
-  <input type='text' onChange={e => setUsername(e.target.value)} placeholder='닉네임' className='mt-3 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
-  <input type='password' onChange={handlePwd} placeholder='비밀번호' className='mt-3 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
+  <input type='text'  maxLength={30} onChange={e => setNickname(e.target.value)} placeholder='닉네임' className='mt-3 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
+  <input type='password'  maxLength={20} onChange={handlePwd} placeholder='비밀번호' className='mt-3 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
   <div className='text-xs text-red-500 w-[300px]'>{pwdAlert}</div>
-  <input type='password' onChange={handlePwdCheck} placeholder='비밀번호 확인' className='mt-3 mb-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
+  <input type='password'  maxLength={20} onChange={handlePwdCheck} placeholder='비밀번호 확인' className='mt-3 mb-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
   <div className='text-xs text-red-500 w-[300px]'>{pwdCheckAlert}</div>
 </>
 

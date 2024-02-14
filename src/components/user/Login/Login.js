@@ -8,71 +8,93 @@ import Popup from 'reactjs-popup';
 import kakao from '../../../assets/images/oauth/kakao_login_medium_wide.png'
 import welsh from '../../../assets/images/welcome/welshcorgiwavingpaw.jpg'
 import LoginJoinForm from '../UI/LoginJoinForm';
-// import {setToken} from '../api/TokenManager';
 import axios from 'axios';
+import { useCookies } from 'react-cookie';
+
 
 export default function Login() {
-  const API_SERVER = 'http://10.125.121.183:8080'
-const prefix = `${API_SERVER}/user/login`
+  //-- Restful Api --//
+  const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
+  const prefix = `${API_SERVER}/user/login`
+
+  //-- Cookie --//
+  const [cookies, setCookies] = useCookies(["accessToken", "refreshToken"])
+  const expires = new Date()
+  expires.setDate(Date.now()+1000*60*60*24)
+  let httpTF = true
+  if(API_SERVER==='http://10.125.121.183:8080'){
+    httpTF = false
+  }
+
+  //-- for input --//
   const emailRef = useRef()
   const pwdRef = useRef()
+  const inputs = <>
+    <input type='email'  maxLength={30} ref={emailRef} placeholder='이메일' className='mt-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
+    <input type='password'  maxLength={30} ref={pwdRef} placeholder='비밀번호' className='mt-3 mb-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
+  </>
+
+  //-- for State Management --//
   const navigate = useNavigate();
   const setIsLogin = useSetRecoilState(stLogin);
-  const [popup,setPopup] = useState({
+  const [popup, setPopup] = useState({
     open: false,
     title: '',
     message: '',
     callback: null,
   })
-  const [check,setCheck]=useState(<></>)
-  
-  const inputs = <>
-    <input type='email' ref={emailRef} placeholder='이메일' className='mt-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
-    <input type='password' ref={pwdRef} placeholder='비밀번호' className='mt-3 mb-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
-  </>
-  // const handleEmailShown = () => {
-  //   if (emailLogin === false) setEmailLogin(true);
-  //   if (emailLogin === true) setEmailLogin(false);
-  // }
+  const [errMessage,setErrMessage] = useState(<></>);
 
+  //-- Login --//
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log(emailRef.current.value,pwdRef.current.value)
+    if(emailRef.current.value===''||pwdRef.current.value===''){
+      setErrMessage(<div className='text-red-500'>이메일과 비밀번호 전부 입력해주세요</div>)
+      return
+    }
+    console.log(emailRef.current.value, pwdRef.current.value)
     try {
       const res = axios.post(`${prefix}`, {
-          headers: {
-              'Content-Type': 'application/json'
-          },
-              userId: emailRef.current.value,
-              password: pwdRef.current.value
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        userId: emailRef.current.value,
+        password: pwdRef.current.value
       })
-      .then(res=>res.data)
-      .then(data => {
-        setIsLogin(true);
-        console.log(data)
-        const accessToken = data.accessToken;
-        const refreshToken = data.refreshToken;
-        setCheck(<div>{accessToken}{refreshToken}</div>)
-        // setToken(accessToken,refreshToken)
-        navigate('/home');
-        // let message = data.message
-    }).catch(err=>{
-      console.log(err)
-      setCheck(<div className='text-red-400'>({err.response.status}) {err.response.data}</div>)
-      setPopup({
-        open: true,
-        title: 'Error',
-        message: err.message,
-      })
-    })
-    console.log(res)
-  } catch (e) {
-    console.log(e)
+        .then(res => res.data)
+        .then(data => {
+          setIsLogin(true);
+          console.log(data)
+          //response.headers?
+          const accessToken = data.accessToken;
+          const refreshToken = data.refreshToken;
+          if (accessToken&&refreshToken) {
+            setCookies("accessToken",accessToken,{path:'/',expires,httpOnly:httpTF})
+            setCookies("refreshToken",refreshToken,{path:'/',expires,httpOnly:httpTF})
+            axios.defaults.headers.Authorization = 'Bearer '+ accessToken
+            console.log(cookies)
+          }
+          setErrMessage(<div>{accessToken}{refreshToken}</div>)
+          // setToken(accessToken,refreshToken)
+          navigate('/home');
+          // let message = data.message
+        }).catch(err => {
+          console.log(err)
+          setErrMessage(<div className='text-red-400'>({err.response.status}) {err.response.data}</div>)
+          setPopup({
+            open: true,
+            title: 'Error',
+            message: err.message,
+          })
+        })
+      console.log(res)
+    } catch (e) {
+      console.log(e)
       return null
-  }
+    }
   }
   const handleKakaoLogin = () => {
-    
+
   }
   return (
     <div className='login container flex justify-center items-center w-full'>
@@ -80,40 +102,16 @@ const prefix = `${API_SERVER}/user/login`
         <div className='login_img'>
           <img src={welsh} alt='welcome welsh' className='w-[400px]' />
         </div>
-        {check}
+        {errMessage}
         {popup.open && (
-          <Popup 
-          open={popup.open}
-          title={popup.title}
-          message={popup.message}
-          callback={popup.callback}
+          <Popup
+            open={popup.open}
+            title={popup.title}
+            message={popup.message}
+            callback={popup.callback}
           />
         )}
-        <LoginJoinForm kakao={kakao} handleKakao={handleKakaoLogin} functionText={'로그인'}  inputs = {inputs} handleButton={handleLogin} emailShown={false}/>
-        {/* <div className='login_title'></div>
-        <div className='login_cate divide-y divide-slate-300'>
-          <div className='login_Aouth2 py-5 '>
-            <button>
-              <img src={kakao} alt='kakao login' />
-            </button>
-          </div>
-          <div className='login_main py-5 flex flex-col justify-center items-center'>
-            <div className='login_email'>
-              <button onClick={handleEmailShown} className='bg-slate-200 w-[300px] h-[42px] rounded-md text-sm'>
-                이메일로 로그인
-              </button>
-              {emailLogin ? (
-                <form className='flex flex-col my-5'>
-                  <input type='email' ref={emailRef} placeholder='이메일' className='mt-10 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
-                  <input type='password' ref={pwdRef} placeholder='비밀번호' className='mt-3 mb-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
-                  <button type='submit' onClick={handleLogin} className='w-[300px] h-[42px] rounded-md text-sm font-bold border-2 border-yellow-300 text-yellow-400'>로그인</button>
-                </form>
-              ) : (
-                <></>
-              )}
-            </div>
-          </div>
-        </div> */}
+        <LoginJoinForm kakao={kakao} handleKakao={handleKakaoLogin} functionText={'로그인'} inputs={inputs} handleButton={handleLogin} emailShown={false} />
         <div className='login_else divide-x divide-slate-300'>
           <Link to='/user/findpwd' className='m-1 px-3 text-slate-500'>비밀번호 찾기</Link>
           <Link to='/user/join' className='m-1 px-3 text-slate-500'>회원가입</Link>
