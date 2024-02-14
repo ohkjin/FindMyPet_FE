@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import { stLogin } from '../atom/LoginAtom'
-// import { userLogin } from '../api/LoginApi';
+import { userLogin } from '../api/LoginApi';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom/dist';
 import Popup from 'reactjs-popup';
@@ -44,10 +44,9 @@ const prefix = `${API_SERVER}/user/login`
           headers: {
               'Content-Type': 'application/json'
           },
-          body: {
               userId: emailRef.current.value,
               password: pwdRef.current.value
-          }
+
       })
       .then(res=>res.data)
       .then(data => {
@@ -72,23 +71,6 @@ const prefix = `${API_SERVER}/user/login`
     console.log(e)
       return null
   }
-    // userLogin(emailRef.current.value,pwdRef.current.value)
-    // .then(data => {
-    //     setIsLogin(true);
-    //     console.log()
-    //     // const accessToken = data.accessToken;
-    //     // const refreshToken = data.refreshToken;
-    //     // setToken(accessToken,refreshToken)
-    //     navigate('/home');
-    //     // let message = data.message
-    // }).catch(err=>
-    //   console.log(err)
-    //   // setPopup({
-    //   //   open: true,
-    //   //   title: 'Error',
-    //   //   message: err.message,
-    //   // })
-    //   )
   }
   const handleKakaoLogin = () => {
     

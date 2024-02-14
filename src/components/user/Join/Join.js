@@ -5,6 +5,7 @@ import kakao from '../../../assets/images/oauth/kakao_join_medium_wide.png'
 import { userJoin } from '../api/JoinApi'
 import { useNavigate } from 'react-router-dom'
 import Popup from 'reactjs-popup'
+// import axios from 'axios'
 
 function Join() {
   const [email, setEmail] = useState('');
@@ -59,6 +60,7 @@ function Join() {
  
   const handleJoin = (e) => {
     e.preventDefault();
+    try{
     userJoin(userDetail)
       .then(data => {
         setPopup({
@@ -77,6 +79,14 @@ function Join() {
           })
         
       })
+    }catch(e){
+      console.log(e)
+          setPopup({
+            open: true,
+            title: 'Error',
+            message:e.response.status
+          })
+    }
   }
 
   const handleKakaoJoin = () => {

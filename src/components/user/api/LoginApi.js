@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_SERVER = 'http://10.125.121.183'
+const API_SERVER = 'http://10.125.121.183:8080'
 
 const prefix = `${API_SERVER}/user/login`
 
@@ -12,10 +12,8 @@ export const userLogin = async (email, pwd) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: {
-                userId: email,
-                password: pwd
-            }
+            userId: email,
+            password: pwd
         })
         return res.data
     } catch (e) {

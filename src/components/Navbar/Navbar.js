@@ -16,6 +16,9 @@ export default function Navbar() {
                 <Link to="/home" className={`${linkShape}${linkDesign}${linkHover}${linkFont}`}>
                     홈
                 </Link>
+                <Link to="/test" className={`${linkShape}${linkDesign}${linkHover}${linkFont}`}>
+                    테스트
+                </Link>
                 <Link to="/find" className={`${linkShape}${linkDesign}${linkHover}${linkFont}`}>
                     유기동물
                 </Link>
@@ -34,6 +37,7 @@ export default function Navbar() {
                     로그인
                 </Link>
                 }
+                
                 <Link to="/user/board" className={`${linkShape}${linkDesign}${linkHover}${linkFont}`}>
                     보드
                 </Link>
