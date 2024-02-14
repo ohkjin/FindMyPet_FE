@@ -13,7 +13,7 @@ import axios from 'axios';
 
 export default function Login() {
   // const [emailLogin, setEmailLogin] = useState(false);
-  const API_SERVER = 'http://10.125.121.183'
+  const API_SERVER = 'http://10.125.121.183:8080'
 const prefix = `${API_SERVER}/user/login`
   const emailRef = useRef()
   const pwdRef = useRef()
@@ -25,6 +25,7 @@ const prefix = `${API_SERVER}/user/login`
     message: '',
     callback: null,
   })
+  const [check,setCheck]=useState(<></>)
   
   const inputs = <>
     <input type='email' ref={emailRef} placeholder='이메일' className='mt-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
@@ -39,7 +40,6 @@ const prefix = `${API_SERVER}/user/login`
     e.preventDefault();
     console.log(emailRef.current.value,pwdRef.current.value)
     try {
-      
       const res = axios.post(`${prefix}`, {
           headers: {
               'Content-Type': 'application/json'
@@ -49,23 +49,27 @@ const prefix = `${API_SERVER}/user/login`
               password: pwdRef.current.value
           }
       })
-      .then(res => {
+      .then(res=>res.data)
+      .then(data => {
         setIsLogin(true);
-        console.log()
+        console.log(data)
         // const accessToken = data.accessToken;
         // const refreshToken = data.refreshToken;
         // setToken(accessToken,refreshToken)
         navigate('/home');
         // let message = data.message
-    }).catch(err=>
+    }).catch(err=>{
       console.log(err)
-      // setPopup({
-      //   open: true,
-      //   title: 'Error',
-      //   message: err.message,
-      // })
-      )
+      setCheck(<div className='text-red-400'>{err.message}</div>)
+      setPopup({
+        open: true,
+        title: 'Error',
+        message: err.message,
+      })
+    })
+    console.log(res)
   } catch (e) {
+    console.log(e)
       return null
   }
     // userLogin(emailRef.current.value,pwdRef.current.value)
@@ -95,6 +99,7 @@ const prefix = `${API_SERVER}/user/login`
         <div className='login_img'>
           <img src={welsh} alt='welcome welsh' className='w-[400px]' />
         </div>
+        {check}
         {popup.open && (
           <Popup 
           open={popup.open}

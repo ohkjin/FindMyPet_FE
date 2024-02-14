@@ -24,9 +24,9 @@ function Join() {
   })
 
   const userDetail = {
-    userId: email,
-    password: pwd,
-    nickname: username
+    "userId": email,
+    "password": pwd,
+    "nickname": username
   }
   const handleEmail = (e) => {
     e.preventDefault();
@@ -67,37 +67,15 @@ function Join() {
             message: '회원가입 성공!',
             callback: function () { navigate('/user/login') }
           })
-        // if (data.code === 1) {
-        //   setPopup({
-        //     open: true,
-        //     title: 'Confirm',
-        //     message: '회원가입 성공!',
-        //     callback: function () { navigate('/user/login') }
-        //   })
-        // } else {
-        //   let message = data.message;
-        //   if (data.code === 0) {
-        //     message = '중복된 유저입니다'
-        //   }
-        //   setPopup({
-        //     open: true,
-        //     title: 'Error',
-        //     message: message
-        //   })
-        // }
+          navigate('user/login')
       }).catch(err => {
-        if(err.response){
+        console.log(err)
           setPopup({
             open: true,
             title: 'Error',
             message:err.response.status
           })
-        }else if(err.request){
-          console.log(err.request)
-        }else{
-          console.log('Error',err.message)
-        }
-        console.log(err.config)
+        
       })
   }
 
