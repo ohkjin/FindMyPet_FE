@@ -1,12 +1,14 @@
 import axios from "axios";
 
-export const API_SERVER_HOST = 'http://localhost:3000'
+const API_SERVER = 'http://10.125.121.183'
 
-const prefix = `${API_SERVER_HOST}/user/login`
+const prefix = `${API_SERVER}/user/login`
 
 export const userLogin = async (email, pwd) => {
+    console.log("API_SERVER_HOST",API_SERVER)
+    console.log("prefix",prefix)
     try {
-        const res = axios.get(`${prefix}`, {
+        const res = axios.post(`${prefix}`, {
             headers: {
                 'Content-Type': 'application/json'
             },

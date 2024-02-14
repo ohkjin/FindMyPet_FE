@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_SERVER_HOST = 'http://localhost:3000'
+const API_SERVER_HOST = process.env.API_KEY
 
 const prefix = `${API_SERVER_HOST}/user/join`
 

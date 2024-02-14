@@ -1,16 +1,20 @@
 import React, { useRef, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import { stLogin } from '../atom/LoginAtom'
-import { userLogin } from '../api/LoginApi';
+// import { userLogin } from '../api/LoginApi';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom/dist';
 import Popup from 'reactjs-popup';
 import kakao from '../../../assets/images/oauth/kakao_login_medium_wide.png'
 import welsh from '../../../assets/images/welcome/welshcorgiwavingpaw.jpg'
 import LoginJoinForm from '../UI/LoginJoinForm';
+// import {setToken} from '../api/TokenManager';
+import axios from 'axios';
 
 export default function Login() {
   // const [emailLogin, setEmailLogin] = useState(false);
+  const API_SERVER = 'http://10.125.121.183'
+const prefix = `${API_SERVER}/user/login`
   const emailRef = useRef()
   const pwdRef = useRef()
   const navigate = useNavigate();
@@ -33,20 +37,54 @@ export default function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    userLogin(emailRef,pwdRef)
-    .then(data => {
-      if(data.code === 1){
+    console.log(emailRef.current.value,pwdRef.current.value)
+    try {
+      
+      const res = axios.post(`${prefix}`, {
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: {
+              userId: emailRef.current.value,
+              password: pwdRef.current.value
+          }
+      })
+      .then(res => {
         setIsLogin(true);
+        console.log()
+        // const accessToken = data.accessToken;
+        // const refreshToken = data.refreshToken;
+        // setToken(accessToken,refreshToken)
         navigate('/home');
-      }else{
         // let message = data.message
-        setPopup({
-          open: true,
-          title: 'Error',
-          message: '로그인 실패',
-        })
-      }
-    }).catch(err=>console.log(err))
+    }).catch(err=>
+      console.log(err)
+      // setPopup({
+      //   open: true,
+      //   title: 'Error',
+      //   message: err.message,
+      // })
+      )
+  } catch (e) {
+      return null
+  }
+    // userLogin(emailRef.current.value,pwdRef.current.value)
+    // .then(data => {
+    //     setIsLogin(true);
+    //     console.log()
+    //     // const accessToken = data.accessToken;
+    //     // const refreshToken = data.refreshToken;
+    //     // setToken(accessToken,refreshToken)
+    //     navigate('/home');
+    //     // let message = data.message
+    // }).catch(err=>
+    //   console.log(err)
+    //   // setPopup({
+    //   //   open: true,
+    //   //   title: 'Error',
+    //   //   message: err.message,
+    //   // })
+    //   )
   }
   const handleKakaoLogin = () => {
     
