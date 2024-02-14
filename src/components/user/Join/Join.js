@@ -5,6 +5,7 @@ import kakao from '../../../assets/images/oauth/kakao_join_medium_wide.png'
 import { userJoin } from '../api/JoinApi'
 import { useNavigate } from 'react-router-dom'
 import Popup from 'reactjs-popup'
+// import axios from 'axios'
 
 function Join() {
   const [email, setEmail] = useState('');
@@ -16,6 +17,7 @@ function Join() {
   const [pwdCheckAlert,setPwdCheckAlert] = useState('');
   const [username, setUsername] = useState('');
   const navigate = useNavigate();
+  const [errMessage,setErrMessage] = useState(<></>);
   const [popup,setPopup] = useState({
     open: false,
     title: '',
@@ -24,9 +26,9 @@ function Join() {
   })
 
   const userDetail = {
-    userId: email,
-    password: pwd,
-    nickname: username
+    "userId": email,
+    "password": pwd,
+    "nickname": username
   }
   const handleEmail = (e) => {
     e.preventDefault();
@@ -59,46 +61,29 @@ function Join() {
  
   const handleJoin = (e) => {
     e.preventDefault();
+    try{
     userJoin(userDetail)
       .then(data => {
+        console.log(data)
         setPopup({
             open: true,
             title: 'Confirm',
-            message: '회원가입 성공!',
+            message: data.message,
             callback: function () { navigate('/user/login') }
           })
-        // if (data.code === 1) {
-        //   setPopup({
-        //     open: true,
-        //     title: 'Confirm',
-        //     message: '회원가입 성공!',
-        //     callback: function () { navigate('/user/login') }
-        //   })
-        // } else {
-        //   let message = data.message;
-        //   if (data.code === 0) {
-        //     message = '중복된 유저입니다'
-        //   }
-        //   setPopup({
-        //     open: true,
-        //     title: 'Error',
-        //     message: message
-        //   })
-        // }
+          navigate('../user/login')
       }).catch(err => {
-        if(err.response){
+        console.log(err)
+        setErrMessage(<div className='text-red-500'>{err.response.data}</div>)
           setPopup({
             open: true,
             title: 'Error',
             message:err.response.status
           })
-        }else if(err.request){
-          console.log(err.request)
-        }else{
-          console.log('Error',err.message)
-        }
-        console.log(err.config)
       })
+    }catch(e){
+      console.log(e)
+    }
   }
 
   const handleKakaoJoin = () => {
@@ -121,6 +106,7 @@ function Join() {
         <div className='login_img'>
           {/* <img src={welsh} alt='welcome welsh' className='w-[400px]' /> */}
         </div>
+        {errMessage}
         {popup.open && (
           <Popup 
           open={popup.open}
