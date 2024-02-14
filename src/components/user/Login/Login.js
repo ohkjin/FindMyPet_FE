@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import { stLogin } from '../atom/LoginAtom'
-import { userLogin } from '../api/LoginApi';
+// import { userLogin } from '../api/LoginApi';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom/dist';
 import Popup from 'reactjs-popup';
@@ -12,7 +12,6 @@ import LoginJoinForm from '../UI/LoginJoinForm';
 import axios from 'axios';
 
 export default function Login() {
-  // const [emailLogin, setEmailLogin] = useState(false);
   const API_SERVER = 'http://10.125.121.183:8080'
 const prefix = `${API_SERVER}/user/login`
   const emailRef = useRef()
@@ -46,20 +45,20 @@ const prefix = `${API_SERVER}/user/login`
           },
               userId: emailRef.current.value,
               password: pwdRef.current.value
-
       })
       .then(res=>res.data)
       .then(data => {
         setIsLogin(true);
         console.log(data)
-        // const accessToken = data.accessToken;
-        // const refreshToken = data.refreshToken;
+        const accessToken = data.accessToken;
+        const refreshToken = data.refreshToken;
+        setCheck(<div>{accessToken}{refreshToken}</div>)
         // setToken(accessToken,refreshToken)
         navigate('/home');
         // let message = data.message
     }).catch(err=>{
       console.log(err)
-      setCheck(<div className='text-red-400'>{err.message}</div>)
+      setCheck(<div className='text-red-400'>({err.response.status}) {err.response.data}</div>)
       setPopup({
         open: true,
         title: 'Error',

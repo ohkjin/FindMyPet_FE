@@ -17,6 +17,7 @@ function Join() {
   const [pwdCheckAlert,setPwdCheckAlert] = useState('');
   const [username, setUsername] = useState('');
   const navigate = useNavigate();
+  const [errMessage,setErrMessage] = useState(<></>);
   const [popup,setPopup] = useState({
     open: false,
     title: '',
@@ -63,29 +64,25 @@ function Join() {
     try{
     userJoin(userDetail)
       .then(data => {
+        console.log(data)
         setPopup({
             open: true,
             title: 'Confirm',
-            message: '회원가입 성공!',
+            message: data.message,
             callback: function () { navigate('/user/login') }
           })
-          navigate('user/login')
+          navigate('../user/login')
       }).catch(err => {
         console.log(err)
+        setErrMessage(<div className='text-red-500'>{err.response.data}</div>)
           setPopup({
             open: true,
             title: 'Error',
             message:err.response.status
           })
-        
       })
     }catch(e){
       console.log(e)
-          setPopup({
-            open: true,
-            title: 'Error',
-            message:e.response.status
-          })
     }
   }
 
@@ -109,6 +106,7 @@ function Join() {
         <div className='login_img'>
           {/* <img src={welsh} alt='welcome welsh' className='w-[400px]' /> */}
         </div>
+        {errMessage}
         {popup.open && (
           <Popup 
           open={popup.open}

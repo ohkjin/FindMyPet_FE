@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+// import React, { useState } from 'react'
 // import axios from 'axios'
 export default function Test() {
     // const API_SERVER = 'http://10.125.121.183:8080'
@@ -16,7 +16,7 @@ export default function Test() {
     // }
   return (
     <div className='container flex flex-col items-center'>
-        <h1>LoginTest</h1>
+        <h1>Test</h1>
         <div>
             {/* <form onSubmit={handleSubmit} className='flex flex-col'>
             <input type='email' name='email' placeholder='이메일' className='mt-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
