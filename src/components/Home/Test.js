@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 // import axios from 'axios'
-export default function LoginTest() {
+export default function Test() {
     // const API_SERVER = 'http://10.125.121.183:8080'
     // const prefix = `${API_SERVER}/user/login`
     // const [test,setTest] = useState(<></>)
