@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { useSetRecoilState } from 'recoil'
+// import { useSetRecoilState } from 'recoil'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom/dist';
 import Popup from 'reactjs-popup';
@@ -8,7 +8,7 @@ import welsh from '../../../assets/images/welcome/welshcorgiwavingpaw.jpg'
 import LoginJoinForm from '../UI/LoginJoinForm';
 import axios from 'axios';
 import { removeAllToken, setAccessToken } from '../atom/TokenManager';
-import { userAtom } from '../atom/TokenAtom';
+
 
 
 export default function Login() {
@@ -26,7 +26,6 @@ export default function Login() {
 
   //-- for State Management --//
   const navigate = useNavigate();
-  const setIsLogin = useSetRecoilState(userAtom);
   const [popup, setPopup] = useState({
     open: false,
     title: '',
@@ -64,7 +63,7 @@ export default function Login() {
           const accessToken = res.headers.authorization;
           axios.defaults.headers.Authorization = accessToken;
           setAccessToken(accessToken);
-          setIsLogin(accessToken);
+          // setIsLogin(accessToken);
           navigate('/home');
           
         }).catch(err => {

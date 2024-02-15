@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
-import { userAtom } from '../user/atom/TokenAtom'
+// import { useRecoilValue } from 'recoil'
+// import { userAtom } from '../user/atom/TokenAtom'
 
 export default function Navbar() {
-    const isLogin = useRecoilValue(userAtom);
+    // const isLogin = useRecoilValue(userAtom);
+    const isLogin=false;
     const linkShape = 'block pt-3 pb-2 px-3 rounded-md lg:inline-block lg:mt-0 mr-4 flex flex-row justify-center items-center'
     const linkFont = 'text-slate-800 font-tenada '
     const linkDesign = 'border border-yellow-300 border-2 '
