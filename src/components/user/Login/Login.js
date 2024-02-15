@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
-import { stLogin } from '../atom/LoginAtom'
-// import { userLogin } from '../api/LoginApi';
+import { userAuthentication } from '../atom/TokenAtom'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom/dist';
 import Popup from 'reactjs-popup';
@@ -14,7 +13,8 @@ import { removeAllToken, setAccessToken } from '../atom/TokenManager';
 
 export default function Login() {
   //-- Restful Api --//
-  const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
+  // const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
+  const API_SERVER = 'http://10.125.121.183:8080'
   const prefix = `${API_SERVER}/user/login`
 
   //-- for input --//
@@ -27,7 +27,7 @@ export default function Login() {
 
   //-- for State Management --//
   const navigate = useNavigate();
-  const setIsLogin = useSetRecoilState(stLogin);
+  const setIsLogin = useSetRecoilState(userAuthentication);
   const [popup, setPopup] = useState({
     open: false,
     title: '',
@@ -46,20 +46,23 @@ export default function Login() {
     console.log(emailRef.current.value, pwdRef.current.value)
     try {
       removeAllToken();
-      axios.post(`${prefix}`, {
+      const res=axios.post(`${prefix}`, {
         headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': `http://localhost:3000`,
-          'Access-Control-Allow-Credentials': "true",
+          'Content-Type': 'application/json'
         },
         userId: emailRef.current.value,
         password: pwdRef.current.value
       })
         .then(res => {
+          console.log(res)
+          if(!res.headers.authorization){
+            setErrMessage(<div className='text-red-400'>No Authorization Header</div>)
+            return
+          }
           const accessToken = res.headers.authorization.slice(7);
           console.log(accessToken);
-          axios.defaults.headers.Authorization = accessToken;
           setAccessToken(accessToken);
+          setIsLogin(true)
           navigate('/home');
         }).catch(err => {
           console.log(err)

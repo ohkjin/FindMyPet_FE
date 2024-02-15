@@ -11,47 +11,47 @@ export const privateApi = axios.create({
     },
 })
 
-//-- refreshToken api --//
-export  const  postTokenRefresh = async ()=>{
-    const res = await privateApi.post('user/refresh',{
-        refreshToken: getToken('refreshToken'),
-    });
-    return res;
-}
+// //-- refreshToken api --//
+// export  const  postTokenRefresh = async ()=>{
+//     const res = await privateApi.post('user/refresh',{
+//         refreshToken: getToken('refreshToken'),
+//     });
+//     return res;
+// }
 
-privateApi.interceptors.request.use(
-(config)=>{
-    const token = getToken('accessToken');
-    //토큰없을시 로그인으로
-    if(!token){
-        // Replace the current URL with a new one
-        window.location.replace('/user/login');
-        return config;
-    }
-    config.headers["Content-Type"]='application/json';
-    config.headers["Authorization"]= 'Bearer '+token;
-    return config;
-},
-(err)=>{
-    console.log(err);
-    //에러코드 전달
-    return Promise.reject(err);
-})
+// privateApi.interceptors.request.use(
+// (config)=>{
+//     const token = getToken('accessToken');
+//     //토큰없을시 로그인으로
+//     if(!token){
+//         // Replace the current URL with a new one
+//         window.location.replace('/user/login');
+//         return config;
+//     }
+//     config.headers["Content-Type"]='application/json';
+//     config.headers["Authorization"]= 'Bearer '+token;
+//     return config;
+// },
+// (err)=>{
+//     console.log(err);
+//     //에러코드 전달
+//     return Promise.reject(err);
+// })
 
-privateApi.interceptors.response.use(
-(res)=>{
-    return res;
-},
-//async used for the wait for the refreshToken
-async (err)=>{
-    if(err.response&&err.response.status===500){
-        const errCode = err.response.data.errorCode;
-        if(errCode===7001){
-            await postTokenRefresh(privateApi);
-            const accessToken = getToken('accessToken');
-            err.config.headers.Authorization=`Bearer ${accessToken}`;
-            return privateApi(err.config);
-        }
-    }
-}
-)
+// privateApi.interceptors.response.use(
+// (res)=>{
+//     return res;
+// },
+// //async used for the wait for the refreshToken
+// async (err)=>{
+//     if(err.response&&err.response.status===500){
+//         const errCode = err.response.data.errorCode;
+//         if(errCode===7001){
+//             await postTokenRefresh(privateApi);
+//             const accessToken = getToken('accessToken');
+//             err.config.headers.Authorization=`Bearer ${accessToken}`;
+//             return privateApi(err.config);
+//         }
+//     }
+// }
+// )

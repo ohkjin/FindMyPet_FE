@@ -1,13 +1,13 @@
 import React from 'react'
 import { useSetRecoilState } from 'recoil'
-import { stLogin } from '../atom/LoginAtom'
+import { userAuthentication } from '../atom/TokenAtom'
 import {  useNavigate } from 'react-router-dom';
 import { privateApi } from '../api/TokenApi';
 import welcome from '../../../assets/images/welcome/tricatwelcome.jpg'
 import { removeAllToken } from '../atom/TokenManager';
 export default function MyPage() {
   const navigate = useNavigate()
-  const setIsLogin = useSetRecoilState(stLogin);
+  const setIsLogin = useSetRecoilState(userAuthentication);
   try{
     privateApi.get('/user/mypage')
     .then(res=>console.log(res.data))
@@ -16,7 +16,7 @@ export default function MyPage() {
   }
 
   const handleLogout = () => {
-    setIsLogin(false);
+    setIsLogin(null);
     removeAllToken();
     navigate('/home')
   }

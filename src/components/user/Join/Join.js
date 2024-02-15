@@ -29,6 +29,7 @@ function Join() {
     "password": pwd,
     "nickname": nickname
   }
+  
   const handleEmail = (e) => {
     e.preventDefault();
     console.log(!emailRegex.test(e.target.value))
