@@ -1,8 +1,7 @@
 import { atom } from "recoil";
-// import { getToken } from "./TokenManager";
+import { getToken } from "./TokenManager";
 
-export const userAuthentication = atom({
+export const userAuth = atom({
     key:`userAuth${new Date().getUTCMilliseconds() * Math.random()}`,
-    // default: getToken('accessToken')
-    default:true
+    default: getToken('accessToken')
 })

@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
-import { userAuthentication } from '../user/atom/TokenAtom'
+import { userAuth } from '../user/atom/TokenAtom'
 
 export default function Navbar() {
-    const isLogin = useRecoilValue(userAuthentication);
+    const isLogin = useRecoilValue(userAuth);
     const linkShape = 'block pt-3 pb-2 px-3 rounded-md lg:inline-block lg:mt-0 mr-4 flex flex-row justify-center items-center'
     const linkFont = 'text-slate-800 font-tenada '
     const linkDesign = 'border border-yellow-300 border-2 '
@@ -19,7 +19,7 @@ export default function Navbar() {
                 <Link to="/test" className={`${linkShape}${linkDesign}${linkHover}${linkFont}`}>
                     테스트
                 </Link>
-                <Link to="/find" className={`${linkShape}${linkDesign}${linkHover}${linkFont}`}>
+                <Link to="/animals" className={`${linkShape}${linkDesign}${linkHover}${linkFont}`}>
                     유기동물
                 </Link>
             </div>
@@ -37,7 +37,6 @@ export default function Navbar() {
                     로그인
                 </Link>
                 }
-                
                 <Link to="/user/board" className={`${linkShape}${linkDesign}${linkHover}${linkFont}`}>
                     보드
                 </Link>

@@ -28,10 +28,22 @@ export default function Find() {
     },[petObjList])
     
   return (
-    <div>Find
-        <div>
-            {/* {petList} */}
-        </div>
+    <div className='Find container flex justify-center items-center w-full'>
+      <div className='Find_Contents w-4/5 min-w-96 p-10 flex flex-col items-center'>
+        <div className='Find_Select w-full flex flex-row justify-center items-center'>
+          <div className='Select_Animal'>
+            <button>
+              🐕
+            </button>
+            <button>
+              🐈
+            </button>
+            <button>
+              🐢
+            </button>
+          </div>
+        </div>      
+      </div>
     </div>
   )
 }

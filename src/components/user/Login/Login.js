@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
-import { userAuthentication } from '../atom/TokenAtom'
+import { userAuth } from '../atom/TokenAtom'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom/dist';
 import Popup from 'reactjs-popup';
@@ -27,7 +27,7 @@ export default function Login() {
 
   //-- for State Management --//
   const navigate = useNavigate();
-  const setIsLogin = useSetRecoilState(userAuthentication);
+  const setIsLogin = useSetRecoilState(userAuth);
   const [popup, setPopup] = useState({
     open: false,
     title: '',
@@ -46,12 +46,14 @@ export default function Login() {
     console.log(emailRef.current.value, pwdRef.current.value)
     try {
       removeAllToken();
-      const res=axios.post(`${prefix}`, {
+      axios.post(`${prefix}`, {
         headers: {
           'Content-Type': 'application/json'
         },
-        userId: emailRef.current.value,
-        password: pwdRef.current.value
+        // userId: emailRef.current.value,
+        // password: pwdRef.current.value
+        userId: 'qwer@qwer.com',
+        password: 'qwerqwer'
       })
         .then(res => {
           console.log(res)
@@ -62,10 +64,10 @@ export default function Login() {
           const accessToken = res.headers.authorization.slice(7);
           console.log(accessToken);
           setAccessToken(accessToken);
-          setIsLogin(true)
-          navigate('/home');
+          setIsLogin(accessToken);
+          navigate('/');
         }).catch(err => {
-          console.log(err)
+          // console.log(err)
           setErrMessage(<div className='text-red-400'>({err.response.status}) {err.response.data}</div>)
           setPopup({
             open: true,
