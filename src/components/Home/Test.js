@@ -1,7 +1,9 @@
 import { useState } from "react"
 // import { useCookies } from "react-cookie"
 
-import axios from 'axios'
+// import axios from 'axios'
+// import { setToken } from "../user/atom/TokenManager"
+import TestForm from "./TestForm"
 export default function Test() {
     const [test,setTest] = useState(<></>)
     // const [cookies,setCookies] = useCookies(["accessToken","refreshToken"])
@@ -11,14 +13,22 @@ export default function Test() {
     // // if(API_SERVER==='http://10.125.121.183:8080'){
     // //   httpTF = false
     // // }
-    // const accessToken='a1234'
+    // const accessToken='a234adf'
     // const refreshToken='qwer1234'
     // setCookies("accessToken",accessToken,{path:'/',expireDt,httpOnly:false})
     // setCookies("refreshToken",refreshToken,{path:'/',expireDt,httpOnly:false})
     // axios.defaults.headers.Authorization = 'Bearer '+ accessToken
     // console.log(cookies)
+    // setToken(accessToken,refreshToken)
 
 
+    const handleRedirect = () =>{
+      // Replace the current URL with a new one
+      window.location.replace("/user/login");
+    }
+    const handleVariable = (input) =>{
+      setTest(<>{input}</>)
+    }
     // const API_SERVER = 'http://10.125.121.183:8080'
     // const prefix = `${API_SERVER}/user/login`
     // const handleSubmit = (e) => {
@@ -59,6 +69,11 @@ export default function Test() {
             </form> */}
         </div>
         <div>
+          <button onClick={handleRedirect} className="h-20 w-20 bg-blue-400"/>
+          </div>
+          <div>
+            <TestForm/>
+          <TestForm variable={handleVariable}/>
             {test}
         </div>
     </div>

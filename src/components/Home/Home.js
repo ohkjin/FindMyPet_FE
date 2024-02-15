@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import welcomeHome from '../../assets/images/welcome/welcomeHome.jpg'
+// import welcomeHome from '../../assets/images/welcome/welcomeHome.jpg'
 // import axios from 'axios'
 export default function Home() {
   
@@ -7,9 +7,9 @@ export default function Home() {
 
   },[])
   return (
-    <div>
-      <div className='BgImage container' >
-        <img src={welcomeHome} alt='welcome Home'/>
+    <div className={``}>
+      <div className='BgImage flex flex-col justify-center items-center' >
+        {/* <img src={welcomeHome} alt='welcome Home'/> */}
       </div>
         <div className='Title '>
           Home
