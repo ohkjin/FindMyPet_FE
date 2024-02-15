@@ -8,7 +8,7 @@ export const userLogin = async (email, pwd) => {
     console.log("API_SERVER_HOST",API_SERVER)
     console.log("prefix",prefix)
     try {
-        const res = await axios.post(`${prefix}`, {
+        await axios.post(`${prefix}`, {
             headers: {
                 'Content-Type': 'application/json'
             },

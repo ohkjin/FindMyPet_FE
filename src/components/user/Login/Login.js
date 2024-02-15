@@ -9,7 +9,7 @@ import kakao from '../../../assets/images/oauth/kakao_login_medium_wide.png'
 import welsh from '../../../assets/images/welcome/welshcorgiwavingpaw.jpg'
 import LoginJoinForm from '../UI/LoginJoinForm';
 import axios from 'axios';
-import { useCookies } from 'react-cookie';
+import { removeAllToken, setAccessToken } from '../atom/TokenManager';
 
 
 export default function Login() {
@@ -17,21 +17,12 @@ export default function Login() {
   const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
   const prefix = `${API_SERVER}/user/login`
 
-  //-- Cookie --//
-  const [cookies, setCookies] = useCookies(["accessToken", "refreshToken"])
-  const expires = new Date()
-  expires.setDate(Date.now()+1000*60*60*24)
-  let httpTF = true
-  if(API_SERVER==='http://10.125.121.183:8080'){
-    httpTF = false
-  }
-
   //-- for input --//
   const emailRef = useRef()
   const pwdRef = useRef()
   const inputs = <>
-    <input type='email'  maxLength={30} ref={emailRef} placeholder='이메일' className='mt-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
-    <input type='password'  maxLength={30} ref={pwdRef} placeholder='비밀번호' className='mt-3 mb-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
+    <input type='email' maxLength={30} ref={emailRef} placeholder='이메일' className='mt-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
+    <input type='password' maxLength={30} ref={pwdRef} placeholder='비밀번호' className='mt-3 mb-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
   </>
 
   //-- for State Management --//
@@ -43,41 +34,33 @@ export default function Login() {
     message: '',
     callback: null,
   })
-  const [errMessage,setErrMessage] = useState(<></>);
+  const [errMessage, setErrMessage] = useState(<></>);
 
   //-- Login --//
   const handleLogin = (e) => {
     e.preventDefault();
-    if(emailRef.current.value===''||pwdRef.current.value===''){
+    if (emailRef.current.value === '' || pwdRef.current.value === '') {
       setErrMessage(<div className='text-red-500'>이메일과 비밀번호 전부 입력해주세요</div>)
       return
     }
     console.log(emailRef.current.value, pwdRef.current.value)
     try {
-      const res = axios.post(`${prefix}`, {
+      removeAllToken();
+      axios.post(`${prefix}`, {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': `http://localhost:3000`,
+          'Access-Control-Allow-Credentials': "true",
         },
         userId: emailRef.current.value,
         password: pwdRef.current.value
       })
-        .then(res => res.data)
-        .then(data => {
-          setIsLogin(true);
-          console.log(data)
-          //response.headers?
-          const accessToken = data.accessToken;
-          const refreshToken = data.refreshToken;
-          if (accessToken&&refreshToken) {
-            setCookies("accessToken",accessToken,{path:'/',expires,httpOnly:httpTF})
-            setCookies("refreshToken",refreshToken,{path:'/',expires,httpOnly:httpTF})
-            axios.defaults.headers.Authorization = 'Bearer '+ accessToken
-            console.log(cookies)
-          }
-          setErrMessage(<div>{accessToken}{refreshToken}</div>)
-          // setToken(accessToken,refreshToken)
+        .then(res => {
+          const accessToken = res.headers.authorization.slice(7);
+          console.log(accessToken);
+          axios.defaults.headers.Authorization = accessToken;
+          setAccessToken(accessToken);
           navigate('/home');
-          // let message = data.message
         }).catch(err => {
           console.log(err)
           setErrMessage(<div className='text-red-400'>({err.response.status}) {err.response.data}</div>)
@@ -87,7 +70,6 @@ export default function Login() {
             message: err.message,
           })
         })
-      console.log(res)
     } catch (e) {
       console.log(e)
       return null

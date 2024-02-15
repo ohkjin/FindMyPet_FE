@@ -1,4 +1,7 @@
 import { atom } from "recoil";
-import { Cookies } from "react-cookie";
+import { getToken } from "./TokenManager";
 
-const cookies = new Cookies()
+const userAtom = atom({
+    key:'auth',
+    default: getToken('accessToken')
+})
