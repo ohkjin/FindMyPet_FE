@@ -1,7 +1,5 @@
 import React, { useRef, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
-import { stLogin } from '../atom/LoginAtom'
-// import { userLogin } from '../api/LoginApi';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom/dist';
 import Popup from 'reactjs-popup';
@@ -10,6 +8,7 @@ import welsh from '../../../assets/images/welcome/welshcorgiwavingpaw.jpg'
 import LoginJoinForm from '../UI/LoginJoinForm';
 import axios from 'axios';
 import { removeAllToken, setAccessToken } from '../atom/TokenManager';
+import { userAtom } from '../atom/TokenAtom';
 
 
 export default function Login() {
@@ -27,7 +26,7 @@ export default function Login() {
 
   //-- for State Management --//
   const navigate = useNavigate();
-  const setIsLogin = useSetRecoilState(stLogin);
+  const setIsLogin = useSetRecoilState(userAtom);
   const [popup, setPopup] = useState({
     open: false,
     title: '',
@@ -56,14 +55,21 @@ export default function Login() {
         password: pwdRef.current.value
       })
         .then(res => {
-          const accessToken = res.headers.authorization.slice(7);
-          console.log(accessToken);
+          console.log(res);
+          console.log(res.headers);
+          if(!res.headers.authorization){
+            setErrMessage(<div className='text-red-400'>No Authorization Token given</div>)
+            return
+          }
+          const accessToken = res.headers.authorization;
           axios.defaults.headers.Authorization = accessToken;
           setAccessToken(accessToken);
+          setIsLogin(accessToken);
           navigate('/home');
+          
         }).catch(err => {
           console.log(err)
-          setErrMessage(<div className='text-red-400'>({err.response.status}) {err.response.data}</div>)
+          setErrMessage(<div className='text-red-400'>{err.response?err.response.data:err.message}</div>)
           setPopup({
             open: true,
             title: 'Error',

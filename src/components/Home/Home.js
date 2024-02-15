@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
+import { useRecoilValue } from 'recoil';
+import { userAtom } from '../user/atom/TokenAtom';
 // import welcomeHome from '../../assets/images/welcome/welcomeHome.jpg'
 // import axios from 'axios'
 export default function Home() {
-  
+  const isLogin = useRecoilValue(userAtom);
   useEffect(()=>{
 
   },[])
@@ -13,6 +15,9 @@ export default function Home() {
       </div>
         <div className='Title '>
           Home
+        </div>
+        <div>
+          {isLogin}
         </div>
     </div>
   )

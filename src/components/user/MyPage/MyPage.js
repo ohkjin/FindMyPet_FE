@@ -1,22 +1,23 @@
 import React from 'react'
 import { useSetRecoilState } from 'recoil'
-import { stLogin } from '../atom/LoginAtom'
 import {  useNavigate } from 'react-router-dom';
 import { privateApi } from '../api/TokenApi';
 import welcome from '../../../assets/images/welcome/tricatwelcome.jpg'
 import { removeAllToken } from '../atom/TokenManager';
+import { userAtom } from '../atom/TokenAtom';
 export default function MyPage() {
   const navigate = useNavigate()
-  const setIsLogin = useSetRecoilState(stLogin);
+  const setIsLogin = useSetRecoilState(userAtom);
   try{
     privateApi.get('/user/mypage')
     .then(res=>console.log(res.data))
+    .catch(err=>console.log(err))
   }catch(e){
     console.log(e)
   }
 
   const handleLogout = () => {
-    setIsLogin(false);
+    setIsLogin(null);
     removeAllToken();
     navigate('/home')
   }

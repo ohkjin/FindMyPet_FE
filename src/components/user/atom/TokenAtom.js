@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 import { getToken } from "./TokenManager";
 
-const userAtom = atom({
-    key:'auth',
+export const userAtom = atom({
+    key:'userAtom',
     default: getToken('accessToken')
 })
