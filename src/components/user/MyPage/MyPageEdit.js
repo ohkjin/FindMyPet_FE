@@ -70,7 +70,7 @@ export default function MyPageEdit() {
             } 
     }
     return (
-        <div className='MyPageEdit container flex justify-center items-center w-full'>
+        <div className='MyPageEdit flex justify-center items-center w-full'>
       <div className='MyPageEdit_Contents w-4/5 min-w-96 p-10 flex flex-col items-center'>
                 <div>
                 </div>

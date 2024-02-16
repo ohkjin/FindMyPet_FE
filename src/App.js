@@ -12,6 +12,7 @@ import Boards from "./components/boards/Boards";
 import Find from "./components/Find/Find";
 import Test from "./components/Home/Test";
 import MyPageEdit from "./components/user/MyPage/MyPageEdit";
+import BoardWrite from "./components/boards/BoardWrite";
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
             <Route path="/user/mypage" element={<MyPage/>}/>
             <Route path="/user/mypage/edit" element={<MyPageEdit/>}/>
             <Route path="/boards" element={<Boards/>}/>
+            <Route path="/board/write" element={<BoardWrite/>}/>
             <Route path="/boards/community" element={<Community/>}/>
         </Routes>
       </RecoilRoot>

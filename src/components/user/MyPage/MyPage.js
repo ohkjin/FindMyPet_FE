@@ -57,7 +57,7 @@ export default function MyPage() {
   }
   
   return (
-    <div className='MyPageContainer container w-full flex flex-col justify-center items-center'>
+    <div className='MyPageContainer w-full flex flex-col justify-center items-center'>
       <div className='w-4/5 flex flex-col'>
       <img src={welcome} alt='welcome cat'/>
       <div>

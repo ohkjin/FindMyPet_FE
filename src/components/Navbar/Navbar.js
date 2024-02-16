@@ -7,11 +7,11 @@ export default function Navbar() {
     const isLogin = useRecoilValue(userAuth);
     const linkShape = 'block pt-3 pb-2 px-3 rounded-md lg:inline-block lg:mt-0 mr-4 flex flex-row justify-center items-center'
     const linkFont = 'text-slate-800 font-tenada '
-    const linkDesign = 'border border-yellow-300 border-2 '
+    const linkDesign = 'text-sm border border-yellow-300 border-2 '
     const linkHover = 'hover:bg-orange-400 hover:text-white '
     return (
-        <nav className="container w-full">
-        <div className="w-full mx-auto bg-white p-4 shadow-md flex flex-row items-center">
+        <nav className=" w-full flex justify-center items-center">
+        <div className="w-full mx-auto min-w-96 bg-white p-4 shadow-md flex flex-row justify-center items-center">
             <div className='basis-2/5 flex flex-row justify-evenly items-center'>
                 <Link to="/home" className={`${linkShape}${linkDesign}${linkHover}${linkFont}`}>
                     홈
@@ -42,6 +42,9 @@ export default function Navbar() {
                 </Link>
                 <Link to="/boards" className={`${linkShape}${linkDesign}${linkHover}${linkFont}`}>
                     보드
+                </Link>
+                <Link to="/board/write" className={`bg-yellow-300 rounded-3xl ${linkShape}${linkDesign} hover:bg-slate-800 hover:text-yellow-300 ${linkFont}`}>
+                    글쓰기
                 </Link>
             </div>
         </div>

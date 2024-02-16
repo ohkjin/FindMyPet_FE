@@ -50,10 +50,10 @@ export default function Login() {
         headers: {
           'Content-Type': 'application/json'
         },
-        userId: emailRef.current.value,
-        password: pwdRef.current.value
-        // userId: 'asdf@qwer.com',
-        // password: 'qwerqwer'
+        // userId: emailRef.current.value,
+        // password: pwdRef.current.value
+        userId: 'qwer@qwer.com',
+        password: 'qwerqwer'
       })
         .then(res => {
           console.log(res)
@@ -84,7 +84,7 @@ export default function Login() {
 
   }
   return (
-    <div className='login container flex justify-center items-center w-full'>
+    <div className='login flex justify-center items-center w-full'>
       <div className='login_contents w-4/5 min-w-96 p-10 flex flex-col items-center'>
         <div className='login_img'>
           <img src={welsh} alt='welcome welsh' className='w-[400px]' />
