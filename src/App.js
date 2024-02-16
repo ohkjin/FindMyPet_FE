@@ -7,8 +7,8 @@ import MyPage from "./components/user/MyPage/MyPage";
 import Join from "./components/user/Join/Join";
 import { RecoilRoot } from "recoil";
 import Navbar from "./components/Navbar/Navbar";
-import Rounge from "./components/board/Rounge/Rounge";
-import Board from "./components/board/Board";
+import Community from "./components/boards/Community/Community";
+import Boards from "./components/boards/Boards";
 import Find from "./components/Find/Find";
 import Test from "./components/Home/Test";
 import MyPageEdit from "./components/user/MyPage/MyPageEdit";
@@ -30,8 +30,8 @@ function App() {
             <Route path="/user/join" element={<Join/>}/>
             <Route path="/user/mypage" element={<MyPage/>}/>
             <Route path="/user/mypage/edit" element={<MyPageEdit/>}/>
-            <Route path="/board" element={<Board/>}/>
-            <Route path="/board/rounge" element={<Rounge/>}/>
+            <Route path="/boards" element={<Boards/>}/>
+            <Route path="/boards/community" element={<Community/>}/>
         </Routes>
       </RecoilRoot>
       </BrowserRouter>

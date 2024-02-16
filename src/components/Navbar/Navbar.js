@@ -40,7 +40,7 @@ export default function Navbar() {
                 <Link to="/user/mypage/edit" className={`${linkShape}${linkDesign}${linkHover}${linkFont}`}>
                     MyPageEdit
                 </Link>
-                <Link to="/user/board" className={`${linkShape}${linkDesign}${linkHover}${linkFont}`}>
+                <Link to="/boards" className={`${linkShape}${linkDesign}${linkHover}${linkFont}`}>
                     보드
                 </Link>
             </div>

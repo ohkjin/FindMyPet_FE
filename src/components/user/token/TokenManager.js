@@ -3,7 +3,7 @@ import { Cookies } from "react-cookie";
 const cookies = new Cookies()
 
 const expDt = new Date();
-expDt.setDate(Date.now()+1000*60*60*24*7);
+expDt.setDate(Date.now()+1000*60*60*24);
 
 // const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
 // let httpTF = true

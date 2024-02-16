@@ -25,16 +25,16 @@ function Join() {
     callback: null,
   })
 
-  // const userDetail = {
-  //   "userId": email,
-  //   "password": pwd,
-  //   "nickname": nickname
-  // }
   const userDetail = {
-    "userId": 'qwer@qwer.com',
-    "password": 'qwerqwer',
-    "nickname": 'qwer'
+    "userId": email,
+    "password": pwd,
+    "nickname": nickname
   }
+  // const userDetail = {
+  //   "userId": 'qwer@qwer.com',
+  //   "password": 'qwerqwer',
+  //   "nickname": 'qwer'
+  // }
   
   const handleEmail = (e) => {
     e.preventDefault();

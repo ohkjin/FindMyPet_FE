@@ -50,15 +50,15 @@ export default function Login() {
         headers: {
           'Content-Type': 'application/json'
         },
-        // userId: emailRef.current.value,
-        // password: pwdRef.current.value
-        userId: 'qwer@qwer.com',
-        password: 'qwerqwer'
+        userId: emailRef.current.value,
+        password: pwdRef.current.value
+        // userId: 'asdf@qwer.com',
+        // password: 'qwerqwer'
       })
         .then(res => {
           console.log(res)
-          if(!res.headers.authorization){
-            setErrMessage(<div className='text-red-400'>No Authorization Header</div>)
+          if(!res.headers){
+            setErrMessage(<div className='text-red-400'>No Header returned</div>)
             return
           }
           const accessToken = res.headers.authorization.slice(7);
