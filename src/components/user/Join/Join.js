@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import LoginJoinForm from '../UI/LoginJoinForm'
 import kakao from '../../../assets/images/oauth/kakao_join_medium_wide.png'
 // import welsh from '../../../assets/images/welcome/tricatwelcome.jpg'
-import { userJoin } from '../api/JoinApi'
+import { userJoin } from './JoinApi'
 import { useNavigate } from 'react-router-dom'
 import Popup from 'reactjs-popup'
 // import axios from 'axios'
@@ -13,6 +13,7 @@ function Join() {
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
   const [pwd,setPwd] = useState('');
   const [pwdAlert,setPwdAlert] = useState('');
+  const pwdRegex = /^[A-Za-z0-9]*$/;
   const [pwdCheckAlert,setPwdCheckAlert] = useState('');
   const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ function Join() {
   }
   const handlePwd = (e) => {
     e.preventDefault()
-    if(e.target.value.length<8 || e.target.value.length>20){
+    if(e.target.value.length<8 || e.target.value.length>20||!pwdRegex.test(e.target.value)){
       setPwdAlert('비밀번호는 문자와 숫자만을 사용하여 8-20자로 입력해주세요.')
       return
     }
@@ -101,7 +102,7 @@ function Join() {
   const inputs =  <>
   <input type='email' maxLength={30} onChange={handleEmail} placeholder='이메일' className='mt-10 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
   <div className='text-xs text-red-500 w-[300px]'>{emailAlert}</div>
-  <input type='text'  maxLength={30} onChange={e => setNickname(e.target.value)} placeholder='닉네임' className='mt-3 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
+  <input type='text'  maxLength={10} onChange={e => setNickname(e.target.value)} placeholder='닉네임' className='mt-3 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
   <input type='password'  maxLength={20} onChange={handlePwd} placeholder='비밀번호' className='mt-3 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
   <div className='text-xs text-red-500 w-[300px]'>{pwdAlert}</div>
   <input type='password'  maxLength={20} onChange={handlePwdCheck} placeholder='비밀번호 확인' className='mt-3 mb-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' />

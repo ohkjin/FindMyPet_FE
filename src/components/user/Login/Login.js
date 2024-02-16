@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
-import { userAuth } from '../atom/TokenAtom'
+import { userAuth } from '../token/TokenAtom'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom/dist';
 import Popup from 'reactjs-popup';
@@ -8,7 +8,7 @@ import kakao from '../../../assets/images/oauth/kakao_login_medium_wide.png'
 import welsh from '../../../assets/images/welcome/welshcorgiwavingpaw.jpg'
 import LoginJoinForm from '../UI/LoginJoinForm';
 import axios from 'axios';
-import { removeAllToken, setAccessToken } from '../atom/TokenManager';
+import { removeAllToken, setAccessToken } from '../token/TokenManager';
 
 
 export default function Login() {
@@ -68,7 +68,7 @@ export default function Login() {
           navigate('/');
         }).catch(err => {
           // console.log(err)
-          setErrMessage(<div className='text-red-400'>({err.response.status}) {err.response.data}</div>)
+          setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status}) ${err.response.data}`:err.message}</div>)
           setPopup({
             open: true,
             title: 'Error',

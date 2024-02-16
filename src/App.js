@@ -9,7 +9,7 @@ import { RecoilRoot } from "recoil";
 import Navbar from "./components/Navbar/Navbar";
 import Rounge from "./components/board/Rounge/Rounge";
 import Board from "./components/board/Board";
-import Animals from "./components/Animals/Animals";
+import Find from "./components/Find/Find";
 import Test from "./components/Home/Test";
 import MyPageEdit from "./components/user/MyPage/MyPageEdit";
 
@@ -23,7 +23,7 @@ function App() {
         <Routes>
             <Route path="/" element={<Main/>}/>
             <Route path="/home" element={<Home/>}/>
-            <Route path="/animals" element={<Animals/>}/>
+            <Route path="/find" element={<Find/>}/>
             <Route path="/user/login" element={<Login/>}/>
             <Route path="/test" element={<Test/>}/>
             <Route path="/user/findpwd" element={<FindPwd/>}/>

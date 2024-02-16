@@ -1,0 +1,17 @@
+{
+  "response" : {
+    "header" : {
+      "reqNo" : 227988583,
+      "resultCode" : "00",
+      "resultMsg" : "NORMAL SERVICE."
+    },
+    "body" : {
+      "items" : {
+        "item" : [ {
+          "kindCd" : "000117",
+          "knm" : "기타축종"
+        } ]
+      }
+    }
+  }
+}

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
-import { userAuth } from '../atom/TokenAtom'
+import { userAuth } from '../token/TokenAtom'
 import {  useNavigate } from 'react-router-dom';
 import welcome from '../../../assets/images/welcome/tricatwelcome.jpg'
-import { getToken, removeAllToken } from '../atom/TokenManager';
+import { getToken, removeAllToken } from '../token/TokenManager';
 import axios from 'axios';
 export default function MyPage() {
   const [errMessage, setErrMessage] = useState(<></>);
@@ -65,7 +65,7 @@ export default function MyPage() {
         {userDetail.userId&&<div>{userDetail.userId}</div>}
         {errMessage}
       </div>
-      <button onClick={()=>navigate(`/edit?userId=${userDetail.userId}&${userDetail.nickname}`)} className='mt-5 w-[300px] h-[42px] rounded-xl text-sm font-bold border-2 border-yellow-300 text-yellow-400'>회원정보 수정</button>
+      <button onClick={()=>navigate(`/user/mypage/edit?userId=${userDetail.userId}&nickname=${userDetail.nickname}`)} className='mt-5 w-[300px] h-[42px] rounded-xl text-sm font-bold border-2 border-yellow-300 text-yellow-400'>회원정보 수정</button>
       <button onClick={handleLogout} className='mt-5 w-[300px] h-[42px] rounded-xl text-sm font-bold border-2 border-yellow-300 text-yellow-400'>로그아웃</button>
       <button onClick={handleWithdraw} className='mt-5 w-[300px] h-[42px] rounded-xl text-sm font-bold border-2 border-yellow-300 text-yellow-400'>회원탈퇴</button>
     </div>

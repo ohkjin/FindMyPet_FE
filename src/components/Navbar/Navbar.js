@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
-import { userAuth } from '../user/atom/TokenAtom'
+import { userAuth } from '../user/token/TokenAtom'
 
 export default function Navbar() {
     const isLogin = useRecoilValue(userAuth);
@@ -19,7 +19,7 @@ export default function Navbar() {
                 <Link to="/test" className={`${linkShape}${linkDesign}${linkHover}${linkFont}`}>
                     테스트
                 </Link>
-                <Link to="/animals" className={`${linkShape}${linkDesign}${linkHover}${linkFont}`}>
+                <Link to="/find" className={`${linkShape}${linkDesign}${linkHover}${linkFont}`}>
                     유기동물
                 </Link>
             </div>
@@ -37,6 +37,9 @@ export default function Navbar() {
                     로그인
                 </Link>
                 }
+                <Link to="/user/mypage/edit" className={`${linkShape}${linkDesign}${linkHover}${linkFont}`}>
+                    MyPageEdit
+                </Link>
                 <Link to="/user/board" className={`${linkShape}${linkDesign}${linkHover}${linkFont}`}>
                     보드
                 </Link>
