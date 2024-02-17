@@ -4,6 +4,7 @@ import { useState } from "react"
 // import axios from 'axios'
 // import { setToken } from "../user/atom/TokenManager"
 import TestForm from "./TestForm"
+import TailBoardForm from '../boards/UI/TailBoardForm'
 export default function Test() {
     const [test,setTest] = useState(<></>)
     // const [cookies,setCookies] = useCookies(["accessToken","refreshToken"])
@@ -75,6 +76,9 @@ export default function Test() {
             <TestForm/>
           <TestForm variable={handleVariable}/>
             {test}
+        </div>
+        <div>
+          <TailBoardForm/>
         </div>
     </div>
   )
