@@ -11,6 +11,7 @@ expDt.setDate(Date.now()+1000*60*60*24);
 //   httpTF = false
 // }
 
+// 시간 지정을 안할시 창을 닫으면 사라진다
 export const setAccessToken=(access)=>{
     cookies.set("accessToken",access,{path:'/',expDt,httpOnly:false})
 }

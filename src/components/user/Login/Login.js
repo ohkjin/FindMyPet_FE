@@ -47,16 +47,14 @@ export default function Login() {
     try {
       removeAllToken();
       axios.post(`${prefix}`, {
-        headers: {
-          'Content-Type': 'application/json'
-        },
         // userId: emailRef.current.value,
         // password: pwdRef.current.value
         userId: 'qwer@qwer.com',
         password: 'qwerqwer'
       })
         .then(res => {
-          console.log(res)
+          console.log("res",res)
+          console.log("headers",res.headers)
           if(!res.headers){
             setErrMessage(<div className='text-red-400'>No Header returned</div>)
             return

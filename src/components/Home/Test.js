@@ -1,12 +1,14 @@
-import { useState } from "react"
+// import { useState } from "react"
 // import { useCookies } from "react-cookie"
 
 // import axios from 'axios'
 // import { setToken } from "../user/atom/TokenManager"
-import TestForm from "./TestForm"
-import TailBoardForm from '../boards/UI/TailBoardForm'
+
+// import TailBoardForm from '../boards/UI/TailBoardForm'
+import { useNavigate } from "react-router-dom";
+import Board from "../boards/Board"
 export default function Test() {
-    const [test,setTest] = useState(<></>)
+    // const [test,setTest] = useState(<></>)
     // const [cookies,setCookies] = useCookies(["accessToken","refreshToken"])
     // const expireDt = new Date()
     // expireDt.setDate(Date.now()+1000*60*60*24)
@@ -21,15 +23,21 @@ export default function Test() {
     // axios.defaults.headers.Authorization = 'Bearer '+ accessToken
     // console.log(cookies)
     // setToken(accessToken,refreshToken)
+    const navigate = useNavigate();
 
 
     const handleRedirect = () =>{
       // Replace the current URL with a new one
       window.location.replace("/user/login");
     }
-    const handleVariable = (input) =>{
-      setTest(<>{input}</>)
+    const handleNavigate = (board) => {
+      navigate(board)
     }
+    // const handleTestForm = (e, inputs) =>{
+    //   e.preventDefault();
+    //   console.log(inputs)
+    //   setTest(<>{inputs.category}{inputs.title}{inputs.content}</>)
+    // }
     // const API_SERVER = 'http://10.125.121.183:8080'
     // const prefix = `${API_SERVER}/user/login`
     // const handleSubmit = (e) => {
@@ -71,14 +79,11 @@ export default function Test() {
         </div>
         <div>
           <button onClick={handleRedirect} className="h-20 w-20 bg-blue-400"/>
+          <button onClick={()=>handleNavigate('/board/6')} className="h-20 w-20 bg-blue-800"/>
           </div>
-          <div>
-            <TestForm/>
-          <TestForm variable={handleVariable}/>
-            {test}
-        </div>
         <div>
-          <TailBoardForm/>
+          {/* <TailBoardForm handleFormSubmit={handleTestForm}/> */}
+          <Board/>
         </div>
     </div>
   )

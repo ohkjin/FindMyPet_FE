@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 // import axios from 'axios'
 import TailAnimalButton from './UI/TailAnimalButton';
 import TailSelect from './UI/TailSelect';
+import TailFindCard from './UI/TailFindCard'
 
-// import dog from '../../data/find/dog.json'
+import dog from '../../data/find/dog.json'
 
 export default function Find() {
   // const API_SERVER = 'http://10.125.121.183'
@@ -14,6 +15,7 @@ export default function Find() {
   // const [selected, setSelected] = useState({
   //   speciesCd:'',
   // });
+  console.log(dog.slice(0,10))
   const [species,setSpecies] = useState('');
 
   useEffect(() => {
@@ -29,7 +31,9 @@ export default function Find() {
     //     setPetObjList(data.response.body.items.item)
     //   })
     // console.log(res.data)
-    setPetObjList('')
+    let slicedDog = dog.slice(0,10);
+    let tmp = slicedDog.map((dog,idx)=><TailFindCard k={`${dog.desertionNo}dog${idx}`} theme='white' imgSrc={dog.filename} title={dog.kindCd} subtitle={`${dog.age} ${dog.sexCd} ${dog.neuterYn}`} by={dog.orgNm}/>)
+    setPetObjList(tmp)
   }, [])
   useEffect(() => {
     console.log(petObjList)
@@ -61,6 +65,9 @@ export default function Find() {
             <TailSelect handleChange={handleSelectBreed}/>
           </div>
           </div>
+        </div>
+        <div>
+          {petObjList}
         </div>
       </div>
     </div>

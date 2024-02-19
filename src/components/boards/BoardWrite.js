@@ -3,18 +3,53 @@ import { useRecoilValue } from 'recoil'
 import { userAuth } from '../user/token/TokenAtom';
 import TailYellowButton from '../../UI/TailYellowButton';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import axios from 'axios';
 
 export default function BoardWrite() {
-    const isLogin = useRecoilValue(userAuth);
+    const userToken = useRecoilValue(userAuth);
     const navigate = useNavigate();
+    const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
+    const [errMessage,setErrMessage] = useState(<></>);
+   
     const handleNavigate = (whereTo) =>{
         navigate(whereTo);
     }
+    
+    const handleSubmit = (e,inputs) => {
+        console.log(inputs)
+        console.log(userToken)
+        e.preventDefault();
+        if(inputs.title===''||inputs.content===''){
+            setErrMessage('제목과 내용을 전부 입력해주세요')
+            return
+        }
+        setErrMessage('');
+        axios.post(`${API_SERVER}/user/board`, 
+            inputs, 
+            {
+            headers: {
+              Authorization: `Bearer ${userToken}`
+            },
+          })
+            .then(res => {
+              console.log(res)
+              if(!res.headers){
+                setErrMessage(<div className='text-red-400'>No Header returned</div>)
+                return
+              }
+              navigate('/boards');
+            }).catch(err => {
+              setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status}) ${err.response.data}`:err.message}</div>)
+            })
+    }
+    
     return (
         <div className='w-full flex flex-col justify-center items-center'>
             <div className='w-4/5 flex flex-col justify-center items-center'>
-                {isLogin ?
-                    <TailBoardForm />
+                {errMessage}
+                {userToken ?
+                    <TailBoardForm handleFormSubmit={handleSubmit}/>
                     :
                     <div className='Alert h-screen w-full flex flex-col items-center'>
                         <div className='AlertSpace basis-1/5'></div>

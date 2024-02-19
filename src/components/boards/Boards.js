@@ -1,12 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import TailBoardList from './UI/TailBoardList'
+import axios from 'axios';
 
 
 export default function Boards() {
   // 카테고리 사항을 보내줌, 추가검색: %Like%, 조회수별, 시간별
-  // 페이지, 페이지 번호, 페이지 총 갯수를 받음
-  // 분류 사항을 보낸뒤 페이지 총 갯수를 읽어서 state변수로 받은뒤 5개로 나누어서 뿌림, 그 후 
-  
+  // 보드번호, 페이지, 페이지 번호, 페이지 총 갯수를 받음
+  // 분류 사항을 보낸뒤 페이지 총 갯수(15)를 받은뒤 3개로 나누어서 뿌림, 그 후 4번쨰부터 받고 싶을때 새로운 페이지 요청
+  const API_SERVER = process.env.REACT_APP_API_SERVER_HOST;
+  const [errMessage,setErrMessage] = useState(<></>);
+  const [boardDetail,setBoardDetail] = useState({
+
+  });
+  const [pageDetail,setPageDetail] = useState({
+
+  });
+  useEffect(()=>{
+    axios.get(`${API_SERVER}/boards`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => {
+        console.log(res)
+      }).catch(err => {
+        setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status}) ${err.response.data}`:err.message}</div>)
+      })
+  },[])
   const handlePageButton = (number) => {
 
   }
@@ -20,6 +40,7 @@ export default function Boards() {
           </form>
         </div>
         <div className='Board_contents m-5 flex flex-col justify-center items-center'>
+          {errMessage}
           <TailBoardList/>
           <TailBoardList/>
           <TailBoardList/>

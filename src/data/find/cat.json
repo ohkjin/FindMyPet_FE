@@ -1,15 +1,6 @@
-{
-  "response" : {
-    "header" : {
-      "reqNo" : 227968802,
-      "resultCode" : "00",
-      "resultMsg" : "NORMAL SERVICE."
-    },
-    "body" : {
-      "items" : {
-        "item" : [ {
+[ {
           "desertionNo" : "426331202400023",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402161002509_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402161002509_s.jpg",
           "happenDt" : "20240215",
           "happenPlace" : "유엔로74번길 1",
           "kindCd" : "[고양이] 믹스묘",
@@ -19,7 +10,7 @@
           "noticeNo" : "부산-남구-2024-00023",
           "noticeSdt" : "20240216",
           "noticeEdt" : "20240226",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402161002509.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402161002509.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -32,7 +23,7 @@
           "officetel" : "051-607-4481"
         }, {
           "desertionNo" : "411319202400044",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402152002128_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402152002128_s.jpg",
           "happenDt" : "20240215",
           "happenPlace" : "만양로10길 10",
           "kindCd" : "[고양이] 페르시안-페르시안 친칠라",
@@ -42,7 +33,7 @@
           "noticeNo" : "서울-동작-2024-00011",
           "noticeSdt" : "20240216",
           "noticeEdt" : "20240226",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402152002128.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402152002128.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -55,7 +46,7 @@
           "officetel" : "02-820-9492"
         }, {
           "desertionNo" : "443571202400139",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402151702568_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402151702568_s.jpg",
           "happenDt" : "20240215",
           "happenPlace" : "용암동 1953",
           "kindCd" : "[고양이] 한국 고양이",
@@ -65,7 +56,7 @@
           "noticeNo" : "충북-청주-2024-00139",
           "noticeSdt" : "20240215",
           "noticeEdt" : "20240226",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402151702568.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402151702568.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -78,7 +69,7 @@
           "officetel" : "043-201-2296"
         }, {
           "desertionNo" : "441400202400028",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/20240215110277_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/20240215110277_s.jpg",
           "happenDt" : "20240215",
           "happenPlace" : "궐동29번길35",
           "kindCd" : "[고양이] 러시안 블루",
@@ -88,7 +79,7 @@
           "noticeNo" : "경기-오산-2024-00028",
           "noticeSdt" : "20240215",
           "noticeEdt" : "20240226",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/20240215110277.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/20240215110277.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -101,7 +92,7 @@
           "officetel" : "031-8036-7643"
         }, {
           "desertionNo" : "441394202400112",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402151102960_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402151102960_s.jpg",
           "happenDt" : "20240215",
           "happenPlace" : "덕이동 698 더릴위드 포레스트 부근",
           "kindCd" : "[고양이] 한국 고양이",
@@ -111,7 +102,7 @@
           "noticeNo" : "경기-고양-2024-00113",
           "noticeSdt" : "20240215",
           "noticeEdt" : "20240226",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402151102960.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402151102960.jpg",
           "processState" : "보호중",
           "sexCd" : "Q",
           "neuterYn" : "U",
@@ -124,7 +115,7 @@
           "officetel" : "031-8075-4657"
         }, {
           "desertionNo" : "448535202400111",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402150902501_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402150902501_s.jpg",
           "happenDt" : "20240214",
           "happenPlace" : "김해시 삼방동 645-7",
           "kindCd" : "[고양이] 한국 고양이",
@@ -134,7 +125,7 @@
           "noticeNo" : "경남-김해-2024-00112",
           "noticeSdt" : "20240215",
           "noticeEdt" : "20240226",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402150902501.png",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402150902501.png",
           "processState" : "보호중",
           "sexCd" : "Q",
           "neuterYn" : "U",
@@ -147,7 +138,7 @@
           "officetel" : "055-350-4134"
         }, {
           "desertionNo" : "447506202400044",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402151502607_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402151502607_s.jpg",
           "happenDt" : "20240214",
           "happenPlace" : "성남교부근",
           "kindCd" : "[고양이] 한국 고양이",
@@ -157,7 +148,7 @@
           "noticeNo" : "경북-김천-2024-00044",
           "noticeSdt" : "20240215",
           "noticeEdt" : "20240226",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402151502607.png",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402151502607.png",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -170,7 +161,7 @@
           "officetel" : "054-421-2572"
         }, {
           "desertionNo" : "441409202400192",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402151402115_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402151402115_s.jpg",
           "happenDt" : "20240214",
           "happenPlace" : "대곶면 대곶로 430번길 52-2 인근",
           "kindCd" : "[고양이] 한국 고양이",
@@ -180,7 +171,7 @@
           "noticeNo" : "경기-김포-2024-00127",
           "noticeSdt" : "20240215",
           "noticeEdt" : "20240226",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402151402115.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402151402115.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -193,7 +184,7 @@
           "officetel" : "031-5186-4323"
         }, {
           "desertionNo" : "428356202400115",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/20240214160260_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/20240214160260_s.jpg",
           "happenDt" : "20240214",
           "happenPlace" : "서구 청마로 51번안길11",
           "kindCd" : "[고양이] 한국 고양이",
@@ -203,7 +194,7 @@
           "noticeNo" : "인천-서구-2024-00102",
           "noticeSdt" : "20240215",
           "noticeEdt" : "20240226",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/20240214160260.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/20240214160260.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -216,7 +207,7 @@
           "officetel" : "032-560-1902"
         }, {
           "desertionNo" : "469569202400065",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402142002408_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402142002408_s.jpg",
           "happenDt" : "20240214",
           "happenPlace" : "전의면 운주산로 1168 어탕국수 앞",
           "kindCd" : "[고양이] 한국 고양이",
@@ -226,7 +217,7 @@
           "noticeNo" : "세종-세종-2024-00065",
           "noticeSdt" : "20240214",
           "noticeEdt" : "20240226",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402142002408.jpeg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402142002408.jpeg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -239,7 +230,7 @@
           "officetel" : "044-300-7616"
         }, {
           "desertionNo" : "444449202400140",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/20240214130271_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/20240214130271_s.jpg",
           "happenDt" : "20240214",
           "happenPlace" : "서북구 쌍용동 1965 건물 3층",
           "kindCd" : "[고양이] 한국 고양이",
@@ -249,7 +240,7 @@
           "noticeNo" : "충남-천안-2024-00140",
           "noticeSdt" : "20240214",
           "noticeEdt" : "20240226",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/20240214130271.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/20240214130271.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -262,7 +253,7 @@
           "officetel" : "041-566-5320"
         }, {
           "desertionNo" : "441401202400087",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/20240214170281_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/20240214170281_s.jpg",
           "happenDt" : "20240214",
           "happenPlace" : "대야동 219-3",
           "kindCd" : "[고양이] 페르시안",
@@ -272,7 +263,7 @@
           "noticeNo" : "경기-시흥-2024-00087",
           "noticeSdt" : "20240214",
           "noticeEdt" : "20240226",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/20240214170281.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/20240214170281.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -285,7 +276,7 @@
           "officetel" : "031-310-6945"
         }, {
           "desertionNo" : "431372202400020",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402141502303_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402141502303_s.jpg",
           "happenDt" : "20240214",
           "happenPlace" : "북구 새장터8길 41",
           "kindCd" : "[고양이] 스코티시폴드",
@@ -295,7 +286,7 @@
           "noticeNo" : "울산-북구-2024-00020",
           "noticeSdt" : "20240214",
           "noticeEdt" : "20240226",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402141502303.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402141502303.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -308,7 +299,7 @@
           "officetel" : "052-241-8083"
         }, {
           "desertionNo" : "429363202400072",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402141202915_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402141202915_s.jpg",
           "happenDt" : "20240214",
           "happenPlace" : "광산구 월곡동",
           "kindCd" : "[고양이] 믹스묘",
@@ -318,7 +309,7 @@
           "noticeNo" : "광주-광산-2024-00072",
           "noticeSdt" : "20240214",
           "noticeEdt" : "20240226",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402141202915.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402141202915.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -331,7 +322,7 @@
           "officetel" : "062-960-8513"
         }, {
           "desertionNo" : "428356202400113",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402141402182_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402141402182_s.jpg",
           "happenDt" : "20240214",
           "happenPlace" : "서구청 당직실",
           "kindCd" : "[고양이] 한국 고양이",
@@ -341,7 +332,7 @@
           "noticeNo" : "인천-서구-2024-00100",
           "noticeSdt" : "20240214",
           "noticeEdt" : "20240226",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402141402182.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402141402182.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -354,7 +345,7 @@
           "officetel" : "032-560-1902"
         }, {
           "desertionNo" : "426339202400027",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402151502665_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402151502665_s.jpg",
           "happenDt" : "20240213",
           "happenPlace" : "사상로223번길14",
           "kindCd" : "[고양이] 믹스묘",
@@ -364,7 +355,7 @@
           "noticeNo" : "부산-사상-2024-00027",
           "noticeSdt" : "20240215",
           "noticeEdt" : "20240226",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402151502665.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402151502665.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -377,7 +368,7 @@
           "officetel" : "051-310-4781"
         }, {
           "desertionNo" : "441394202400111",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402132002834_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402132002834_s.jpg",
           "happenDt" : "20240213",
           "happenPlace" : "덕이동 792-1 부근",
           "kindCd" : "[고양이] 한국 고양이",
@@ -387,7 +378,7 @@
           "noticeNo" : "경기-고양-2024-00112",
           "noticeSdt" : "20240214",
           "noticeEdt" : "20240226",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402132002834.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402132002834.jpg",
           "processState" : "보호중",
           "sexCd" : "Q",
           "neuterYn" : "U",
@@ -400,7 +391,7 @@
           "officetel" : "031-8075-4657"
         }, {
           "desertionNo" : "469569202400063",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402131902740_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402131902740_s.jpg",
           "happenDt" : "20240213",
           "happenPlace" : "소정면 산단언덕2길36",
           "kindCd" : "[고양이] 한국 고양이",
@@ -410,7 +401,7 @@
           "noticeNo" : "세종-세종-2024-00063",
           "noticeSdt" : "20240213",
           "noticeEdt" : "20240223",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402131902740.jpeg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402131902740.jpeg",
           "processState" : "보호중",
           "sexCd" : "M",
           "neuterYn" : "U",
@@ -423,7 +414,7 @@
           "officetel" : "044-300-7616"
         }, {
           "desertionNo" : "429363202400070",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402121502857_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402121502857_s.jpg",
           "happenDt" : "20240212",
           "happenPlace" : "광산구 신창동",
           "kindCd" : "[고양이] 한국 고양이",
@@ -433,7 +424,7 @@
           "noticeNo" : "광주-광산-2024-00070",
           "noticeSdt" : "20240212",
           "noticeEdt" : "20240222",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402121502857.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402121502857.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -446,7 +437,7 @@
           "officetel" : "062-960-8513"
         }, {
           "desertionNo" : "444568202400065",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402111202307_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402111202307_s.jpg",
           "happenDt" : "20240211",
           "happenPlace" : "당진시 석문면 LH천년나무3단지",
           "kindCd" : "[고양이] 스코티시폴드",
@@ -456,7 +447,7 @@
           "noticeNo" : "충남-당진-2024-00065",
           "noticeSdt" : "20240211",
           "noticeEdt" : "20240220",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402111202307.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402111202307.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -469,7 +460,7 @@
           "officetel" : "041-350-4231"
         }, {
           "desertionNo" : "429361202400020",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402111602517_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402111602517_s.jpg",
           "happenDt" : "20240211",
           "happenPlace" : "남구 백운동",
           "kindCd" : "[고양이] 한국 고양이",
@@ -479,7 +470,7 @@
           "noticeNo" : "광주-남구-2024-00021",
           "noticeSdt" : "20240211",
           "noticeEdt" : "20240221",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402111602517.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402111602517.jpg",
           "processState" : "보호중",
           "sexCd" : "M",
           "neuterYn" : "U",
@@ -492,7 +483,7 @@
           "officetel" : "062-607-2752"
         }, {
           "desertionNo" : "428351202400036",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402131002997_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402131002997_s.jpg",
           "happenDt" : "20240209",
           "happenPlace" : "미추홀구 구청케이지",
           "kindCd" : "[고양이] 한국 고양이",
@@ -502,7 +493,7 @@
           "noticeNo" : "인천-미추홀-2024-00040",
           "noticeSdt" : "20240214",
           "noticeEdt" : "20240226",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402131002997.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402131002997.jpg",
           "processState" : "보호중",
           "sexCd" : "Q",
           "neuterYn" : "U",
@@ -515,7 +506,7 @@
           "officetel" : "032-880-4683"
         }, {
           "desertionNo" : "426330202400013",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402131602646_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402131602646_s.jpg",
           "happenDt" : "20240209",
           "happenPlace" : "여고로127번길 65 ",
           "kindCd" : "[고양이] 믹스묘",
@@ -525,7 +516,7 @@
           "noticeNo" : "부산-동래-2024-00014",
           "noticeSdt" : "20240213",
           "noticeEdt" : "20240223",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402131602646.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402131602646.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -538,7 +529,7 @@
           "officetel" : "051-550-4834"
         }, {
           "desertionNo" : "427345202400034",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402101002184_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402101002184_s.jpg",
           "happenDt" : "20240209",
           "happenPlace" : "금호 1교 다리 밑",
           "kindCd" : "[고양이] 페르시안",
@@ -548,7 +539,7 @@
           "noticeNo" : "대구-북구-2024-00034",
           "noticeSdt" : "20240210",
           "noticeEdt" : "20240220",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402101002184.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402101002184.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -561,7 +552,7 @@
           "officetel" : "053-665-3192"
         }, {
           "desertionNo" : "448535202400109",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402130902137_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402130902137_s.jpg",
           "happenDt" : "20240208",
           "happenPlace" : "김해시 한림면 퇴래리 1086-11",
           "kindCd" : "[고양이] 한국 고양이",
@@ -571,7 +562,7 @@
           "noticeNo" : "경남-김해-2024-00110",
           "noticeSdt" : "20240213",
           "noticeEdt" : "20240223",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402130902137.png",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402130902137.png",
           "processState" : "보호중",
           "sexCd" : "M",
           "neuterYn" : "U",
@@ -584,7 +575,7 @@
           "officetel" : "055-350-4134"
         }, {
           "desertionNo" : "441409202400176",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402131002567_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402131002567_s.jpg",
           "happenDt" : "20240208",
           "happenPlace" : "운양동 한신더휴아파트 일대",
           "kindCd" : "[고양이] 샴",
@@ -594,7 +585,7 @@
           "noticeNo" : "경기-김포-2024-00111",
           "noticeSdt" : "20240213",
           "noticeEdt" : "20240223",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402131002567.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402131002567.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -607,7 +598,7 @@
           "officetel" : "031-5186-4323"
         }, {
           "desertionNo" : "426333202400045",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402131702361_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402131702361_s.jpg",
           "happenDt" : "20240208",
           "happenPlace" : "청사포로107번길",
           "kindCd" : "[고양이] 믹스묘",
@@ -617,7 +608,7 @@
           "noticeNo" : "부산-해운대-2024-00044",
           "noticeSdt" : "20240213",
           "noticeEdt" : "20240223",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402131702361.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402131702361.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -630,7 +621,7 @@
           "officetel" : "051-749-5681"
         }, {
           "desertionNo" : "469569202400059",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/20240208200259_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/20240208200259_s.jpg",
           "happenDt" : "20240208",
           "happenPlace" : "조치원읍 죽림리 동광빌라근처",
           "kindCd" : "[고양이] 믹스묘",
@@ -640,7 +631,7 @@
           "noticeNo" : "세종-세종-2024-00059",
           "noticeSdt" : "20240208",
           "noticeEdt" : "20240219",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/20240208200259.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/20240208200259.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -653,7 +644,7 @@
           "officetel" : "044-300-7616"
         }, {
           "desertionNo" : "448537202400049",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402081602652_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402081602652_s.jpg",
           "happenDt" : "20240208",
           "happenPlace" : "문동폭포길6-2",
           "kindCd" : "[고양이] 한국 고양이",
@@ -663,7 +654,7 @@
           "noticeNo" : "경남-거제-2024-00049",
           "noticeSdt" : "20240208",
           "noticeEdt" : "20240219",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402081602652.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402081602652.jpg",
           "processState" : "보호중",
           "sexCd" : "Q",
           "neuterYn" : "U",
@@ -676,7 +667,7 @@
           "officetel" : "055-639-6366"
         }, {
           "desertionNo" : "447505202400099",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402081502662_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402081502662_s.jpg",
           "happenDt" : "20240208",
           "happenPlace" : "한화 콘도에서 보문 CC가는 2차선 도로",
           "kindCd" : "[고양이] 믹스묘",
@@ -686,7 +677,7 @@
           "noticeNo" : "경북-경주-2024-00099",
           "noticeSdt" : "20240208",
           "noticeEdt" : "20240219",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402081502662.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402081502662.jpg",
           "processState" : "보호중",
           "sexCd" : "M",
           "neuterYn" : "U",
@@ -699,7 +690,7 @@
           "officetel" : "054-760-2883"
         }, {
           "desertionNo" : "447505202400098",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402131302919_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402131302919_s.jpg",
           "happenDt" : "20240208",
           "happenPlace" : "내남식육식당 용산 강변길 41-3",
           "kindCd" : "[고양이] 믹스묘",
@@ -709,7 +700,7 @@
           "noticeNo" : "경북-경주-2024-00098",
           "noticeSdt" : "20240208",
           "noticeEdt" : "20240219",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402131302919.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402131302919.jpg",
           "processState" : "보호중",
           "sexCd" : "Q",
           "neuterYn" : "U",
@@ -722,7 +713,7 @@
           "officetel" : "054-760-2883"
         }, {
           "desertionNo" : "448535202400105",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402080902682_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402080902682_s.jpg",
           "happenDt" : "20240207",
           "happenPlace" : "김해시 안하로 28(안명초)부근",
           "kindCd" : "[고양이] 한국 고양이",
@@ -732,7 +723,7 @@
           "noticeNo" : "경남-김해-2024-00106",
           "noticeSdt" : "20240208",
           "noticeEdt" : "20240219",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402080902682.png",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402080902682.png",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -745,7 +736,7 @@
           "officetel" : "055-350-4134"
         }, {
           "desertionNo" : "441399202400131",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402081502880_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402081502880_s.jpg",
           "happenDt" : "20240207",
           "happenPlace" : "가운119 안전센터",
           "kindCd" : "[고양이] 믹스묘",
@@ -755,7 +746,7 @@
           "noticeNo" : "경기-남양주-2024-00131",
           "noticeSdt" : "20240208",
           "noticeEdt" : "20240219",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402081502880.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402081502880.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -768,7 +759,7 @@
           "officetel" : "031-590-2324"
         }, {
           "desertionNo" : "431373202400071",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402081302762_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402081302762_s.jpg",
           "happenDt" : "20240207",
           "happenPlace" : "온양 서희 스타힐스 앞 도로",
           "kindCd" : "[고양이] 러시안 블루",
@@ -778,7 +769,7 @@
           "noticeNo" : "울산-울주-2024-00072",
           "noticeSdt" : "20240208",
           "noticeEdt" : "20240219",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402081302762.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402081302762.jpg",
           "processState" : "보호중",
           "sexCd" : "M",
           "neuterYn" : "U",
@@ -791,7 +782,7 @@
           "officetel" : "052-204-1639"
         }, {
           "desertionNo" : "426339202400025",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402081602128_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402081602128_s.jpg",
           "happenDt" : "20240207",
           "happenPlace" : "내정로116",
           "kindCd" : "[고양이] 한국 고양이",
@@ -801,7 +792,7 @@
           "noticeNo" : "부산-사상-2024-00025",
           "noticeSdt" : "20240208",
           "noticeEdt" : "20240219",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402081602128.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402081602128.jpg",
           "processState" : "보호중",
           "sexCd" : "M",
           "neuterYn" : "U",
@@ -814,7 +805,7 @@
           "officetel" : "051-310-4781"
         }, {
           "desertionNo" : "430366202400037",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402071702485_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402071702485_s.jpg",
           "happenDt" : "20240207",
           "happenPlace" : "괴정동 79-8인근",
           "kindCd" : "[고양이] 브리티시 쇼트헤어",
@@ -824,7 +815,7 @@
           "noticeNo" : "대전-서구-2024-00039",
           "noticeSdt" : "20240207",
           "noticeEdt" : "20240219",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402071702485.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402071702485.jpg",
           "processState" : "보호중",
           "sexCd" : "Q",
           "neuterYn" : "U",
@@ -837,7 +828,7 @@
           "officetel" : "042-288-2483"
         }, {
           "desertionNo" : "426339202400024",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402081602828_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402081602828_s.jpg",
           "happenDt" : "20240206",
           "happenPlace" : "사상로488-19 ",
           "kindCd" : "[고양이] 한국 고양이",
@@ -847,7 +838,7 @@
           "noticeNo" : "부산-사상-2024-00024",
           "noticeSdt" : "20240208",
           "noticeEdt" : "20240219",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402081602828.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402081602828.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -860,7 +851,7 @@
           "officetel" : "051-310-4781"
         }, {
           "desertionNo" : "444452202400163",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402071602489_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402071602489_s.jpg",
           "happenDt" : "20240206",
           "happenPlace" : "배방 북수리 1779",
           "kindCd" : "[고양이] 믹스묘",
@@ -870,7 +861,7 @@
           "noticeNo" : "충남-아산-2024-00141",
           "noticeSdt" : "20240207",
           "noticeEdt" : "20240216",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402071602489.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402071602489.jpg",
           "processState" : "보호중",
           "sexCd" : "F",
           "neuterYn" : "U",
@@ -883,7 +874,7 @@
           "officetel" : "041-530-6200"
         }, {
           "desertionNo" : "441553202400208",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402071402281_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402071402281_s.jpg",
           "happenDt" : "20240206",
           "happenPlace" : "향남인근",
           "kindCd" : "[고양이] 한국 고양이",
@@ -893,7 +884,7 @@
           "noticeNo" : "경기-화성-2024-00208",
           "noticeSdt" : "20240207",
           "noticeEdt" : "20240216",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402071402281.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402071402281.jpg",
           "processState" : "보호중",
           "sexCd" : "Q",
           "neuterYn" : "U",
@@ -906,7 +897,7 @@
           "officetel" : "031-5189-7099"
         }, {
           "desertionNo" : "430366202400036",
-          "filename" : "http://www.animal.go.kr/files/shelter/2023/11/202402071702482_s.jpg",
+          "filename" : "https://www.animal.go.kr/files/shelter/2023/11/202402071702482_s.jpg",
           "happenDt" : "20240206",
           "happenPlace" : "괴정동79-8인근",
           "kindCd" : "[고양이] 스코티시폴드",
@@ -916,7 +907,7 @@
           "noticeNo" : "대전-서구-2024-00038",
           "noticeSdt" : "20240207",
           "noticeEdt" : "20240219",
-          "popfile" : "http://www.animal.go.kr/files/shelter/2023/11/202402071702482.jpg",
+          "popfile" : "https://www.animal.go.kr/files/shelter/2023/11/202402071702482.jpg",
           "processState" : "보호중",
           "sexCd" : "Q",
           "neuterYn" : "U",
@@ -928,10 +919,3 @@
           "chargeNm" : "서구",
           "officetel" : "042-288-2483"
         } ]
-      },
-      "numOfRows" : 40,
-      "pageNo" : 1,
-      "totalCount" : 44
-    }
-  }
-}

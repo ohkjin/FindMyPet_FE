@@ -23,9 +23,9 @@ export default function Navbar() {
                     유기동물
                 </Link>
             </div>
-            <div className={`basis-1/5 flex justify-center items-center text-2xl ${linkFont} `}>
+            <Link to="/home" className={`basis-1/5 flex justify-center items-center text-2xl ${linkFont} `}> 
                 MyPetFinder
-            </div>
+            </Link>
             <div className='basis-2/5 flex flex-row justify-evenly items-center'>
                 
                 {isLogin?
