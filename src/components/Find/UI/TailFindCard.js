@@ -3,7 +3,7 @@ import React from 'react'
 export default function TailCard({k,theme,imgSrc,title,subtitle,by}) {
     let eachtags="";
     const themeColor = {
-        'white':['bg-sky-500/20 text-violet-900/75',500,400,300,'bg-violet-300/10'],
+        'white':['bg-yellow-400/40 text-slate-900/75',500,400,300,'bg-white'],
         'black':['bg-sky-500/20 text-gray-200',300,400,900,'bg-violet-300/5'],
         '':['bg-sky-500/20 text-gray-200',300,400,900,'bg-violet-300/5'],
     }
@@ -16,15 +16,25 @@ export default function TailCard({k,theme,imgSrc,title,subtitle,by}) {
     // }
   return (
     //justify-self-start self-start: 길이 자동 조절
-    <div key={k} className={`${themeColor[theme][4]} group relative rounded-lg shadow-xl p-3`}>
-        <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden  bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+    // .iipWfW {
+    //     position: relative;
+    //     display: flex;
+    //     flex-direction: column;
+    //     margin: 0px auto;
+    //     border-radius: 10px;
+    //     background-color: white;
+    //     transition: all 0.3s ease-in-out 0s;
+    //     box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
+    // }
+    <div key={k} className={`${themeColor[theme][4]}  w-[calc(-3rem + 50vw)] group relative rounded-xl shadow-md transition duration-15- ease-in-out hover:-translate-y-1 p-3 cursor-pointer `}>
+        <div className="max-w-64 max-h-52 aspect-h-1 aspect-w-1 w-full overflow-hidden  bg-gray-200 lg:aspect-none group-hover:opacity-75 ">
                 <img 
                 src={imgSrc} alt={title}
                 className="h-full w-full object-cover object-center bg-black bg-blend-multiply lg:h-full lg:w-full"
                 />
         </div>
         <div className="mt-4 flex flex-col justify-left">
-            <h3 className={`${themeColor[theme][0]} rounded-md font-semibold  flex justify-left items-center`}>
+            <h3 className={`${themeColor[theme][0]} rounded-md font-semibold text-sm  flex justify-left items-center`}>
                 {title}
             </h3>
             <p className={`mt-1 text-sm text-gray-${themeColor[theme][1]}`}>

@@ -1,9 +1,13 @@
 
 import { PhotoIcon } from '@heroicons/react/24/solid'
 import TailAnimalButton from '../../Find/UI/TailAnimalButton'
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import sidoObjList from '../../../data/find/sido.json'
+import axios from 'axios';
+import TailSelectSigungu from './TailSelectSigungu';
+import TailSelectShelter from './TailSelectShelter';
 
-export default function TailBoardForm({handleFormSubmit,detail}) {
+export default function TailBoardForm({handleFormSubmit,handleCancel,detail}) {
   const handleSelCate = (e,seletedCate) =>{
     e.preventDefault();
     setInputs({
@@ -28,6 +32,51 @@ const handleChange = (e) => {
       [e.target.name]:e.target.value,
   })
 }
+//-- 보호소 선택 --//
+const baseurl = 'https://apis.data.go.kr/1543061/abandonmentPublicSrvc'
+const sidoRef = useRef();
+const [sigunguObjList, setSigunguObjList] = useState([]);
+const gunguRef = useRef();
+const [shelterObjList, setShelterObjList] = useState([]);
+const shelterRef = useRef();
+// 시도 선택시 value에 넣은 시도코드가 돌아온다
+const handleSelectSido = (e)=>{
+  e.preventDefault();
+  // console.log(e.target.value)
+  if(e.target.value!==''){
+    const apikey= process.env.REACT_APP_API_KEY
+    const url = `${baseurl}/sigungu?serviceKey=${apikey}&upr_cd=${e.target.value}&_type=json`
+    axios.get(url)
+    .then(res=>{
+      if(res.data){
+        // console.log(res.data.response.body.items.item)
+        setSigunguObjList(res.data.response.body.items.item)
+        // console.log(Object.keys(sidoObjList[0]))
+      }
+      })
+    .catch(err=>console.log(err))
+  }
+}
+const handleSelectSigungu = (e)=>{
+  e.preventDefault();
+  console.log(e.target.value)
+  if(e.target.value!==''){
+    const apikey= process.env.REACT_APP_API_KEY
+    const url =`${baseurl}/shelter?serviceKey=${apikey}&upr_cd=${sidoRef.current.value}&org_cd=${e.target.value}&_type=json`
+    axios.get(url)
+    .then(res=>{
+      if(res.data){
+        console.log(res.data.response.body.items.item)
+        setShelterObjList(res.data.response.body.items.item)
+      }
+      })
+    .catch(err=>console.log(err))
+  }
+}
+useEffect(()=>{
+  console.log(shelterRef.current);
+},[gunguRef])
+
   return (
     <form onSubmit={(event)=>handleFormSubmit(event,inputs)}>
       <div className="mt-20 space-y-12">
@@ -43,6 +92,20 @@ const handleChange = (e) => {
                 <TailAnimalButton icon={''} text={'후기'} handleButton={(e)=>handleSelCate(e,1)} selected={inputs.category===1?true:false}/>
                 <TailAnimalButton icon={''} text={'분실 신고'} handleButton={(e)=>handleSelCate(e,2)} selected={inputs.category===2?true:false}/>
               </div>
+              {inputs.category===1&&
+              <>
+              <div className="mt-4 block font-tenada text-sm font-medium leading-6 text-gray-900">
+              보호소 선택
+              </div>
+              <div className=" mt-2 flex flex-col">
+              <TailSelectSigungu handleChange={handleSelectSido} selRef={sidoRef} optionWithValue={sidoObjList} init={`-- 시도 선택 --`}/>
+              {sidoRef!==''&&<TailSelectSigungu handleChange={handleSelectSigungu} selRef={gunguRef} optionWithValue={sigunguObjList} init={`-- 시군구 선택 --`}/>}
+              {gunguRef!==''&&<TailSelectShelter selRef={shelterRef} optionWithValue={shelterObjList} init={`-- 보호소 선택 --`}/>}
+            </div>
+            </>
+              }
+              
+
             </div>
             
             <div className="Title sm:col-span-4">
@@ -152,6 +215,13 @@ const handleChange = (e) => {
       </div>
 
       <div className="mt-6 flex items-center justify-end gap-x-6">
+      <button
+          type="button"
+          onClick={handleCancel}
+          className="rounded-md bg-gray-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          취소
+        </button>
         <button
           type="submit"
           className="rounded-md bg-yellow-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

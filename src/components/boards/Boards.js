@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import TailBoardList from './UI/TailBoardList'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 export default function Boards() {
@@ -9,9 +10,6 @@ export default function Boards() {
   // 분류 사항을 보낸뒤 페이지 총 갯수(15)를 받은뒤 3개로 나누어서 뿌림, 그 후 4번쨰부터 받고 싶을때 새로운 페이지 요청
   const API_SERVER = process.env.REACT_APP_API_SERVER_HOST;
   const [errMessage,setErrMessage] = useState(<></>);
-  const [boardDetail,setBoardDetail] = useState({
-
-  });
   const [pageDetail,setPageDetail] = useState({
 
   });
@@ -22,7 +20,8 @@ export default function Boards() {
       },
     })
       .then(res => {
-        console.log(res)
+        console.log(res);
+        setPageDetail(res.data);
       }).catch(err => {
         setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status}) ${err.response.data}`:err.message}</div>)
       })
@@ -41,9 +40,7 @@ export default function Boards() {
         </div>
         <div className='Board_contents m-5 flex flex-col justify-center items-center'>
           {errMessage}
-          <TailBoardList/>
-          <TailBoardList/>
-          <TailBoardList/>
+          {pageDetail.boardList && pageDetail.boardList.map((b, idx) => <Link to={`/board/${b.board_id}`} key={`board${idx}`}><TailBoardList board={b}/></Link>)}
         </div>
         <div className='Board_pagenum m-5 flex flex-row justify-center items-center'>
           <button className='mx-1 text-slate-700'>◀</button>

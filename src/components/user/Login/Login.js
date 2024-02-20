@@ -65,8 +65,8 @@ export default function Login() {
           setIsLogin(accessToken);
           navigate('/');
         }).catch(err => {
-          // console.log(err)
-          setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status}) ${err.response.data}`:err.message}</div>)
+          console.log(err)
+          setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.data.status}) ${err.response.data.message}`:err.message}</div>)
           setPopup({
             open: true,
             title: 'Error',

@@ -9,8 +9,8 @@ import TailBoardForm from './UI/TailBoardForm';
 export default function Board() {
   const { board_id } = useParams();
   const userToken = useRecoilValue(userAuth);
-  const navigate = useNavigate();
   const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
+  const [edit,setEdit] = useState(false);
   // const apiLink = `${API_SERVER}/user/board/${board_id}`
   const apiLink = `${API_SERVER}/user/board/6`
   const [errMessage,setErrMessage] = useState(<></>);
@@ -23,24 +23,30 @@ export default function Board() {
     writer: 'none',
     commentList: [],//List안에 유저와 내용이 담겨야함
 })
+
   useEffect(()=>{
-    // axios.get(apiLink, {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Authorization: `Bearer ${userToken}`
-    //   },
-    // })
-    //   .then(res => {
-    //     console.log(res)
-    //     if(!res.data){
-    //       setErrMessage(<div className='text-red-400'>데이터가 없습니다</div>)
-    //       return
-    //     }
-    //     setBoardDetail(res.data)
-    //   }).catch(err => {
-    //     setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status}) ${err.response.data}`:err.message}</div>)
-    //   })
+    axios.get(apiLink, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userToken}`
+      },
+    })
+      .then(res => {
+        console.log(res)
+        if(!res.data){
+          setErrMessage(<div className='text-red-400'>데이터가 없습니다</div>)
+          return
+        }
+        setBoardDetail(res.data)
+      }).catch(err => {
+        setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status}) ${err.response.data}`:err.message}</div>)
+      })
   },[])
+
+
+  const handleGoEdit=()=>{
+    setEdit(true);
+  }
 
   const handleSubmitEdit = (e,inputs) => {
     console.log(inputs)
@@ -61,21 +67,20 @@ export default function Board() {
         .then(res => {
           console.log(res)
           if(!res.headers){
-            setErrMessage(<div className='text-red-400'>No Header returned</div>)
-            return
+            setErrMessage(<div className='text-red-400'>No Header returned</div>);
+            return;
           }
-          navigate('/boards');
+          setEdit(false);
         }).catch(err => {
           setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status}) ${err.response.data}`:err.message}</div>)
         })
-      }
+  }
   return (
-    <div>
-      <div className=''>
+    <div className='Board flex justify-center items-center w-full'>
+      <div className='Board_container w-4/5 min-w-96 p-10 flex flex-col items-center'>
         {errMessage}
-      <TailBoardDetail detail={boardDetail}/>
-      <TailBoardForm detail={boardDetail} handleFormSubmit={handleSubmitEdit}/>
-       
+        {edit?<TailBoardForm detail={boardDetail} handleFormSubmit={handleSubmitEdit}/>
+        :<TailBoardDetail detail={boardDetail} handleEdit={handleGoEdit}/>}
       </div>
     </div>
   )

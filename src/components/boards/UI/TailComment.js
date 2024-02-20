@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default function TailComment(comment) {
+export default function TailComment({comment}) {
   return (
     <div>
-        <div className='Name'>{comment.}</div>
-        <div className='Date'></div>
-        <div className='Content'></div>
+        <div className='Name'>{comment.writer}</div>
+        <div className='Date'>{comment.registered}</div>
+        <div className='Content'>{comment.content}</div>
     </div>
   )
 }
