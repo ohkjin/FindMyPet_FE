@@ -14,14 +14,16 @@ import Test from "./components/Home/Test";
 import MyPageEdit from "./components/user/MyPage/MyPageEdit";
 import BoardWrite from "./components/boards/BoardWrite";
 import Board from "./components/boards/Board";
+import Footer from "./components/Footer/Footer";
 
 function App() {
 
   return (
       <BrowserRouter>
       <RecoilRoot>
+      <div className={`w-screen min-h-screen bg-[url('./assets/images/welcome/welcomeHome.jpg')] bg-cover`}>
+        {/* <div> */}
         <Navbar/>
-        <div className=""></div>
         <Routes>
             <Route path="/" element={<Main/>}/>
             <Route path="/home" element={<Home/>}/>
@@ -37,6 +39,8 @@ function App() {
             <Route path="/board/write/:write_type" element={<BoardWrite/>}/>
             <Route path="/boards/community" element={<Community/>}/>
         </Routes>
+        <Footer/>
+        </div>
       </RecoilRoot>
       </BrowserRouter>
   );
