@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import { userAuth } from '../user/token/TokenAtom'
+import WriteDropDown from './WriteDropDown';
 
 export default function Navbar() {
     const isLogin = useRecoilValue(userAuth);
@@ -43,9 +44,7 @@ export default function Navbar() {
                 <Link to="/boards" className={`${linkShape}${linkDesign}${linkHover}${linkFont}`}>
                     보드
                 </Link>
-                <Link to="/board/write" className={`bg-yellow-300 rounded-3xl ${linkShape}${linkDesign} hover:bg-slate-800 hover:text-yellow-300 ${linkFont}`}>
-                    글쓰기
-                </Link>
+                <WriteDropDown/>
             </div>
         </div>
     </nav>

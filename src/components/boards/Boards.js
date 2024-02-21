@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import TailBoardList from './UI/TailBoardList'
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 
 export default function Boards() {
@@ -10,18 +10,30 @@ export default function Boards() {
   // 분류 사항을 보낸뒤 페이지 총 갯수(15)를 받은뒤 3개로 나누어서 뿌림, 그 후 4번쨰부터 받고 싶을때 새로운 페이지 요청
   const API_SERVER = process.env.REACT_APP_API_SERVER_HOST;
   const [errMessage,setErrMessage] = useState(<></>);
+  const [searchParams] = useSearchParams();
+  const pageNo = searchParams.get('pageNo')
   const [pageDetail,setPageDetail] = useState({
-
+    page:1,
+    totalPages:1,
   });
+  const [boardDetails,setBoardDetails] = useState([])
   useEffect(()=>{
-    axios.get(`${API_SERVER}/boards`, {
+    axios.get(`${API_SERVER}/boards?pageNo=2`, {
       headers: {
         'Content-Type': 'application/json',
       },
     })
       .then(res => {
-        console.log(res);
-        setPageDetail(res.data);
+        if(res.data){
+          setPageDetail({
+            ...pageDetail,
+            totalPages:res.data.totalPages
+          });
+          setBoardDetails(res.data.content);
+        }else{
+          console.log(res)
+          return
+        }
       }).catch(err => {
         setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status}) ${err.response.data}`:err.message}</div>)
       })
@@ -35,12 +47,11 @@ export default function Boards() {
         <div className='Board_search m-5 w-full'>
           <form className='w-full flex flex-row justify-center items-center'>
           <input type='text' placeholder='찾으시는 글이 있으신가요?' className='w-4/5 px-5 py-1 border-2 border-yellow-300 rounded-3xl'/>
-          <button type='button' className='h-9 px-3 py-1 mx-5 text-sm font-bold bg-yellow-300 rounded-3xl'>글쓰기</button>
           </form>
         </div>
-        <div className='Board_contents m-5 flex flex-col justify-center items-center'>
+        <div className='Board_contents m-5'>
           {errMessage}
-          {pageDetail.boardList && pageDetail.boardList.map((b, idx) => <Link to={`/board/${b.board_id}`} key={`board${idx}`}><TailBoardList board={b}/></Link>)}
+          {boardDetails.map((b, idx) => <div key={`boardList${idx}`}><TailBoardList board={b}/></div>)}
         </div>
         <div className='Board_pagenum m-5 flex flex-row justify-center items-center'>
           <button className='mx-1 text-slate-700'>◀</button>

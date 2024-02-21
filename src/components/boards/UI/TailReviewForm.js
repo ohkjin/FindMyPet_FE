@@ -1,32 +1,91 @@
 
 import { PhotoIcon } from '@heroicons/react/24/solid'
 import TailAnimalButton from '../../Find/UI/TailAnimalButton'
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import sidoObjList from '../../../data/find/sido.json'
+import axios from 'axios';
+import TailSelectSigungu from './TailSelectSigungu';
+import TailSelectShelter from './TailSelectShelter';
+import TailRating from '../../../UI/notUsed/TailRating';
 
-export default function TailBoardForm({handleFormSubmit,handleCancel,detail}) {
-  const handleSelCate = (e,seletedCate) =>{
-    e.preventDefault();
-    setInputs({
-      ...inputs,
-      category:seletedCate,
-    });
-  }
-  const cate = {
-    'COMMUNITY':0,
-    'QA':1,
-  }
-  const [inputs, setInputs] = useState({
-    category: detail?cate[detail.category]:0,
-    title: detail?detail.title:'',
+export default function TailReviewForm({handleFormSubmit,handleCancel,detail}) {
+ 
+
+const [inputs, setInputs] = useState({
+    shelter: detail?detail.shelter:'',
+    rating: detail?detail.rating:0,
     content: detail?detail.content:'',
 })
-const handleChange = (e) => {
+
+//-- 보호소 선택 --//
+const baseurl = 'https://apis.data.go.kr/1543061/abandonmentPublicSrvc'
+const sidoRef = useRef();
+const [sigunguObjList, setSigunguObjList] = useState([]);
+const gunguRef = useRef();
+const [shelterObjList, setShelterObjList] = useState([]);
+// 시도 선택시 value에 넣은 시도코드가 돌아온다
+const handleSelectSido = (e)=>{
+  e.preventDefault();
+  // console.log(e.target.value)
+  if(e.target.value!==''){
+    const apikey= process.env.REACT_APP_API_KEY
+    const url = `${baseurl}/sigungu?serviceKey=${apikey}&upr_cd=${e.target.value}&_type=json`
+    axios.get(url)
+    .then(res=>{
+      if(res.data){
+        // console.log(res.data.response.body.items.item)
+        setSigunguObjList(res.data.response.body.items.item)
+        // console.log(Object.keys(sidoObjList[0]))
+      }
+      })
+    .catch(err=>console.log(err))
+  }
+}
+const handleSelectSigungu = (e)=>{
+  e.preventDefault();
+  console.log(e.target.value)
+  if(e.target.value!==''){
+    const apikey= process.env.REACT_APP_API_KEY
+    const url =`${baseurl}/shelter?serviceKey=${apikey}&upr_cd=${sidoRef.current.value}&org_cd=${e.target.value}&_type=json`
+    axios.get(url)
+    .then(res=>{
+      if(res.data){
+        console.log(res.data.response.body.items.item)
+        setShelterObjList(res.data.response.body.items.item)
+      }
+      })
+    .catch(err=>console.log(err))
+  }
+}
+// 보호소
+const handleSelectShelter = (e) =>{
   e.preventDefault();
   setInputs({
-      ...inputs,
-      [e.target.name]:e.target.value,
-  })
+    ...inputs,
+    shelter:e.target.value,
+  });
 }
+
+// 평점
+  const [rating, setRating] = useState(0);
+  const handleRating = (e,ratingInput) =>{
+      e.preventDefault();
+      setRating(ratingInput);
+      setInputs({
+        ...inputs,
+        rating:ratingInput,
+      });
+      // console.log(inputs)
+  }
+
+//내용
+  const handleContentChange = (e) => {
+    e.preventDefault();
+    setInputs({
+        ...inputs,
+        content:e.target.value,
+    })
+  }
 
   return (
     <form onSubmit={(event)=>handleFormSubmit(event,inputs)}>
@@ -35,33 +94,33 @@ const handleChange = (e) => {
    
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="Category sm:col-span-4">
-              <div className="block font-tenada text-sm font-medium leading-6 text-gray-900">
-                카테고리
+              <>
+              <div className="mt-4 block font-tenada text-sm font-medium leading-6 text-gray-900">
+              보호소 선택
               </div>
-              <div className=" mt-2 flex flex-row">
-                <TailAnimalButton icon={''} text={'커뮤니티 글'} handleButton={(e)=>handleSelCate(e,0)} selected={inputs.category===0?true:false}/>
-                <TailAnimalButton icon={''} text={'Q&A'} handleButton={(e)=>handleSelCate(e,1)} selected={inputs.category===1?true:false}/>
-              </div>
-            </div> 
+              <div className=" mt-2 flex flex-col">
+              <TailSelectSigungu handleChange={handleSelectSido} selRef={sidoRef} optionWithValue={sidoObjList} init={`-- 시도 선택 --`}/>
+              {sidoRef!==''&&<TailSelectSigungu handleChange={handleSelectSigungu} selRef={gunguRef} optionWithValue={sigunguObjList} init={`-- 시군구 선택 --`}/>}
+              {gunguRef!==''&&<TailSelectShelter handleChange={handleSelectShelter} optionWithValue={shelterObjList} init={`-- 보호소 선택 --`}/>}
+            </div>
+            </>
+            </div>
+            
             <div className="Title sm:col-span-4">
               <label htmlFor="username" className="block font-tenada text-sm font-medium leading-6 text-gray-900">
-                제목
+                평점
               </label>
               <div className="mt-2">
-                <div className="px-3 flex rounded-md shadow-sm ring-1 ring-inset ring-yellow-200 focus-within:ring-2 focus-within:ring-inset focus-within:ring-yellow-300 sm:max-w-md">
-                  <input
-                    type="text"
-                    name="title"
-                    id="title"
-                    className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900  placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder="제목을 입력해주세요"
-                    maxLength={45}
-                    onChange={handleChange}
-                    defaultValue={inputs.title}
-                  />
-                </div>
+              <div className="flex flex-row">
+                <button onClick={(e)=>handleRating(e,1)}>{inputs.rating>=1?'😺':'⚪'}</button>
+                <button onClick={(e)=>handleRating(e,2)}>{inputs.rating>=2?'😺':'⚪'}</button>
+                <button onClick={(e)=>handleRating(e,3)}>{inputs.rating>=3?'😺':'⚪'}</button>
+                <button onClick={(e)=>handleRating(e,4)}>{inputs.rating>=4?'😺':'⚪'}</button>
+                <button onClick={(e)=>handleRating(e,5)}>{inputs.rating>=5?'😺':'⚪'}</button>
+              </div>
               </div>
             </div>
+
             <div className="col-span-full">
               <label htmlFor="about" className="block font-tenada text-sm font-medium leading-6 text-gray-900">
                 내용
@@ -74,38 +133,15 @@ const handleChange = (e) => {
                   className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-yellow-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-300 sm:text-sm sm:leading-6"
                   placeholder='내용을 입력해주세요'
                   maxLength={256}
-                  onChange={handleChange}
+                  onChange={handleContentChange}
                   defaultValue={inputs.content}
                 />
               </div>
             </div>
-            <div className="col-span-full">
-              <label htmlFor="cover-photo" className="block text-sm font-tenada leading-6 text-gray-900">
-                사진 업로드
-              </label>
-              <div className="mt-2 flex justify-center rounded-lg border border-dashed border-yellow-900/25 bg-yellow-100 px-6 py-10">
-                <div className="text-center">
-                  <PhotoIcon className="mx-auto h-12 w-12 text-gray-400" aria-hidden="true" />
-                  <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                    <label
-                      htmlFor="file-upload"
-                      className="relative cursor-pointer rounded-md font-semibold text-indigo-300 focus-within:outline-none focus-within:ring-2 focus-within:ring-yellow-300 focus-within:ring-offset-2 hover:text-indigo-500"
-                    >
-                      <span>Upload a file</span>
-                      <input id="file-upload" name="file-upload" type="file" className="sr-only" />
-                    </label>
-                    <p className="pl-1">or drag and drop</p>
-                  </div>
-                  <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
-
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-tenada leading-7 text-gray-900">체크 사항</h2>
-
           <div className="mt-2 space-y-10">
             <fieldset>
               <div className="mt-6 space-y-6">
