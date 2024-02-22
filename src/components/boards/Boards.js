@@ -155,6 +155,7 @@ export default function Boards() {
         </div>
         <div className='Board_contents w-full my-5'>
           {errMessage}
+          {boardDetails.length===0&&<div className='flex justify-center text-gray-500 text-lg'>검색 결과가 없습니다</div>}
           {boardDetails.map((b, idx) => <div key={`boardList${idx}`}><TailBoardList board={b} /><div className='border-2 border-yellow-200/20'/><div className='border-2 border-gray-200/20'/></div>)}
         </div>
         <div className='Board_pagenum m-5 flex flex-row justify-center items-center'>
