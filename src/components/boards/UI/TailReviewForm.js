@@ -1,12 +1,9 @@
-
-import { PhotoIcon } from '@heroicons/react/24/solid'
-import TailAnimalButton from '../../Find/UI/TailAnimalButton'
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import sidoObjList from '../../../data/find/sido.json'
 import axios from 'axios';
 import TailSelectSigungu from './TailSelectSigungu';
 import TailSelectShelter from './TailSelectShelter';
-import TailRating from '../../../UI/notUsed/TailRating';
+import { findApi } from '../../Find/FindApi';
 
 export default function TailReviewForm({handleFormSubmit,handleCancel,detail}) {
  
@@ -23,6 +20,7 @@ const sidoRef = useRef();
 const [sigunguObjList, setSigunguObjList] = useState([]);
 const gunguRef = useRef();
 const [shelterObjList, setShelterObjList] = useState([]);
+const shelterRef = useRef();
 // 시도 선택시 value에 넣은 시도코드가 돌아온다
 const handleSelectSido = (e)=>{
   e.preventDefault();
@@ -30,15 +28,23 @@ const handleSelectSido = (e)=>{
   if(e.target.value!==''){
     const apikey= process.env.REACT_APP_API_KEY
     const url = `${baseurl}/sigungu?serviceKey=${apikey}&upr_cd=${e.target.value}&_type=json`
-    axios.get(url)
-    .then(res=>{
-      if(res.data){
-        // console.log(res.data.response.body.items.item)
-        setSigunguObjList(res.data.response.body.items.item)
-        // console.log(Object.keys(sidoObjList[0]))
-      }
-      })
-    .catch(err=>console.log(err))
+    // axios.get(url)
+    // .then(res=>{
+    //   if(res.data){
+    //     // console.log(res.data.response.body.items.item)
+    //     setSigunguObjList(res.data.response.body.items.item)
+    //     // console.log(Object.keys(sidoObjList[0]))
+    //   }
+    //   })
+    // .catch(err=>console.log(err))
+    findApi(`/sigungu?serviceKey=${apikey}&upr_cd=${e.target.value}&_type=json`)
+    .then((item)=>{
+      // console.log(item);
+      // 군구,보호소 초기화
+      gunguRef.current.value = '';
+      shelterRef.current.value = '';
+      setSigunguObjList(item);
+    })
   }
 }
 const handleSelectSigungu = (e)=>{
@@ -51,6 +57,7 @@ const handleSelectSigungu = (e)=>{
     .then(res=>{
       if(res.data){
         console.log(res.data.response.body.items.item)
+        shelterRef.current.value = '';
         setShelterObjList(res.data.response.body.items.item)
       }
       })
@@ -101,7 +108,7 @@ const handleSelectShelter = (e) =>{
               <div className=" mt-2 flex flex-col">
               <TailSelectSigungu handleChange={handleSelectSido} selRef={sidoRef} optionWithValue={sidoObjList} init={`-- 시도 선택 --`}/>
               {sidoRef!==''&&<TailSelectSigungu handleChange={handleSelectSigungu} selRef={gunguRef} optionWithValue={sigunguObjList} init={`-- 시군구 선택 --`}/>}
-              {gunguRef!==''&&<TailSelectShelter handleChange={handleSelectShelter} optionWithValue={shelterObjList} init={`-- 보호소 선택 --`}/>}
+              {gunguRef!==''&&<TailSelectShelter handleChange={handleSelectShelter} selRef={shelterRef} optionWithValue={shelterObjList} init={`-- 보호소 선택 --`}/>}
             </div>
             </>
             </div>

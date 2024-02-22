@@ -1,26 +1,37 @@
-// import axios from "axios"
-// const apikey= process.env.REACT_APP_API_KEY
-// const url =`${baseurl}/shelter?serviceKey=${apikey}&upr_cd=${sidoRef.current.value}&org_cd=${e.target.value}&_type=json`
+import axios from "axios"
 
-// const instance = axios.create({
-//     baseURL:'https://apis.data.go.kr/1543061/abandonmentPublicSrvc',
-//     timeout:1000
-// }) 
+const instance = axios.create({
+    baseURL:'https://apis.data.go.kr/1543061/abandonmentPublicSrvc',
+    timeout:2000,
+}) 
 
 // instance.interceptors.request.use(
 //    (err)=>{
 //         console.log(err);
-//         // return Promise.reject(err);
+//         return Promise.reject(err);
 //    }
 // )
 // instance.interceptors.response.use(
 //     (res)=>{
-//         return res;
+//      return res;
 //     },
 //     (err)=>{
 //         console.log(err);
 //     }
 // )
+
+// export const findPlaceApi = async (prefix)=>{
+//     const res = await instance.get(prefix)
+//     return res;
+// }
+
+export const findApi = async (prefix)=>{
+    const res = await instance.get(prefix)
+    if(res.data){
+        return res.data.response.body.items.item
+    }
+    return [];
+}
 
 // export const findAnimalsApi = async (code) =>{
 //     const res = await axios.post(`${prefix}`, userDetail)

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { getToken } from "../user/token/TokenManager";
 import { useRecoilValue } from "recoil";
 import { userNickname } from "../user/token/TokenAtom";
+import TailReviewForm from "../boards/UI/TailReviewForm";
 export default function Test() {
     // const [test,setTest] = useState(<></>)
     // const [cookies,setCookies] = useCookies(["accessToken","refreshToken"])
@@ -84,6 +85,9 @@ export default function Test() {
         <div>
           <button onClick={handleRedirect} className="h-20 w-20 bg-blue-400"/>
           <button onClick={()=>handleNavigate('/board/6')} className="h-20 w-20 bg-blue-800"/>
+          </div>
+          <div>
+            <TailReviewForm/>
           </div>
     </div>
   )
