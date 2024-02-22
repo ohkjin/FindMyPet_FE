@@ -14,7 +14,7 @@ export default function MyPage() {
 
   //-- 유저정보 --//
   useEffect(()=>{
-    console.log(userToken)
+    // console.log(userToken)
     const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
     axios.get(`${API_SERVER}/user/mypage`, {
         headers: {
@@ -22,7 +22,7 @@ export default function MyPage() {
           // Authorization: `Bearer ${getToken('accessToken')}`
         },
     }).then(res=>{
-      console.log(res.data);
+      // console.log(res.data);
       setUserDetail(res.data);
     })
     .catch(err=>{

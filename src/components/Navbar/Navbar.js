@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
-import { userAuth } from '../user/token/TokenAtom'
+import { userAuth, userNickname } from '../user/token/TokenAtom'
 import WriteDropDown from './WriteDropDown';
+import { Disclosure } from '@headlessui/react';
 
 export default function Navbar() {
     const isLogin = useRecoilValue(userAuth);
@@ -11,8 +12,8 @@ export default function Navbar() {
     const linkDesign = ' text-sm border border-yellow-300 border-2 bg-white/[0.5] '
     const linkHover = ' hover:bg-orange-400 hover:text-white '
     return (
-        <nav className=" w-full flex justify-center items-center">
-        <div className=" w-full mx-auto min-w-96 p-4 flex flex-row justify-center items-center">
+        <nav className="totalContainer">
+        <div className="w-full mx-auto min-w-96 p-4 flex flex-row justify-center items-center">
             <div className='basis-2/5 flex flex-row  justify-evenly items-center'>
                 <Link to="/home" className={`${linkShape} ${linkDesign} ${linkHover} ${linkFont}`}>
                     홈

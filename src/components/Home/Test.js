@@ -85,9 +85,6 @@ export default function Test() {
           <button onClick={handleRedirect} className="h-20 w-20 bg-blue-400"/>
           <button onClick={()=>handleNavigate('/board/6')} className="h-20 w-20 bg-blue-800"/>
           </div>
-        <div>
-         
-        </div>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import { userAuth, userNickname } from '../token/TokenAtom'
 import { useNavigate } from 'react-router-dom';

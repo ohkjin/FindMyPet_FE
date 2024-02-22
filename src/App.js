@@ -21,7 +21,7 @@ function App() {
   return (
       <BrowserRouter>
       <RecoilRoot>
-        <div className="w-full h-full ">
+        <div className="">
       <div className={`w-screen min-h-screen self-stretch bg-[url('./assets/images/welcome/welcomeHome.jpg')] lg:bg-cover bg-contain bg-no-repeat `}>
         {/* <div> */}
         <Navbar/>

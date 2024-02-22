@@ -80,7 +80,7 @@ return (
           댓글
         </div>
         <form method='post' onSubmit={handleCommentSubmit} className='Comment_Input flex flex-col bg-white border-2 border-gray-200 rounded-lg p-3'>
-          <input id='comment' ref={commentRef} name='comment' defaultValue='' placeholder='댓글을 입력해주세요' className='p-1 m-1' />
+          <input id='comment' ref={commentRef} maxLength={45} name='comment' defaultValue='' placeholder='댓글을 입력해주세요' className='p-1 m-1' />
           <button type='submit' className='bg-yellow-300 p-1 px-6 text-xs text-yellow-900 rounded-xl self-end'>등록</button>
         </form>
         <div className='Comment_List'>

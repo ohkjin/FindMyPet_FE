@@ -21,6 +21,7 @@ export default function TailComment({comment}) {
   // console.log(userNickname===comment.writer)
   const icons =['🦮','🐕‍🦺','🐕','🐈','🐇','🦔','🐢','🐟','🐓','🦜','🐍','🐩']
   const randomIconIdx = Math.floor(Math.random()*icons.length);
+
   return (
     <div className='whiteContainer'>
       <div className='flex flex-row justify-between items-center'>
@@ -29,7 +30,7 @@ export default function TailComment({comment}) {
       </div>
       <div className='flex flex-row justify-between items-center'>
         {isEditing?
-        <input type='text' ref={commentRef} defaultValue={comment.content}/>
+        <input type='text' ref={commentRef} maxLength={45} defaultValue={comment.content}/>
         :
         <div className='Content'>{comment.content}</div>
         }
