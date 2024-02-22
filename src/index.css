@@ -6,3 +6,16 @@
     font-family: 'Tenada';
     src: url('/src/assets/fonts/TENADA_font/Tenada.ttf');
 }
+
+@layer components{
+    .totalContainer{
+        @apply w-full flex flex-col justify-center items-center
+    }
+    .innerContainer{
+        @apply max-w-[61rem] my-auto py-6; 
+    }
+    .whiteContainer{
+        @apply bg-white/[0.9] rounded-3xl shadow p-5 m-5; 
+    }
+
+}

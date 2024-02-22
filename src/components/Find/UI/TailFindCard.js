@@ -3,7 +3,7 @@ import React from 'react'
 export default function TailCard({k,theme,imgSrc,title,subtitle,by}) {
     let eachtags="";
     const themeColor = {
-        'white':['bg-yellow-400/40 text-slate-900/75',500,400,300,'bg-white'],
+        'white':['bg-yellow-400/40 text-slate-900/75',500,400,300,'bg-white/[0.8]'],
         'black':['bg-sky-500/20 text-gray-200',300,400,900,'bg-violet-300/5'],
         '':['bg-sky-500/20 text-gray-200',300,400,900,'bg-violet-300/5'],
     }
@@ -27,10 +27,10 @@ export default function TailCard({k,theme,imgSrc,title,subtitle,by}) {
     //     box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
     // }
     <div key={k} className={`${themeColor[theme][4]}  w-[calc(-3rem + 50vw)] group relative rounded-xl shadow-md transition duration-15- ease-in-out hover:-translate-y-1 p-3 cursor-pointer `}>
-        <div className="max-w-64 max-h-52 aspect-h-1 aspect-w-1 w-full overflow-hidden  bg-gray-200 lg:aspect-none group-hover:opacity-75 ">
+        <div className="max-w-64 max-h-52 aspect-h-1 aspect-w-1 w-full overflow-hidden  bg-gray-200 rounded-lg lg:aspect-none group-hover:opacity-75 ">
                 <img 
                 src={imgSrc} alt={title}
-                className="h-full w-full object-cover object-center bg-black bg-blend-multiply lg:h-full lg:w-full"
+                className="h-full w-full object-cover object-center bg-black bg-blend-multiply lg:h-full lg:w-full "
                 />
         </div>
         <div className="mt-4 flex flex-col justify-left">

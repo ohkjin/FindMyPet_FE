@@ -24,7 +24,7 @@ export default function TailBoardList({ board }) {
           <p className="mt-1 text-sm text-gray-500">{board.content}</p>
         </div>
         <div className="flex flex-1 items-end justify-between text-sm">
-          <p className="text-gray-500">작성자: {board.writer} 조회수: {board.view}</p>
+          <p className="text-gray-500">작성자: {board.writer} 조회수: {board.view} 댓글수: {board.commentSize}</p>
 
           <div className="flex">
             <button

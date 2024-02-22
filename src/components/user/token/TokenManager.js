@@ -15,9 +15,13 @@ expDt.setDate(Date.now()+1000*60*60*24);
 export const setAccessToken=(access)=>{
     cookies.set("accessToken",access,{path:'/',expDt,httpOnly:false})
 }
+export const setUserCookie=(nickname)=>{
+    cookies.set("nickname",nickname,{path:'/',expDt,httpOnly:false})
+}
 
 export const removeAllToken=()=>{
-    cookies.remove("accessToken",{path:'/'})
+    cookies.remove("accessToken",{path:'/'});
+    cookies.remove("nickname",{path:'/'});
 }
 
 export const getToken=(tokenName)=>{

@@ -49,6 +49,10 @@ export default function Board() {
     setEdit(true);
   }
 
+  const handleCancelEdit=()=>{
+    setEdit(false);
+  }
+
   const handleSubmitEdit = (e,inputs) => {
     console.log(inputs)
     console.log(userToken)
@@ -77,10 +81,10 @@ export default function Board() {
         })
   }
   return (
-    <div className='Board flex justify-center items-center w-full'>
-      <div className='Board_container w-4/5 min-w-96 p-10 flex flex-col items-center'>
+    <div className='totalContainer'>
+      <div className='innerContainer'>
         {errMessage}
-        {edit?<TailBoardForm detail={boardDetail} handleFormSubmit={handleSubmitEdit}/>
+        {edit?<TailBoardForm detail={boardDetail} handleFormSubmit={handleSubmitEdit} handleCancel={handleCancelEdit}/>
         :<TailBoardDetail detail={boardDetail} handleEdit={handleGoEdit}/>}
       </div>
     </div>

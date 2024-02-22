@@ -43,9 +43,9 @@ export default function TailBoardDetail({ detail, handleEdit }) {
   }
 
 return (
-  <div className='BoardDetail w-full flex flex-col justify-center items-center'>
-    <div className='BoardDetail w-4/5 '>
-      <div className='flex flex-col justify-start items-start'>
+  <div className='w-full'>
+    <div className='whiteContainer'>
+      <div className=' w-full flex flex-col justify-start items-start'>
         <div className='Cate bg-yellow-200 rounded-xl my-3 p-1 px-4 font-semibold'>
           {detail.category}
         </div>
@@ -60,6 +60,7 @@ return (
       <div className='border border-gray-200' />
       <div className='my-5'>
         <div className='Content my-16'>
+          {errMessage}
           {detail.content}
         </div>
         <div className='flex flex-row justify-between items-center text-gray-500'>
@@ -72,12 +73,13 @@ return (
           </div>
         </div>
       </div>
+      </div>
       <div className='border-2 border-gray-100' />
       <div className='Comments'>
         <div className='Comment_Label my-3 text-lg font-bold '>
           댓글
         </div>
-        <form method='post' onSubmit={handleCommentSubmit} className='Comment_Input flex flex-col border-2 border-gray-200 rounded-lg p-3'>
+        <form method='post' onSubmit={handleCommentSubmit} className='Comment_Input flex flex-col bg-white border-2 border-gray-200 rounded-lg p-3'>
           <input id='comment' ref={commentRef} name='comment' defaultValue='' placeholder='댓글을 입력해주세요' className='p-1 m-1' />
           <button type='submit' className='bg-yellow-300 p-1 px-6 text-xs text-yellow-900 rounded-xl self-end'>등록</button>
         </form>
@@ -86,6 +88,5 @@ return (
         </div>
       </div>
     </div>
-  </div>
 )
 }

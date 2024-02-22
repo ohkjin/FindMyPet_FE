@@ -77,8 +77,8 @@ export default function Find() {
   }
 
   return (
-    <div className='Find flex justify-center items-center w-full'>
-      <div className='Find_Contents w-4/5 min-w-96 p-10 flex flex-col items-center'>
+    <div className='totalContainer'>
+      <div className='innerContainer min-w-96 p-10 flex flex-col items-center'>
         <div className='Find_Select w-full mb-5 grid lg:grid-cols-2 md:grid-cols-1 sm:grid-auto-flow justify-center items-center bg-yellow-50 rounded-lg px-2 py-2 shadow-md'>
           <div className='Select_Kind m-3 grid lg:grid-cols-2 md:grid-cols-2 sm:grid-auto-flow'>
           <div className='Select_Species flex justify-center'>

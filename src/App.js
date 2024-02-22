@@ -21,7 +21,8 @@ function App() {
   return (
       <BrowserRouter>
       <RecoilRoot>
-      <div className={`w-screen min-h-screen bg-[url('./assets/images/welcome/welcomeHome.jpg')] bg-cover`}>
+        <div className="w-full h-full ">
+      <div className={`w-screen min-h-screen self-stretch bg-[url('./assets/images/welcome/welcomeHome.jpg')] lg:bg-cover bg-contain bg-no-repeat `}>
         {/* <div> */}
         <Navbar/>
         <Routes>
@@ -39,8 +40,10 @@ function App() {
             <Route path="/board/write/:write_type" element={<BoardWrite/>}/>
             <Route path="/boards/community" element={<Community/>}/>
         </Routes>
-        <Footer/>
+        
         </div>
+        </div>
+        <Footer/>
       </RecoilRoot>
       </BrowserRouter>
   );

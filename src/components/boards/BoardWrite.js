@@ -64,8 +64,8 @@ export default function BoardWrite() {
     }
     
     return (
-        <div className='w-full flex flex-col justify-center items-center'>
-            <div className='w-4/5 flex justify-center items-center'>
+        <div className='totalContainer'>
+            <div className='innerContainer whiteContainer shadow-3xl m-10'>
                 {errMessage}
                 {userToken ?
                     write_type==='0'?

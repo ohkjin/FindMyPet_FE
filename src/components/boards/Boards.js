@@ -11,14 +11,17 @@ export default function Boards() {
   const API_SERVER = process.env.REACT_APP_API_SERVER_HOST;
   const [errMessage,setErrMessage] = useState(<></>);
   const [searchParams] = useSearchParams();
-  const pageNo = searchParams.get('pageNo')
+  const pageNo = searchParams.get('page')
   const [pageDetail,setPageDetail] = useState({
     page:1,
     totalPages:1,
   });
   const [boardDetails,setBoardDetails] = useState([])
   useEffect(()=>{
-    axios.get(`${API_SERVER}/boards?pageNo=2`, {
+    axios.get(`${API_SERVER}/boards?`, {
+      params: {
+        page:pageNo,
+      },
       headers: {
         'Content-Type': 'application/json',
       },
@@ -42,8 +45,8 @@ export default function Boards() {
 
   }
   return (
-    <div className='Board flex flex-col justify-center items-center'>
-      <div className='Board_body mt-10 w-4/5 min-w-96 flex flex-col justify-center items-center'>
+    <div className='totalContainer'>
+      <div className='innerContainer whiteContainer mt-10 min-w-96 flex flex-col justify-center items-center'>
         <div className='Board_search m-5 w-full'>
           <form className='w-full flex flex-row justify-center items-center'>
           <input type='text' placeholder='찾으시는 글이 있으신가요?' className='w-4/5 px-5 py-1 border-2 border-yellow-300 rounded-3xl'/>

@@ -6,7 +6,9 @@
 
 // import TailBoardForm from '../boards/UI/TailBoardForm'
 import { useNavigate } from "react-router-dom";
-import Board from "../boards/Board"
+import { getToken } from "../user/token/TokenManager";
+import { useRecoilValue } from "recoil";
+import { userNickname } from "../user/token/TokenAtom";
 export default function Test() {
     // const [test,setTest] = useState(<></>)
     // const [cookies,setCookies] = useCookies(["accessToken","refreshToken"])
@@ -24,7 +26,9 @@ export default function Test() {
     // console.log(cookies)
     // setToken(accessToken,refreshToken)
     const navigate = useNavigate();
-
+    const nickname = useRecoilValue(userNickname)
+    console.log(getToken('nickname'));
+    console.log(nickname)
 
     const handleRedirect = () =>{
       // Replace the current URL with a new one
@@ -68,9 +72,9 @@ export default function Test() {
     //   .then((data)=>console.log(data))
     //   .catch(err => console.log(err))
   return (
-    <div className='container flex flex-col items-center'>
+    <div className='totalContainer'>
         <h1>Test</h1>
-        <div>
+        <div className="innerContainer whiteContainer">
             {/* <form onSubmit={handleSubmit} className='flex flex-col'>
             <input type='email' name='email' placeholder='이메일' className='mt-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
             <input type='password' name='pwd' placeholder='비밀번호' className='mt-3 mb-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
@@ -82,8 +86,7 @@ export default function Test() {
           <button onClick={()=>handleNavigate('/board/6')} className="h-20 w-20 bg-blue-800"/>
           </div>
         <div>
-          {/* <TailBoardForm handleFormSubmit={handleTestForm}/> */}
-          <Board/>
+         
         </div>
     </div>
   )
