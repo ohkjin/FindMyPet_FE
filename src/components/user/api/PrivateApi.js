@@ -1,13 +1,32 @@
 import axios from "axios"
+import { useRecoilValue } from "recoil"
+import { getToken } from "../token/TokenManager";
 
-const instance = axios.create({
-    baseURL:'https://apis.data.go.kr/1543061/abandonmentPublicSrvc',
+const API_SERVER = process.env.REACT_APP_API_SERVER_HOST;
+const userToken = getToken('accessToken');
+let preventNullToken ='';
+if(userToken){
+    preventNullToken = userToken;
+}
+
+export const privateApi = axios.create({
+    baseURL:API_SERVER+'/user',
     timeout:2000,
 }) 
 
-instance.interceptors.request.use(
+//사용법
+// import privateApi from './privateApi'
+// privateApi({
+//  url:'/login',
+//  method:'get',
+//  data:data
+// })
+
+privateApi.interceptors.request.use(
     (config) => {
         // Modify the request config if needed
+        config.headers["Content-Type"] = "application/json; charset=utf-8";
+        config.headers["Authorization"] =  'Bearer ' + preventNullToken;
         return config;
       },
    (err)=>{
@@ -15,25 +34,29 @@ instance.interceptors.request.use(
         return Promise.reject(err);
    }
 )
-instance.interceptors.response.use(
+privateApi.interceptors.response.use(
     (res)=>{
-    // console.log(res)
-     return res;
+    if(!res.data){
+            alert('데이터가 없습니다');
+            return;
+            }
+     return res.data.content;
     },
     (err)=>{
         console.log(err);
+        alert(err.response.data.status.message)
         return Promise.reject(err);
     }
 )
 
 
-export const findApi = async (prefix)=>{
-    const res = await instance.get(prefix)
-    if(res.data){
-        return res.data.response.body.items.item
-    }
-    return [];
-}
+// export const privateApi = async (prefix)=>{
+//     const res = await instance.get(prefix)
+//     if(res.data){
+//         return res.data.response.body.items.item
+//     }
+//     return [];
+// }
 
 // const onSelectSpecies = (code) => {
 //     setSpecies(code);

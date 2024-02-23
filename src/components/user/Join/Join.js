@@ -68,7 +68,7 @@ function Join() {
   const handleJoin = (e) => {
     e.preventDefault();
     if(email===''||nickname===''||pwd===''||emailAlert!==''||pwdAlert!==''||pwdCheckAlert!==''){
-      setErrMessage(<div className='text-red-500'>모든 칸은 입력되어야하며 에러사항이 없도록 확인해주세요</div>)
+      setErrMessage(<div className='w-full text-red-500 text-sm font-bold flex justify-center items-center'>모든 칸은 입력되어야하며 에러사항이 없도록 확인해주세요</div>)
       return
     }
     try{
@@ -83,13 +83,10 @@ function Join() {
           })
           navigate('../user/login')
       }).catch(err => {
-        console.log(err)
-        setErrMessage(<div className='text-red-500'>{err.response.data}</div>)
-          setPopup({
-            open: true,
-            title: 'Error',
-            message:err.response.status
-          })
+        console.log(err.response)
+        if(err.response){
+          setErrMessage(<div className='flex-wrap  text-red-500 text-sm font-bold flex justify-center items-center'>{err.response.data.status.message}</div>)
+        }
       })
     }catch(e){
       console.log(e)
@@ -105,8 +102,8 @@ function Join() {
   <input type='text'  maxLength={10} onChange={e => setNickname(e.target.value)} placeholder='닉네임' className='mt-3 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
   <input type='password'  maxLength={20} onChange={handlePwd} placeholder='비밀번호' className='mt-3 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
   <div className='text-xs text-red-500 w-[300px]'>{pwdAlert}</div>
-  <input type='password'  maxLength={20} onChange={handlePwdCheck} placeholder='비밀번호 확인' className='mt-3 mb-7 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
-  <div className='text-xs text-red-500 w-[300px]'>{pwdCheckAlert}</div>
+  <input type='password'  maxLength={20} onChange={handlePwdCheck} placeholder='비밀번호 확인' className='mt-3 w-[300px] h-[42px]  p-3 border-b border-slate-200' />
+  <div className='text-xs text-red-500 mb-7 w-[300px]'>{pwdCheckAlert}</div>
 </>
 
 
@@ -116,16 +113,7 @@ function Join() {
         <div className='login_img'>
           {/* <img src={welsh} alt='welcome welsh' className='w-[400px]' /> */}
         </div>
-        {errMessage}
-        {popup.open && (
-          <Popup 
-          open={popup.open}
-          title={popup.title}
-          message={popup.message}
-          callback={popup.callback}
-          />
-        )}
-        <LoginJoinForm kakao={kakao} handleKakao={handleKakaoJoin} functionText={'회원가입'}  inputs = {inputs} handleButton={handleJoin} emailShown={true}/>
+        <LoginJoinForm kakao={kakao} errMsgDiv={errMessage} handleKakao={handleKakaoJoin} functionText={'회원가입'}  inputs = {inputs} handleButton={handleJoin} emailShown={true}/>
       </div>
     </div>
   )

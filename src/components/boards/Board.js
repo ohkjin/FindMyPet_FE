@@ -5,6 +5,7 @@ import { userAuth } from '../user/token/TokenAtom';
 import axios from 'axios';
 import TailBoardDetail from './UI/TailBoardDetail';
 import TailBoardForm from './UI/TailBoardForm';
+import { privateApi } from '../user/api/PrivateApi';
 
 export default function Board() {
   const { boardId } = useParams();
@@ -12,6 +13,7 @@ export default function Board() {
   const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
   const [edit,setEdit] = useState(false);
   const apiLink = `${API_SERVER}/user/board/${boardId}`
+  const navigate = useNavigate();
   // const apiLink = `${API_SERVER}/user/board/6`
   const [errMessage,setErrMessage] = useState(<></>);
   const [boardDetail, setBoardDetail] = useState({
@@ -26,29 +28,44 @@ export default function Board() {
 })
 
   useEffect(()=>{
-    axios.get(apiLink, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userToken}`
-      },
+    console.log(userToken);
+    // let nullPreventToken = '';
+    // if(userToken){
+    //   nullPreventToken = userToken;
+    // }
+    // axios.get(apiLink, {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     Authorization: `Bearer ${nullPreventToken}`
+    //   },
+    // })
+    //   .then(res => {
+    //     if(!res.data){
+    //       setErrMessage(<div className='text-red-400'>데이터가 없습니다</div>)
+    //       return
+    //     }
+    //     setBoardDetail(res.data.content)
+    //   }).catch(err => {
+    //     setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status}) ${err.response.data}`:err.message}</div>)
+    //   })
+    privateApi({
+      url:`/board/${boardId}`,
+      method:'get',})
+    .then((content)=>{
+      // console.log(content)
+      setBoardDetail(content)
     })
-      .then(res => {
-        console.log(res)
-        if(!res.data){
-          setErrMessage(<div className='text-red-400'>데이터가 없습니다</div>)
-          return
-        }
-        setBoardDetail(res.data)
-      }).catch(err => {
-        setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status}) ${err.response.data}`:err.message}</div>)
-      })
+    .catch((err)=>
+      console.log(err)
+    )
+
   },[])
 
-
+  // 수정 폼 열기
   const handleGoEdit=()=>{
     setEdit(true);
   }
-
+  // 수정 폼 닫기
   const handleCancelEdit=()=>{
     setEdit(false);
   }
@@ -70,22 +87,34 @@ export default function Board() {
         },
       })
         .then(res => {
-          console.log(res)
-          if(!res.headers){
-            setErrMessage(<div className='text-red-400'>No Header returned</div>);
-            return;
-          }
+          // console.log(res)
           setEdit(false);
         }).catch(err => {
           setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status}) ${err.response.data}`:err.message}</div>)
         })
+  }
+  const handleSubmitDelete=(e)=>{
+    e.preventDefault();
+    window.confirm('정말 삭제하시겠습니까?');
+    axios.delete(apiLink, 
+      {
+      headers: {
+        Authorization: `Bearer ${userToken}`
+      },
+    })
+      .then(res => {
+        // console.log(res)
+        navigate('./boards')
+      }).catch(err => {
+        setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status}) ${err.response.data}`:err.message}</div>)
+      })
   }
   return (
     <div className='totalContainer'>
       <div className='innerContainer'>
         {errMessage}
         {edit?<TailBoardForm detail={boardDetail} handleFormSubmit={handleSubmitEdit} handleCancel={handleCancelEdit}/>
-        :<TailBoardDetail detail={boardDetail} handleEdit={handleGoEdit}/>}
+        :<TailBoardDetail detail={boardDetail} handleEdit={handleGoEdit} handleDelete={handleSubmitDelete}/>}
       </div>
     </div>
   )
