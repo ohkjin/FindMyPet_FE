@@ -1,11 +1,11 @@
 import TailBoardForm from './UI/TailBoardForm'
 import { useRecoilValue } from 'recoil'
 import { userAuth } from '../user/token/TokenAtom';
-import TailYellowButton from '../../UI/TailYellowButton';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import TailReviewForm from './UI/TailReviewForm';
+import LoginAlertPage from '../../UI/LoginAlertPage'
 
 //-- 글쓰기 --//
 // board/write/write_type 으로 write_type에서 받고 일반글과 후기로 나뉜다
@@ -16,10 +16,6 @@ export default function BoardWrite() {
     const navigate = useNavigate();
     const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
     const [errMessage,setErrMessage] = useState(<></>);
-   
-    const handleNavigate = (whereTo) =>{
-        navigate(whereTo);
-    }
     
     const handleSubmit = (e,inputs) => {
         console.log(inputs)
@@ -73,16 +69,7 @@ export default function BoardWrite() {
                     :
                     <TailReviewForm handleFormSubmit={handleSubmit}/>
                     :
-                    <div className='Alert h-screen w-full flex flex-col items-center'>
-                        <div className='AlertSpace basis-1/5'></div>
-                        <div className='AlertBox basis-2/5 bg-yellow-50 border-4 border-yellow-300  rounded-3xl flex flex-col items-center'>
-                            <div className='AlertText font-tenada font-bold text-xl mt-24 mx-3'>로그인이 필요한 서비스입니다! 🐾</div>
-                            <div className='AlertButton grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 mt-10'>
-                                <TailYellowButton handleClick={()=>handleNavigate(-1)} leftT={'👈'}  rightT={'뒤로 가버리기'} />
-                                <TailYellowButton handleClick={()=>handleNavigate('/user/login')} leftT={'로그인 하러가기'} rightT={'👉'} />
-                            </div>
-                        </div>
-                    </div>
+                    <LoginAlertPage/>
                 }
             </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function LoginJoinForm({kakao, handleKakao, handleButton, functionText, inputs, emailShown}) {
+export default function LoginJoinForm({kakao, errMsgDiv,handleKakao, handleButton, functionText, inputs, emailShown}) {
 const [emailLogin,setEmailLogin] = useState(emailShown);
 
 // const Mappedinput = Array.from(inputMap).map(([key, value]) => (
@@ -31,6 +31,7 @@ const [emailLogin,setEmailLogin] = useState(emailShown);
                         {emailLogin ? (
                             <form className='flex flex-col my-5' method='post' >
                             {inputs}
+                            {errMsgDiv}
                             <button  onClick={handleButton} className='mt-5 w-[300px] h-[42px] rounded-xl text-sm font-bold border-2 border-yellow-300 text-yellow-400'>{functionText}</button>
                             </form>
                         ) : (

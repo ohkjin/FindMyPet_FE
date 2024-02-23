@@ -1,0 +1,58 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul.pagination li {
+    display: inline-block;
+    width: 1.25rem;
+    height: 1.25rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul.pagination li a {
+
+    width: 1.25rem;
+    height: 1.2s5rem;
+    
+    font-family: tenada;
+    font-size: 1rem;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+
+    color: #ecc94b;
+    text-decoration: none;
+}
+
+ul.pagination li:first-child {
+    border-radius: 5px 0 0 5px;
+    color: black;
+}
+ul.pagination li:last-child {
+    border-radius: 0 5px 5px 0;
+    color: black;
+}
+
+
+
+ul.pagination li.active a {
+    color: gray;
+}
+
+ul.pagination li.disabled a {
+    color: gainsboro;
+}
+
+ul.pagination li a:hover,
+ul.pagination li a.active {
+    color: orange;
+}

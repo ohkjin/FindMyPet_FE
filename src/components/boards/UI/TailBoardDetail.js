@@ -3,12 +3,14 @@ import TailComment from './TailComment'
 import { useRecoilValue } from 'recoil';
 import { userAuth } from '../../user/token/TokenAtom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-export default function TailBoardDetail({ detail, handleEdit }) {
+export default function TailBoardDetail({ detail, handleEdit,handleDelete }) {
   const [errMessage,setErrMessage] = useState(<></>);
   const commentRef = useRef();
   const userToken = useRecoilValue(userAuth)
   const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
+  const navigate = useNavigate();
  
   const handleCommentSubmit = (e) => {
     e.preventDefault();
@@ -27,6 +29,7 @@ export default function TailBoardDetail({ detail, handleEdit }) {
       },
       {
         headers: {
+          "Content-Type": `application/json`,
           Authorization: `Bearer ${userToken}`
         },
       })
@@ -69,7 +72,7 @@ return (
           </div>
           <div className='Buttons flex flex-col md:flex-row  justify-between items-center'>
             <button onClick={handleEdit} className='w-50 h-50 bg-gray-100 text-gray-400 text-sm rounded-lg m-1 py-1 px-2 '>수정</button>
-            <button onClick={handleEdit} className='w-50 h-50 bg-gray-100 text-gray-400 text-sm rounded-lg m-1 py-1 px-2'>삭제</button>
+            <button onClick={handleDelete} className='w-50 h-50 bg-gray-100 text-gray-400 text-sm rounded-lg m-1 py-1 px-2'>삭제</button>
           </div>
         </div>
       </div>
@@ -80,7 +83,7 @@ return (
           댓글
         </div>
         <form method='post' onSubmit={handleCommentSubmit} className='Comment_Input flex flex-col bg-white border-2 border-gray-200 rounded-lg p-3'>
-          <input id='comment' ref={commentRef} maxLength={45} name='comment' defaultValue='' placeholder='댓글을 입력해주세요' className='p-1 m-1' />
+          <input id='comment' onClick={userToken?null:(()=>navigate('../../user/loginalert'))} ref={commentRef} maxLength={45} name='comment' defaultValue='' placeholder='댓글을 입력해주세요' className='p-1 m-1' />
           <button type='submit' className='bg-yellow-300 p-1 px-6 text-xs text-yellow-900 rounded-xl self-end'>등록</button>
         </form>
         <div className='Comment_List'>

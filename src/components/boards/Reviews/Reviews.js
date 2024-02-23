@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
-import TailBoardList from './UI/TailBoardList'
+import TailBoardList from '../UI/TailBoardList'
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
-import TailAnimalButton from '../Find/UI/TailAnimalButton';
-import TailRadioButton from '../../UI/TailRadioButton';
+import TailRadioButton from '../../../UI/TailRadioButton';
+import TailAnimalButton from '../../Find/UI/TailAnimalButton';
 import Pagination from 'react-js-pagination';
-import '../../UI/PaginationCSS.css'
+import '../../../UI/PaginationCSS.css'
 
 
-export default function Boards() {
+export default function Reviews() {
   // 카테고리 사항을 보내줌, 추가검색: %Like%, 조회수별, 시간별
   // 보드번호, 페이지, 페이지 번호, 페이지 총 갯수를 받음
   // 분류 사항을 보낸뒤 페이지 총 갯수(15)를 받은뒤 3개로 나누어서 뿌림, 그 후 4번쨰부터 받고 싶을때 새로운 페이지 요청
@@ -38,12 +38,11 @@ export default function Boards() {
       },
     })
       .then(res => {
-        console.log(res)
         if (res.data) {
           if(totalPages===0){
             setTotalPages(res.data.totalPages)
           }
-          setBoardDetails(res.data.content.content);
+          setBoardDetails(res.data.content);
           setErrMessage(<></>);
         } else {
           console.log(res)
