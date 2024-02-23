@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react'
 import { useRecoilValue } from 'recoil';
 import { userAuth, userNickname } from '../../user/token/TokenAtom';
-import axios from 'axios';
+import { privateApi } from '../../user/token/PrivateApi';
+import { useNavigate } from 'react-router-dom';
 
 export default function TailComment({comment}) {
   const nickname = useRecoilValue(userNickname);
@@ -10,54 +11,45 @@ export default function TailComment({comment}) {
   const API_SERVER = process.env.REACT_APP_API_SERVER_HOST;
   const userToken = useRecoilValue(userAuth);
   const [errMessage,setErrMessage] = useState(<></>);
-  const handleEdit = ()=>{
+  const navigate = useNavigate();
+  const handleEdit = (e)=>{
+    e.preventDefault();
     if(isEditing===false){
       setIsEditing(true);
     }else{
       // console.log(comment.commentId)
       // console.log(commentRef.current.value)
-      axios.put(`${API_SERVER}/user/comment/${comment.commentId}`,
-        {
+      privateApi({
+        url:`/comment/${comment.commentId}`,
+        method:'put',
+        data:{
           content:commentRef.current.value
-        },
-        {
-          headers: {
-           "Content-Type": `application/json`,
-            Authorization: `Bearer ${userToken}`
-          },
-        })
-        .then(res => {
-          console.log(res)
-          if (!res.headers) {
-            setErrMessage(<div className='text-red-400'>No Header returned</div>)
-            return
-          }
-          setIsEditing(false);
-          window.location.reload();
-        }).catch(err => {
-          setErrMessage(<div className='text-red-400'>{err.response ? `(${err.response.status}) ${err.response.data}` : err.message}</div>)
-        })
+        }
+      })
+      .then((res)=>{
+        setIsEditing(false);
+        navigate(0);
+      })
+      .catch((err)=>
+        console.log(err)
+      )
     }
     
   }
-  const handleDelete = ()=>{
-    axios.delete(`${API_SERVER}/user/comment/${comment.commentId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${userToken}`
-          },
-        })
-        .then(res => {
-          console.log(res)
-          if (!res.headers) {
-            setErrMessage(<div className='text-red-400'>No Header returned</div>)
-            return
-          }
-          window.location.reload();
-        }).catch(err => {
-          setErrMessage(<div className='text-red-400'>{err.response ? `(${err.response.status}) ${err.response.data}` : err.message}</div>)
-        })
+  const handleDelete = (e)=>{
+    e.preventDefault();
+    privateApi({
+      url:`/comment/${comment.commentId}`,
+      method:'delete',
+    })
+    .then((res)=>{
+      navigate(0);
+    })
+    .catch((err)=>
+      console.log(err)
+    )
   }
+  
   // console.log("user",userNick,"commenter",comment.writer)
   // console.log(userNickname===comment.writer)
   const icons =['🦮','🐕‍🦺','🐕','🐈','🐇','🦔','🐢','🐟','🐓','🦜','🐍','🐩']

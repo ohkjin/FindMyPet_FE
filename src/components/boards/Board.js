@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { userAuth } from '../user/token/TokenAtom';
-import axios from 'axios';
 import TailBoardDetail from './UI/TailBoardDetail';
 import TailBoardForm from './UI/TailBoardForm';
-import { privateApi } from '../user/api/PrivateApi';
+import { privateApi } from '../user/token/PrivateApi';
 
 export default function Board() {
   const { boardId } = useParams();
@@ -28,26 +27,6 @@ export default function Board() {
 })
 
   useEffect(()=>{
-    console.log(userToken);
-    // let nullPreventToken = '';
-    // if(userToken){
-    //   nullPreventToken = userToken;
-    // }
-    // axios.get(apiLink, {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Authorization: `Bearer ${nullPreventToken}`
-    //   },
-    // })
-    //   .then(res => {
-    //     if(!res.data){
-    //       setErrMessage(<div className='text-red-400'>데이터가 없습니다</div>)
-    //       return
-    //     }
-    //     setBoardDetail(res.data.content)
-    //   }).catch(err => {
-    //     setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status}) ${err.response.data}`:err.message}</div>)
-    //   })
     privateApi({
       url:`/board/${boardId}`,
       method:'get',})
@@ -58,7 +37,6 @@ export default function Board() {
     .catch((err)=>
       console.log(err)
     )
-
   },[])
 
   // 수정 폼 열기
@@ -79,41 +57,39 @@ export default function Board() {
         return
     }
     setErrMessage('');
-    axios.put(apiLink, 
-        inputs, 
-        {
-        headers: {
-          Authorization: `Bearer ${userToken}`
-        },
-      })
-        .then(res => {
-          // console.log(res)
-          setEdit(false);
-        }).catch(err => {
-          setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status}) ${err.response.data}`:err.message}</div>)
-        })
+
+    privateApi({
+      url:`/board/${boardId}`,
+      method:'put',
+      data:inputs})
+    .then((res)=>{
+      window.location.reload();
+      setEdit(false);
+    })
+    .catch((err)=>
+      console.log(err)
+    )
+    
   }
   const handleSubmitDelete=(e)=>{
     e.preventDefault();
     window.confirm('정말 삭제하시겠습니까?');
-    axios.delete(apiLink, 
-      {
-      headers: {
-        Authorization: `Bearer ${userToken}`
-      },
+    privateApi({
+      url:`/board/${boardId}`,
+      method:'delete',
     })
-      .then(res => {
-        // console.log(res)
-        navigate('./boards')
-      }).catch(err => {
-        setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status}) ${err.response.data}`:err.message}</div>)
-      })
+    .then((res)=>{
+      navigate('../boards');
+    })
+    .catch((err)=>
+      console.log(err)
+    )
   }
   return (
     <div className='totalContainer'>
       <div className='innerContainer'>
         {errMessage}
-        {edit?<TailBoardForm detail={boardDetail} handleFormSubmit={handleSubmitEdit} handleCancel={handleCancelEdit}/>
+        {edit?<TailBoardForm className='whiteContainer' detail={boardDetail} handleFormSubmit={handleSubmitEdit} handleCancel={handleCancelEdit}/>
         :<TailBoardDetail detail={boardDetail} handleEdit={handleGoEdit} handleDelete={handleSubmitDelete}/>}
       </div>
     </div>

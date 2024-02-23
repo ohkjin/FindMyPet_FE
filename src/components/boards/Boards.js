@@ -6,6 +6,7 @@ import TailAnimalButton from '../Find/UI/TailAnimalButton';
 import TailRadioButton from '../../UI/TailRadioButton';
 import Pagination from 'react-js-pagination';
 import '../../UI/PaginationCSS.css'
+import TailSelect from '../Find/UI/TailSelect';
 
 
 export default function Boards() {
@@ -14,22 +15,59 @@ export default function Boards() {
   // 분류 사항을 보낸뒤 페이지 총 갯수(15)를 받은뒤 3개로 나누어서 뿌림, 그 후 4번쨰부터 받고 싶을때 새로운 페이지 요청
   const API_SERVER = process.env.REACT_APP_API_SERVER_HOST;
   const [errMessage, setErrMessage] = useState(<></>);
-  const [searchParams] = useSearchParams();
-  const pageNo = searchParams.get('page')
-  const [totalPages, setTotalPages] = useState(5);
+  const [searchParams,setSearchParams] = useSearchParams();
+  const [totalPages, setTotalPages] = useState(1);
   const [pageArray,setPageArray]=useState([1]);
   const [buttons,setButtons]=useState([]);
   const [params,setParams] = useState({
-    page: pageNo,
+    page: null,
     category:null,
     order:null,
     keyword:'',
   })
+  const [writer,setWriter] = useState(searchParams.get('writer'));
   const [boardDetails, setBoardDetails] = useState([])
 
   //-- 페이지 로딩 --//
-  //제일 처음과, param이 변할떄 페이지 가져오기
+  //제일 처음에,그후 param이 변할떄 페이지 가져오기 (writer param 삭제)
+  // 글쓴이를 클릭하여 writer param이 있으면 search, page변할때도 불러오기
+  useEffect(()=>{
+    // console.log(typeof writer,writer)
+    // console.log(typeof params.page)
+    if(writer){
+      console.log("writer")
+      axios.get(`${API_SERVER}/boards/writer`, {
+        params: {
+          writer:writer,
+          page:params.page
+        },
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(res => {
+          // console.log("res",res)
+          if (res.data) {
+            if(totalPages===0){
+              setTotalPages(res.data.totalPages)
+            }
+            setBoardDetails(res.data.content.content);
+            setErrMessage(<></>);
+          } else {
+            // console.log(res)
+            return
+          }
+        }).catch(err => {
+          setErrMessage(<div className='text-red-400'>{err.response ? `(${err.response.status}) ${err.response.data}` : err.message}</div>)
+        })
+        return;
+    }
+  },[writer,params.page])
   useEffect(() => {
+    if(searchParams.get('writer')){
+      return
+    }
+    console.log("nowriter")
     console.log("params",params);
     axios.get(`${API_SERVER}/boards?`, {
       params: params,
@@ -38,15 +76,15 @@ export default function Boards() {
       },
     })
       .then(res => {
-        console.log(res)
+        // console.log("res",res)
         if (res.data) {
-          if(totalPages===0){
-            setTotalPages(res.data.totalPages)
-          }
+          // if(totalPages===0){
+          //   setTotalPages(res.data.totalPages)
+          // }
           setBoardDetails(res.data.content.content);
           setErrMessage(<></>);
         } else {
-          console.log(res)
+          // console.log(res)
           return
         }
       }).catch(err => {
@@ -108,8 +146,10 @@ export default function Boards() {
   const handleSelCate = (e,cate) => {
     e.preventDefault();
     //카테고리 변경일떄만 전체 페이지 초기화
-    setTotalPages(0);
+    // setTotalPages(0);
     searchRef.current.value = '';
+    searchParams.delete('writer');
+    setSearchParams(searchParams.toString());
     setParams({
       ...params,
       category:cate,
@@ -120,6 +160,8 @@ export default function Boards() {
   const handleSelOrder = (e,order) => {
     e.preventDefault();
     searchRef.current.value = '';
+    searchParams.delete('writer');
+    setSearchParams(searchParams.toString());
     setParams({
       ...params,
       order:order,
@@ -132,6 +174,8 @@ export default function Boards() {
   const handleSearch = (e) => {
     e.preventDefault();
     // console.log("searchRef",searchRef);
+    searchParams.delete('writer');
+    setSearchParams(searchParams.toString());
     setParams({
       ...params,
       keyword:searchRef.current.value,
@@ -141,7 +185,7 @@ export default function Boards() {
   
   return (
     <div className='totalContainer'>
-      <div className='innerContainer whiteContainer mt-10 min-w-96 p-5 lg:p-20 flex flex-col items-center'>
+      <div className='innerContainer whiteContainer mt-10 min-w-96 p-5 md:p-24 lg:p-32 flex flex-col items-center'>
         <div className="w-full flex flex-row justify-start items-start space-x-4">
           <TailAnimalButton icon={''} text={'전체'} handleButton={(e) => handleSelCate(e, null)} selected={params.category === null ? true : false} />
           <TailAnimalButton icon={''} text={'커뮤니티'} handleButton={(e) => handleSelCate(e, 'COMMUNITY')} selected={params.category === 'COMMUNITY' ? true : false} />
@@ -149,6 +193,7 @@ export default function Boards() {
         </div>
         <div className='Board_search my-5 w-full'>
           <form onSubmit={handleSearch} className='w-full flex flex-row justify-center items-center'>
+            {/* <TailSelect optItems,selRef,handleChange,init/> */}
             <input type='text' ref={searchRef} placeholder='찾으시는 글이 있으신가요?' className='w-4/5 px-5 py-1 border-2 border-yellow-300 rounded-3xl' />
             <button type='submit' className='px-3 py-1 mx-5 my-2 text-sm font-bold bg-yellow-300 border-2 border-yellow-300 rounded-3xl hover:bg-slate-800 hover:text-yellow-300'>
               검색

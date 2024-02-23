@@ -4,7 +4,7 @@ import { userAuth, userNickname } from '../token/TokenAtom'
 import {  useNavigate } from 'react-router-dom';
 import welcome from '../../../assets/images/welcome/tricatwelcome.jpg'
 import { removeAllToken } from '../token/TokenManager';
-import axios from 'axios';
+import { privateApi } from '../token/PrivateApi';
 export default function MyPage() {
   const [errMessage, setErrMessage] = useState(<></>);
   const [userDetail,setUserDetail]=useState('')
@@ -14,21 +14,16 @@ export default function MyPage() {
 
   //-- 유저정보 --//
   useEffect(()=>{
-    // console.log(userToken)
-    const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
-    axios.get(`${API_SERVER}/user/mypage`, {
-        headers: {
-          Authorization: `Bearer ${userToken}`
-          // Authorization: `Bearer ${getToken('accessToken')}`
-        },
-    }).then(res=>{
-      // console.log(res.data);
-      setUserDetail(res.data);
+    privateApi({
+      url:`/mypage`,
+      method:'get',})
+    .then((content)=>{
+      // console.log(content)
+      setUserDetail(content);
     })
-    .catch(err=>{
-      setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status})${err.response.data}`:`${err.message}`}</div>)
-    })
-    
+    .catch((err)=>
+      console.log(err)
+    )
   },[])
  
   //-- 로그아웃 --//
@@ -40,25 +35,18 @@ export default function MyPage() {
   }
   //-- 회원탈퇴 --//
   const handleWithdraw = () => {
-    try{
-      const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
-      axios.delete(`${API_SERVER}/user/mypage`, {
-          headers: {
-            Authorization: `Bearer ${userToken}`
-          },
-      }).then(res=>{
-        console.log(res.data);
+    privateApi({
+      url:`/mypage`,
+      method:'delete',})
+    .then((res)=>{
         removeAllToken();
         setUserToken(null);
         setUserNick(null);
         navigate('/home')
-      })
-      .catch(err=>{
-        setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status})${err.response.data}`:`${err.message}`}</div>)
-      })
-      }catch(e){
-        console.log(e)
-      } 
+    })
+    .catch((err)=>
+      console.log(err)
+    )
   }
   
   return (

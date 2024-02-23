@@ -1,15 +1,15 @@
-import { getToken } from "../atom/TokenManager"
-import axios from "axios"
+// import { getToken } from "../atom/TokenManager"
+// import axios from "axios"
 
-const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
+// const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
 
-//-- Token이 필요한 api요청을 보내는 instance --//
-export const privateApi = axios.create({
-    baseURL:API_SERVER,
-    headers:{
-        Authorization: `Bearer ${getToken('accessToken')}`,
-    },
-})
+// //-- Token이 필요한 api요청을 보내는 instance --//
+// export const privateApi = axios.create({
+//     baseURL:API_SERVER,
+//     headers:{
+//         Authorization: `Bearer ${getToken('accessToken')}`,
+//     },
+// })
 
 // //-- refreshToken api --//
 // export  const  postTokenRefresh = async ()=>{

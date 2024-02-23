@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useRecoilValue } from "recoil"
-import { getToken } from "../token/TokenManager";
+import { getToken } from "./TokenManager";
 
 const API_SERVER = process.env.REACT_APP_API_SERVER_HOST;
 const userToken = getToken('accessToken');
@@ -30,20 +30,19 @@ privateApi.interceptors.request.use(
         return config;
       },
    (err)=>{
-        console.log(err);
+        // console.log(err);
         return Promise.reject(err);
    }
 )
 privateApi.interceptors.response.use(
     (res)=>{
     if(!res.data){
-            alert('데이터가 없습니다');
-            return;
+            return res;
             }
      return res.data.content;
     },
     (err)=>{
-        console.log(err);
+        // console.log(err);
         alert(err.response.data.status.message)
         return Promise.reject(err);
     }

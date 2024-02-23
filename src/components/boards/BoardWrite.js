@@ -3,9 +3,9 @@ import { useRecoilValue } from 'recoil'
 import { userAuth } from '../user/token/TokenAtom';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
-import axios from 'axios';
 import TailReviewForm from './UI/TailReviewForm';
 import LoginAlertPage from '../../UI/LoginAlertPage'
+import { privateApi } from '../user/token/PrivateApi';
 
 //-- 글쓰기 --//
 // board/write/write_type 으로 write_type에서 받고 일반글과 후기로 나뉜다
@@ -39,29 +39,22 @@ export default function BoardWrite() {
         }
        
         setErrMessage('');
-    
-        axios.post(`${API_SERVER}${prefix}`, 
-            inputs, 
-            {
-            headers: {
-              Authorization: `Bearer ${userToken}`
-            },
+        privateApi({
+            url:'/board',
+            method:'post',
+            data:inputs})
+          .then((res)=>{
+            navigate('/boards');
           })
-            .then(res => {
-              console.log(res)
-              if(!res.headers){
-                setErrMessage(<div className='text-red-400'>No Header returned</div>)
-                return
-              }
-              navigate('/boards');
-            }).catch(err => {
-              setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status}) ${err.response.data}`:err.message}</div>)
-            })
+          .catch((err)=>
+            console.log(err)
+          )
+
     }
     
     return (
         <div className='totalContainer'>
-            <div className='innerContainer whiteContainer shadow-3xl m-10'>
+            <div className='innerContainer shadow-3xl m-10'>
                 {errMessage}
                 {userToken ?
                     write_type==='0'?

@@ -24,7 +24,7 @@ export default function Navbar() {
     const nav_droplist = [
         {name:'홈',to:'/home'},
         {name:'유기동물',to:'/find'},
-        isLogin?{name:'MyPage',to:'/find'}:{name:'로그인',to:'/user/login'},
+        isLogin?{name:'MyPage',to:'/user/mypage'}:{name:'로그인',to:'/user/login'},
         {name:'커뮤니티/Q&A',to:'/boards'},
         {name:'보호소 리뷰',to:'/reviews'},
         {name:'커뮤니티/Q&A 쓰기',to:'/board/write/0'},

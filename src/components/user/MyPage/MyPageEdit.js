@@ -1,8 +1,9 @@
-import axios from 'axios';
+
 import React, { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { userAuth } from '../token/TokenAtom';
 import { useRecoilValue } from 'recoil';
+import { privateApi } from '../token/PrivateApi';
 
 export default function MyPageEdit() {
     const [sParams] = useSearchParams();
@@ -19,26 +20,25 @@ export default function MyPageEdit() {
     })
     const handleChange = (e) => {
         e.preventDefault();
+        setErrMessage('')
         if(e.target.name==='passwordCheck'){
             if(e.target.value!==inputs.password){
                 setErrMessage('비밀번호는 일치해야합니다.')
-            }
-            setErrMessage('')
-            return
-        }
-       
-        setInputs({
-            ...inputs,
-            [e.target.name]:e.target.value,
-        })
-
-        if(e.target.name==='password'){
-            if(e.target.value.length<8 || e.target.value.length>20||!pwdRegex.test(e.target.value)){
-                setErrMessage('비밀번호는 문자와 숫자만을 사용하여 8-20자로 입력해주세요.')
                 return
             }
+        }else{
+            setInputs({
+                ...inputs,
+                [e.target.name]:e.target.value,
+            })
+    
+            if(e.target.name==='password'){
+                if(e.target.value.length<8 || e.target.value.length>20||!pwdRegex.test(e.target.value)){
+                    setErrMessage('비밀번호는 문자와 숫자만을 사용하여 8-20자로 입력해주세요.');
+                    return;
+                }
+            }
         }
-        setErrMessage('')
     }
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -50,24 +50,18 @@ export default function MyPageEdit() {
             setErrMessage('에러사항이 없는지 다시 확인해주세요')
             return
         }
-        console.log(inputs);
-        console.log(userToken);
-        try{
-            const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
-            axios.put(`${API_SERVER}/user/mypage`,inputs, {
-                headers: {
-                  Authorization: `Bearer ${userToken}`
-                },
-            }).then(res=>{
-              console.log(res.data);
-              navigate('/user/mypage')
-            })
-            .catch(err=>{
-              setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.status})${err.response.data}`:`${err.message}`}</div>)
-            })
-            }catch(e){
-              console.log(e)
-            } 
+        // console.log(inputs);
+        // console.log(userToken);
+        privateApi({
+            url:`/mypage`,
+            method:'put',
+            data:inputs})
+          .then((res)=>{
+            navigate('/user/mypage')
+          })
+          .catch((err)=>
+            console.log(err)
+          )
     }
     return (
         <div className='totalContainer'>

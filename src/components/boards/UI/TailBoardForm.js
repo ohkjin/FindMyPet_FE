@@ -29,7 +29,7 @@ const handleChange = (e) => {
 }
 
   return (
-    <div className='p-10'>
+    <div className='whiteContainer p-10'>
     <form onSubmit={(event)=>handleFormSubmit(event,inputs)}>
       <div className="mt-20 space-y-12">
         <div className="border-b border-gray-900/10 pb-12">

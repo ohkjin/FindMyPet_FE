@@ -1,14 +1,15 @@
 import React, { useRef, useState } from 'react'
 import TailComment from './TailComment'
 import { useRecoilValue } from 'recoil';
-import { userAuth } from '../../user/token/TokenAtom';
-import axios from 'axios';
+import { userAuth, userNickname } from '../../user/token/TokenAtom';
 import { useNavigate } from 'react-router-dom';
+import { privateApi } from '../../user/token/PrivateApi';
 
 export default function TailBoardDetail({ detail, handleEdit,handleDelete }) {
   const [errMessage,setErrMessage] = useState(<></>);
   const commentRef = useRef();
-  const userToken = useRecoilValue(userAuth)
+  const userToken = useRecoilValue(userAuth);
+  const nickname = useRecoilValue(userNickname);
   const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
   const navigate = useNavigate();
  
@@ -23,26 +24,19 @@ export default function TailBoardDetail({ detail, handleEdit,handleDelete }) {
     if(commentRef.current.value===''||commentRef.current.value===null){
       return
     }
-    axios.post(`${API_SERVER}/user/comment/${detail.boardId}`,
-      {
+    privateApi({
+      url:`/comment/${detail.boardId}`,
+      method:'post',
+      data:{
         content:commentRef.current.value
-      },
-      {
-        headers: {
-          "Content-Type": `application/json`,
-          Authorization: `Bearer ${userToken}`
-        },
-      })
-      .then(res => {
-        console.log(res)
-        if (!res.headers) {
-          setErrMessage(<div className='text-red-400'>No Header returned</div>)
-          return
-        }
-        window.location.reload();
-      }).catch(err => {
-        setErrMessage(<div className='text-red-400'>{err.response ? `(${err.response.status}) ${err.response.data}` : err.message}</div>)
-      })
+      }
+    })
+    .then((res)=>{
+      navigate(0);
+    })
+    .catch((err)=>
+      console.log(err)
+    )
   }
 
 return (
@@ -71,8 +65,10 @@ return (
             🐾 {detail.writer}
           </div>
           <div className='Buttons flex flex-col md:flex-row  justify-between items-center'>
+            {nickname===detail.writer&&<>
             <button onClick={handleEdit} className='w-50 h-50 bg-gray-100 text-gray-400 text-sm rounded-lg m-1 py-1 px-2 '>수정</button>
             <button onClick={handleDelete} className='w-50 h-50 bg-gray-100 text-gray-400 text-sm rounded-lg m-1 py-1 px-2'>삭제</button>
+            </>}
           </div>
         </div>
       </div>
