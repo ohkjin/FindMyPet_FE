@@ -21,6 +21,7 @@ export default function FindShelter({handleSelectShelter}) {
                 .then((item) => {
                     // console.log(item);
                     // 군구,보호소 초기화
+                    if(!item){return}
                     gunguRef.current.value = '';
                     shelterRef.current.value = '';
                     setSigunguObjList(item);
@@ -33,6 +34,7 @@ export default function FindShelter({handleSelectShelter}) {
         if (e.target.value !== '') {
             findApi(`/shelter?serviceKey=${apikey}&upr_cd=${sidoRef.current.value}&org_cd=${e.target.value}&_type=json`)
                 .then((item) => {
+                    if(!item){return}
                     // console.log(item);
                     // 보호소 초기화
                     shelterRef.current.value = '';

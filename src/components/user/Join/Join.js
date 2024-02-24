@@ -4,7 +4,6 @@ import kakao from '../../../assets/images/oauth/kakao_join_medium_wide.png'
 // import welsh from '../../../assets/images/welcome/tricatwelcome.jpg'
 import { userJoin } from './JoinApi'
 import { useNavigate } from 'react-router-dom'
-import Popup from 'reactjs-popup'
 // import axios from 'axios'
 
 function Join() {
@@ -18,12 +17,6 @@ function Join() {
   const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
   const [errMessage,setErrMessage] = useState(<></>);
-  const [popup,setPopup] = useState({
-    open: false,
-    title: '',
-    message: '',
-    callback: null,
-  })
 
   const userDetail = {
     "userId": email,
@@ -75,12 +68,12 @@ function Join() {
     userJoin(userDetail)
       .then(data => {
         console.log(data)
-        setPopup({
-            open: true,
-            title: 'Confirm',
-            message: data.message,
-            callback: function () { navigate('/user/login') }
-          })
+        // setPopup({
+        //     open: true,
+        //     title: 'Confirm',
+        //     message: data.message,
+        //     callback: function () { navigate('/user/login') }
+        //   })
           navigate('../user/login')
       }).catch(err => {
         console.log(err.response)

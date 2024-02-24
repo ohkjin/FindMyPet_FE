@@ -28,13 +28,18 @@ const lastMonth = formatDate(current);
   const [detail,setDetail] = useState('');
     const upkindArr = [417000,422400,429900];
     let url = `/abandonmentPublic?serviceKey=${apikey}`
-    url =`${url}&bgnde=${lastMonth}&endde=${today}&upkind=${upkindArr[0]}&care_reg_no=${shelter}`
+    url =`${url}&bgnde=${lastMonth}&endde=${today}&upkind=${upkindArr[2]}&care_reg_no=${shelter}`
     url = url + '&pageNo=1&numOfRows=1&_type=json'
     useEffect(()=>{
-      console.log(url)
+      // console.log(url)
       findApi(url)
       .then((item) => {
-          console.log(item);
+          if(item){
+            console.log('FindShelterDetail item',item[0]);
+          }
+          else{
+            console.log('no data')
+          }
       })
       .catch(err => console.log("FindShelterDetail",err))
     },[])

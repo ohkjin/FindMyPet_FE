@@ -11,8 +11,6 @@ export default function Boards() {
   // 카테고리 사항을 보내줌, 추가검색: %Like%, 조회수별, 시간별
   // 보드번호, 페이지, 페이지 번호, 페이지 총 갯수를 받음
   // 분류 사항을 보낸뒤 페이지 총 갯수(15)를 받은뒤 3개로 나누어서 뿌림, 그 후 4번쨰부터 받고 싶을때 새로운 페이지 요청
-  const API_SERVER = process.env.REACT_APP_API_SERVER_HOST;
-  const [errMessage, setErrMessage] = useState(<></>);
   // const [searchParams,setSearchParams] = useSearchParams();
   const [totalPages, setTotalPages] = useState(0);
   const [params,setParams] = useState({
@@ -153,7 +151,6 @@ export default function Boards() {
           <TailRadioButton text={'조회순'} handleButton={(e) => handleSelOrder(e, 'view')} selected={params.order === 'view' ? true : false} />
         </div>
         <div className='Board_contents w-full my-5'>
-          {errMessage}
           {boardDetails.length===0&&<div className='flex justify-center text-gray-500 text-lg'>검색 결과가 없습니다</div>}
           {boardDetails.map((b, idx) => <div key={`boardList${idx}`}><TailBoardList board={b} /><div className='border-2 border-yellow-200/20'/><div className='border-2 border-gray-200/20'/></div>)}
         </div>

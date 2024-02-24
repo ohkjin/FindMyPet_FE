@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import TailComment from './TailComment'
 import { useRecoilValue } from 'recoil';
 import { userAuth, userNickname } from '../../user/token/TokenAtom';
@@ -6,11 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { privateApi } from '../../user/token/PrivateApi';
 
 export default function TailBoardDetail({ detail, handleEdit,handleDelete }) {
-  const [errMessage,setErrMessage] = useState(<></>);
   const commentRef = useRef();
   const userToken = useRecoilValue(userAuth);
   const nickname = useRecoilValue(userNickname);
-  const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
   const navigate = useNavigate();
  
   const handleCommentSubmit = (e) => {
@@ -57,7 +55,6 @@ return (
       <div className='border border-gray-200' />
       <div className='my-5'>
         <div className='Content my-16'>
-          {errMessage}
           {detail.content}
         </div>
         <div className='flex flex-row justify-between items-center text-gray-500'>

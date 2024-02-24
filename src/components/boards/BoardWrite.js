@@ -14,7 +14,6 @@ export default function BoardWrite() {
     const { write_type } = useParams();
     const userToken = useRecoilValue(userAuth);
     const navigate = useNavigate();
-    const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
     const [errMessage,setErrMessage] = useState(<></>);
     
     const handleSubmit = (e,inputs) => {

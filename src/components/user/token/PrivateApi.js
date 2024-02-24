@@ -1,5 +1,4 @@
 import axios from "axios"
-import { useRecoilValue } from "recoil"
 import { getToken } from "./TokenManager";
 
 const API_SERVER = process.env.REACT_APP_API_SERVER_HOST;

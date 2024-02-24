@@ -12,10 +12,6 @@ export default function WriteDropDown({maintxt,droplist}) {
     //     {name:'보호소 리뷰 쓰기',to:'/board/write/1'},
     //     isLogin?{name:'MyPage',to:'/user/mypage'}:{name:'로그인',to:'/user/login'},
     // ];
-    const linkShape = 'block pt-3 pb-2 px-3 rounded-md lg:inline-block lg:mt-0 mr-4 flex flex-row justify-center items-center'
-    const linkFont = 'text-slate-800 font-tenada '
-    const linkDesign = 'text-sm border border-yellow-300 border-2 '
-    const linkHover = 'hover:bg-orange-400 hover:text-white '
   return (
     <Menu as='div' className="relative inline-block text-left">
         <div>
@@ -44,21 +40,6 @@ export default function WriteDropDown({maintxt,droplist}) {
                         }
                         </Menu.Item>
                     )}
-                    {/* <Menu.Item>
-                        {({active})=>
-                            <Link to="/board/write/0" className={` hover:bg-slate-800 hover:text-yellow-300` }>
-                            커뮤니티/Q&A 쓰기
-                            </Link>
-                        }
-                    </Menu.Item>
-                    <div className='border-2 border-yellow-200'/>
-                    <Menu.Item>
-                        {({active})=>
-                            <Link to="/board/write/1" className={` hover:bg-slate-800 hover:text-yellow-300`}>
-                            보호소 리뷰 쓰기
-                            </Link>
-                        }
-                    </Menu.Item> */}
                 </div>
             </Menu.Items>
         </Transition>

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useRecoilValue } from 'recoil';
-import { userAuth, userNickname } from '../../user/token/TokenAtom';
+import { userNickname } from '../../user/token/TokenAtom';
 import { privateApi } from '../../user/token/PrivateApi';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,9 +8,6 @@ export default function TailComment({comment}) {
   const nickname = useRecoilValue(userNickname);
   const [isEditing,setIsEditing] = useState(false);
   const commentRef = useRef();
-  const API_SERVER = process.env.REACT_APP_API_SERVER_HOST;
-  const userToken = useRecoilValue(userAuth);
-  const [errMessage,setErrMessage] = useState(<></>);
   const navigate = useNavigate();
   const handleEdit = (e)=>{
     e.preventDefault();
@@ -61,7 +58,6 @@ export default function TailComment({comment}) {
         <div className='Name font-bold'>{icons[randomIconIdx]} {comment.writer}</div>
         <div className='Date text-sm text-gray-300'>{comment.registered}</div>
       </div>
-      {errMessage}
       <div className='flex flex-row justify-between items-center'>
         {isEditing?
         <input type='text' ref={commentRef} maxLength={45} defaultValue={comment.content} className='w-3/4 rounded-md border-2 border-dashed border-gray-200'/>

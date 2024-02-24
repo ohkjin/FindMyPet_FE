@@ -28,10 +28,11 @@ instance.interceptors.response.use(
 
 export const findApi = async (prefix)=>{
     const res = await instance.get(prefix)
-    if(res.data){
-        return res.data.response.body.items.item
-    }
-    return [];
+    // let item =[];
+    // if(res.data.response.body.items.item){
+    //     item = res.data.response.body.items.item
+    // }
+    return res.data.response.body.items.item;
 }
 
 //--//-- findApi 응용 --//--//
