@@ -18,7 +18,7 @@ export default function MyPage() {
       url:`/mypage`,
       method:'get',})
     .then((content)=>{
-      // console.log(content)
+      console.log(content)
       setUserDetail(content);
     })
     .catch((err)=>

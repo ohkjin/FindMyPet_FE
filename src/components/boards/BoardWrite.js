@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil'
 import { userAuth } from '../user/token/TokenAtom';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
-import TailReviewForm from './UI/TailReviewForm';
+import TailReviewForm from './Reviews/TailReviewForm';
 import LoginAlertPage from '../../UI/LoginAlertPage'
 import { privateApi } from '../user/token/PrivateApi';
 
@@ -54,7 +54,7 @@ export default function BoardWrite() {
     
     return (
         <div className='totalContainer'>
-            <div className='innerContainer shadow-3xl m-10'>
+            <div className='innerContainer shadow-3xl'>
                 {errMessage}
                 {userToken ?
                     write_type==='0'?

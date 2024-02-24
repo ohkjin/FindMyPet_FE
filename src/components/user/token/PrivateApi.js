@@ -11,7 +11,7 @@ if(userToken){
 
 export const privateApi = axios.create({
     baseURL:API_SERVER+'/user',
-    timeout:2000,
+    timeout:3000,
 }) 
 
 //사용법
@@ -31,6 +31,7 @@ privateApi.interceptors.request.use(
       },
    (err)=>{
         // console.log(err);
+        alert(err.message);
         return Promise.reject(err);
    }
 )

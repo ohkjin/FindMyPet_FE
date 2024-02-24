@@ -26,7 +26,7 @@ export default function TailCard({k,theme,imgSrc,title,subtitle,by}) {
     //     transition: all 0.3s ease-in-out 0s;
     //     box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
     // }
-    <div key={k} className={`${themeColor[theme][4]}  w-[calc(-3rem + 50vw)] group relative rounded-xl shadow-md transition duration-15- ease-in-out hover:-translate-y-1 p-3 cursor-pointer `}>
+    <div key={k} className={`${themeColor[theme][4]}  w-[calc(-3rem + 50vw)] group rounded-xl shadow-md transition duration-15- ease-in-out hover:-translate-y-1 p-3 cursor-pointer `}>
         <div className="max-w-64 max-h-52 aspect-h-1 aspect-w-1 w-full overflow-hidden  bg-gray-200 rounded-lg lg:aspect-none group-hover:opacity-75 ">
                 <img 
                 src={imgSrc} alt={title}

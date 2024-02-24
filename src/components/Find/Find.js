@@ -3,8 +3,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import TailAnimalButton from './UI/TailAnimalButton';
 import TailSelect from './UI/TailSelect';
 import TailFindCard from './UI/TailFindCard'
-
-import dog from '../../data/find/dog.json'
 import axios from 'axios';
 
 export default function Find() {
@@ -18,7 +16,6 @@ export default function Find() {
   // const [selected, setSelected] = useState({
   //   speciesCd:'',
   // });
-  console.log(dog.slice(0,10))
   const [species,setSpecies] = useState('');
 
   useEffect(() => {
@@ -39,11 +36,14 @@ export default function Find() {
 
   const onSelectSpecies = (code) => {
     setSpecies(code);
+  }
+
+  useEffect(()=>{
     const apikey = process.env.REACT_APP_API_KEY;
     let url = 'https://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic?'
     url += 'serviceKey=' + apikey
     url += `&bgnde=20240120&endde=20240220`
-    url += `&upkind=${code}&neuter_yn=U&pageNo=1&numOfRows=100&_type=json`
+    url += `&upkind=${species}&neuter_yn=U&pageNo=1&numOfRows=100&_type=json`
     axios.get(url)
       .then(res => {
         if(res.data){
@@ -54,8 +54,13 @@ export default function Find() {
           setPetCardList(tmp);
         }
         })
-  }
+  },[species])
+
+
   useEffect(() => {
+    if(!petObjList){
+      return
+    }
     //dog json이 있는 경우 각종 리스트
     //1. 견종리스트
     let breedtmp = petObjList.map(d=>d.kindCd.replace(/^\[.*?\]\s/, ''));

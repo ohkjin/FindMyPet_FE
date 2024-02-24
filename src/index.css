@@ -12,11 +12,11 @@
         @apply w-full flex flex-col justify-center items-center
     }
     .innerContainer{
-        @apply lg:max-w-[61rem] w-4/5 my-auto py-6; 
+        @apply lg:max-w-[61rem] min-w-96 w-4/5 my-auto py-6; 
          /* max-w-[61rem] */
     }
     .whiteContainer{
-        @apply bg-white/[0.9] rounded-3xl shadow p-5 m-5; 
+        @apply bg-white/[0.95] rounded-3xl shadow p-5 m-5; 
     }
     /* .pagination {
         @apply  flex justify-center mt-4;

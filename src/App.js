@@ -23,7 +23,7 @@ function App() {
       <BrowserRouter>
       <RecoilRoot>
         <div className="">
-        <div className={`w-screen min-h-screen self-stretch bg-welcomeHome lg:bg-cover bg-contain bg-no-repeat `}>
+        <div className={`w-screen min-h-screen self-stretch bg-welcomeHome bg-contain bg-no-repeat `}>
         {/* <div className="w-screen h-screen bg-welcomeHome"> */}
         <Navbar/>
         <Routes>

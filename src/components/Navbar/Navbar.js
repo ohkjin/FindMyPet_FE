@@ -23,20 +23,17 @@ export default function Navbar() {
     ];
     const nav_maintxt = <img src={dogpaw} className='w-8 h-8' alt='dogpaw_button'/>
     const nav_droplist = [
-        [
-            {name:'홈',to:'/home'},
-        ],
-        [
-            {name:'유기동물',to:'/find'},
-        ],
-        [
-            {name:'커뮤니티/Q&A',to:'/boards'},
-            {name:'보호소 리뷰',to:'/reviews'},
-        ],
-        [
-            {name:'커뮤니티/Q&A 쓰기',to:'/board/write/0'},
-            {name:'보호소 리뷰 쓰기',to:'/board/write/1'},
-        ],
+        {title:'Main',
+          list:[{name:'홈',icon:'🏡',to:'/home'},
+                {name:'테스트',icon:'🧺',to:'/test'}],},
+        {title:'유기동물', 
+          list:[{name:'유기동물',icon:'🐇',to:'/find'}],},
+        {title:'보드', 
+          list:[{name:'게시판',icon:'🙋‍♀️',to:'/boards'},
+                {name:'보호소',icon:'🏦',to:'/reviews'}],},
+        {title:'글쓰기', 
+          list:[{name:'게시글',icon:'✍',to:'/board/write/0'},
+                {name:'리뷰',icon:'⭐',to:'/board/write/1'}],},
     ];
 // const navMenu = [
 //     {name:'대시보드',to:'#',current:true},

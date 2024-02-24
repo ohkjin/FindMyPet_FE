@@ -9,7 +9,9 @@ import { useNavigate } from "react-router-dom";
 import { getToken } from "../user/token/TokenManager";
 import { useRecoilValue } from "recoil";
 import { userNickname } from "../user/token/TokenAtom";
-import TailReviewForm from "../boards/UI/TailReviewForm";
+import TailReviewForm from "../boards/Reviews/TailReviewForm";
+import { useEffect } from "react";
+import FindShelterDetail from "../Find/api/FindShelterDetail";
 export default function Test() {
     // const [test,setTest] = useState(<></>)
     // const [cookies,setCookies] = useCookies(["accessToken","refreshToken"])
@@ -38,6 +40,19 @@ export default function Test() {
     const handleNavigate = (board) => {
       navigate(board)
     }
+    const originalDate = new Date("Sat Feb 24 2024 21:47:44 GMT+0900 (한국 표준시)");
+
+    const formatDate = (original) => {
+      const formattedDate = original.toLocaleDateString('ko-KR', {
+          day: '2-digit',
+          year: 'numeric',
+          month: '2-digit',
+        }).replace(/[^0-9]/g, ''); // Remove non-numeric characters    
+      return formattedDate;
+  }
+    console.log(formatDate(originalDate)); // Output: "20240224"
+    
+    // console.log(new Date())
     // const handleTestForm = (e, inputs) =>{
     //   e.preventDefault();
     //   console.log(inputs)
@@ -87,7 +102,8 @@ export default function Test() {
           <button onClick={()=>handleNavigate('/board/6')} className="h-20 w-20 bg-blue-800"/>
           </div>
           <div>
-            <TailReviewForm/>
+            <FindShelterDetail shelter={344452202300001}/>
+            {/* <TailReviewForm/> */}
           </div>
     </div>
   )

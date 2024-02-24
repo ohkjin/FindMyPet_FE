@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
 import sidoObjList from '../../../data/find/sido.json'
-import axios from 'axios';
-import TailSelectSigungu from './TailSelectSigungu';
-import TailSelectShelter from './TailSelectShelter';
+import TailSelectSigungu from '../../Find/UI/TailSelectSigungu';
+import TailSelectShelter from '../../Find/UI/TailSelectShelter';
 import { findApi } from '../../Find/FindApi';
+import FindShelter from '../../Find/FindShelter';
 
 export default function TailReviewForm({handleFormSubmit,handleCancel,detail}) {
  
@@ -15,58 +15,9 @@ const [inputs, setInputs] = useState({
 })
 
 //-- 보호소 선택 --//
-const baseurl = 'https://apis.data.go.kr/1543061/abandonmentPublicSrvc'
-const sidoRef = useRef();
-const [sigunguObjList, setSigunguObjList] = useState([]);
-const gunguRef = useRef();
-const [shelterObjList, setShelterObjList] = useState([]);
-const shelterRef = useRef();
-// 시도 선택시 value에 넣은 시도코드가 돌아온다
-const handleSelectSido = (e)=>{
-  e.preventDefault();
-  // console.log(e.target.value)
-  if(e.target.value!==''){
-    const apikey= process.env.REACT_APP_API_KEY
-    const url = `${baseurl}/sigungu?serviceKey=${apikey}&upr_cd=${e.target.value}&_type=json`
-    // axios.get(url)
-    // .then(res=>{
-    //   if(res.data){
-    //     // console.log(res.data.response.body.items.item)
-    //     setSigunguObjList(res.data.response.body.items.item)
-    //     // console.log(Object.keys(sidoObjList[0]))
-    //   }
-    //   })
-    // .catch(err=>console.log(err))
-    findApi(`/sigungu?serviceKey=${apikey}&upr_cd=${e.target.value}&_type=json`)
-    .then((item)=>{
-      // console.log(item);
-      // 군구,보호소 초기화
-      gunguRef.current.value = '';
-      shelterRef.current.value = '';
-      setSigunguObjList(item);
-    })
-  }
-}
-const handleSelectSigungu = (e)=>{
-  e.preventDefault();
-  console.log(e.target.value)
-  if(e.target.value!==''){
-    const apikey= process.env.REACT_APP_API_KEY
-    const url =`${baseurl}/shelter?serviceKey=${apikey}&upr_cd=${sidoRef.current.value}&org_cd=${e.target.value}&_type=json`
-    axios.get(url)
-    .then(res=>{
-      if(res.data){
-        console.log(res.data.response.body.items.item)
-        shelterRef.current.value = '';
-        setShelterObjList(res.data.response.body.items.item)
-      }
-      })
-    .catch(err=>console.log(err))
-  }
-}
-// 보호소
 const handleSelectShelter = (e) =>{
   e.preventDefault();
+  // console.log("shelterCode",e.target.value)
   setInputs({
     ...inputs,
     shelter:e.target.value,
@@ -74,10 +25,9 @@ const handleSelectShelter = (e) =>{
 }
 
 // 평점
-  const [rating, setRating] = useState(0);
+
   const handleRating = (e,ratingInput) =>{
       e.preventDefault();
-      setRating(ratingInput);
       setInputs({
         ...inputs,
         rating:ratingInput,
@@ -96,23 +46,11 @@ const handleSelectShelter = (e) =>{
 
   return (
     <form onSubmit={(event)=>handleFormSubmit(event,inputs)}>
-      <div className="whiteContainer mt-20 space-y-12">
+      <div className="whiteContainer space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
    
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            <div className="Category sm:col-span-4">
-              <>
-              <div className="mt-4 block font-tenada text-sm font-medium leading-6 text-gray-900">
-              보호소 선택
-              </div>
-              <div className=" mt-2 flex flex-col">
-              <TailSelectSigungu handleChange={handleSelectSido} selRef={sidoRef} optionWithValue={sidoObjList} init={`-- 시도 선택 --`}/>
-              {sidoRef!==''&&<TailSelectSigungu handleChange={handleSelectSigungu} selRef={gunguRef} optionWithValue={sigunguObjList} init={`-- 시군구 선택 --`}/>}
-              {gunguRef!==''&&<TailSelectShelter handleChange={handleSelectShelter} selRef={shelterRef} optionWithValue={shelterObjList} init={`-- 보호소 선택 --`}/>}
-            </div>
-            </>
-            </div>
-            
+          <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <FindShelter handleSelectShelter={handleSelectShelter}/>
             <div className="Title sm:col-span-4">
               <label htmlFor="username" className="block font-tenada text-sm font-medium leading-6 text-gray-900">
                 평점

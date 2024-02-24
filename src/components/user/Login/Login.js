@@ -54,7 +54,7 @@ export default function Login() {
         // password: 'asdfasdf'
       })
         .then(res => {
-          // console.log("res",res)
+          console.log("res",res)
           // console.log("headers",res.headers)
           if(!res.headers){
             setErrMessage(<div className='text-red-400'>No Header returned</div>)
@@ -76,7 +76,7 @@ export default function Login() {
           navigate('/');
         }).catch(err => {
           console.log(err)
-          setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.data.status}) ${err.response.data.message}`:err.message}</div>)
+          setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.data.status.code}) ${err.response.data.status.message}`:err.message}</div>)
           setPopup({
             open: true,
             title: 'Error',

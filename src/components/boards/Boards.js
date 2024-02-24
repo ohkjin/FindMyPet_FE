@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import TailBoardList from './UI/TailBoardList'
-import axios from 'axios';
-import { useSearchParams } from 'react-router-dom';
 import TailAnimalButton from '../Find/UI/TailAnimalButton';
 import TailRadioButton from '../../UI/TailRadioButton';
 import Pagination from 'react-js-pagination';
 import '../../UI/PaginationCSS.css'
-import TailSelect from '../Find/UI/TailSelect';
+import { publicApi } from '../user/token/PublicApi';
 
 
 export default function Boards() {
@@ -15,81 +13,37 @@ export default function Boards() {
   // 분류 사항을 보낸뒤 페이지 총 갯수(15)를 받은뒤 3개로 나누어서 뿌림, 그 후 4번쨰부터 받고 싶을때 새로운 페이지 요청
   const API_SERVER = process.env.REACT_APP_API_SERVER_HOST;
   const [errMessage, setErrMessage] = useState(<></>);
-  const [searchParams,setSearchParams] = useSearchParams();
-  const [totalPages, setTotalPages] = useState(1);
-  const [pageArray,setPageArray]=useState([1]);
-  const [buttons,setButtons]=useState([]);
+  // const [searchParams,setSearchParams] = useSearchParams();
+  const [totalPages, setTotalPages] = useState(0);
   const [params,setParams] = useState({
     page: null,
     category:null,
     order:null,
     keyword:'',
   })
-  const [writer,setWriter] = useState(searchParams.get('writer'));
   const [boardDetails, setBoardDetails] = useState([])
 
   //-- 페이지 로딩 --//
-  //제일 처음에,그후 param이 변할떄 페이지 가져오기 (writer param 삭제)
-  // 글쓴이를 클릭하여 writer param이 있으면 search, page변할때도 불러오기
-  useEffect(()=>{
-    // console.log(typeof writer,writer)
-    // console.log(typeof params.page)
-    if(writer){
-      console.log("writer")
-      axios.get(`${API_SERVER}/boards/writer`, {
-        params: {
-          writer:writer,
-          page:params.page
-        },
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then(res => {
-          // console.log("res",res)
-          if (res.data) {
-            if(totalPages===0){
-              setTotalPages(res.data.totalPages)
-            }
-            setBoardDetails(res.data.content.content);
-            setErrMessage(<></>);
-          } else {
-            // console.log(res)
-            return
-          }
-        }).catch(err => {
-          setErrMessage(<div className='text-red-400'>{err.response ? `(${err.response.status}) ${err.response.data}` : err.message}</div>)
-        })
-        return;
-    }
-  },[writer,params.page])
+  //제일 처음에,그후 param이 변할떄 페이지 가져오기
   useEffect(() => {
-    if(searchParams.get('writer')){
-      return
-    }
-    console.log("nowriter")
-    console.log("params",params);
-    axios.get(`${API_SERVER}/boards?`, {
-      params: params,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    // console.log("params",params);
+    console.log("tp",totalPages)
+    publicApi({
+      url:'/boards',
+      method:'get',
+      params:params,
     })
-      .then(res => {
-        // console.log("res",res)
-        if (res.data) {
-          // if(totalPages===0){
-          //   setTotalPages(res.data.totalPages)
-          // }
-          setBoardDetails(res.data.content.content);
-          setErrMessage(<></>);
-        } else {
-          // console.log(res)
-          return
-        }
-      }).catch(err => {
-        setErrMessage(<div className='text-red-400'>{err.response ? `(${err.response.status}) ${err.response.data}` : err.message}</div>)
-      })
+    .then((content)=>{
+      // console.log(content)
+      if(totalPages===0){
+                // console.log("totalPage",res.data.content.totalPages)
+                setTotalPages(content.totalPages)
+              }
+      setBoardDetails(content.content);
+    })
+    .catch((err)=>
+      console.log(err)
+    )
   }, [params])
 
   //-- 총 페이지로 페이지 번호로 나누기 --// 
@@ -146,10 +100,8 @@ export default function Boards() {
   const handleSelCate = (e,cate) => {
     e.preventDefault();
     //카테고리 변경일떄만 전체 페이지 초기화
-    // setTotalPages(0);
+    setTotalPages(0);
     searchRef.current.value = '';
-    searchParams.delete('writer');
-    setSearchParams(searchParams.toString());
     setParams({
       ...params,
       category:cate,
@@ -160,8 +112,6 @@ export default function Boards() {
   const handleSelOrder = (e,order) => {
     e.preventDefault();
     searchRef.current.value = '';
-    searchParams.delete('writer');
-    setSearchParams(searchParams.toString());
     setParams({
       ...params,
       order:order,
@@ -174,8 +124,6 @@ export default function Boards() {
   const handleSearch = (e) => {
     e.preventDefault();
     // console.log("searchRef",searchRef);
-    searchParams.delete('writer');
-    setSearchParams(searchParams.toString());
     setParams({
       ...params,
       keyword:searchRef.current.value,
@@ -212,11 +160,10 @@ export default function Boards() {
         <div className='Board_pagenum m-5 flex flex-row justify-center items-center'>
             <Pagination
                 activePage={params.page}
-                totalItemsCount={totalPages}
-                itemsCountPerPage={2}
+                totalItemsCount={totalPages*10}
                 // prevPageText={'◀'}
                 // nextPageText={'▶'}
-                pageRangeDisplayed={5}
+                pageRangeDisplayed={3}
                 onChange={handlePageButton}
               />
           {/* {params.page-3>=1?
