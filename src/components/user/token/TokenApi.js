@@ -3,7 +3,7 @@
 
 // const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
 
-//-- Token이 필요한 api요청을 보내는 instance --//
+// //-- Token이 필요한 api요청을 보내는 instance --//
 // export const privateApi = axios.create({
 //     baseURL:API_SERVER,
 //     headers:{
