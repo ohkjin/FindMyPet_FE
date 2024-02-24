@@ -10,6 +10,7 @@ export default function WriteDropDown({maintxt,droplist}) {
     // const droplist = [
     //     {name:'커뮤니티/Q&A 쓰기',to:'/board/write/0'},
     //     {name:'보호소 리뷰 쓰기',to:'/board/write/1'},
+    //     isLogin?{name:'MyPage',to:'/user/mypage'}:{name:'로그인',to:'/user/login'},
     // ];
     const linkShape = 'block pt-3 pb-2 px-3 rounded-md lg:inline-block lg:mt-0 mr-4 flex flex-row justify-center items-center'
     const linkFont = 'text-slate-800 font-tenada '

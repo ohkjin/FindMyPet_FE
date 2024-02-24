@@ -3,6 +3,7 @@ import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import TailMenuButton from '../../UI/TailMenuButton'
 
 export default function NavDropDown({maintxt,droplist}) {
     //-- 예시 --//
@@ -36,27 +37,17 @@ export default function NavDropDown({maintxt,droplist}) {
                     {droplist&&droplist.map((item)=>
                         <Menu.Item key={item.name}>
                         {({active})=>
-                            <Link to={item.to} className={` hover:bg-slate-800 hover:text-yellow-300` }>
-                            {item.name}
-                            </Link>
+                            <TailMenuButton menu={item}/>
                         }
                         </Menu.Item>
                     )}
-                    {/* <Menu.Item>
+                    {droplist&&droplist.map((item)=>
+                        <Menu.Item key={item.name}>
                         {({active})=>
-                            <Link to="/board/write/0" className={` hover:bg-slate-800 hover:text-yellow-300` }>
-                            커뮤니티/Q&A 쓰기
-                            </Link>
+                            <TailMenuButton menu={item}/>
                         }
-                    </Menu.Item>
-                    <div className='border-2 border-yellow-200'/>
-                    <Menu.Item>
-                        {({active})=>
-                            <Link to="/board/write/1" className={` hover:bg-slate-800 hover:text-yellow-300`}>
-                            보호소 리뷰 쓰기
-                            </Link>
-                        }
-                    </Menu.Item> */}
+                        </Menu.Item>
+                    )}
                 </div>
             </Menu.Items>
         </Transition>

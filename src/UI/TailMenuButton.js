@@ -1,19 +1,18 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
-export default function TailMenuButton({icon,text,handleButton,selected}) {
-  if(!selected){
-    selected=false;
-  }
+export default function TailMenuButton({menu}) {
+  
   // console.log("bt", code)
-  const color = selected?'bg-orange-400 border-solid border-black':'bg-white border-dashed border-yellow-300';
+  const color = 'bg-yellow-50 border-dashed border-yellow-300';
   return (
-    <button onClick={handleButton} className={`${color} border-2 hover:bg-yellow-400 hover:border-solid hover:border-black rounded-xl p-2 m-1 flex flex-col justify-center items-center `}>
+    <Link to={menu.to} className={`${color} border-[3px] w-14 h-14 hover:bg-orange-400 hover:border-solid  rounded-xl p-2 m-1 flex flex-col justify-center items-center `}>
         <div>
-          {icon&&icon}
+          {menu.icon&&menu.icon}
         </div>
         <div className='text-xs font-bold'>
-          {text&&text}
+          {menu.name&&menu.name}
         </div>
-    </button>
+    </Link>
   )
 }
