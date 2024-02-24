@@ -1,8 +1,4 @@
-import { useRef, useState } from 'react';
-import sidoObjList from '../../../data/find/sido.json'
-import TailSelectSigungu from '../../Find/UI/TailSelectSigungu';
-import TailSelectShelter from '../../Find/UI/TailSelectShelter';
-import { findApi } from '../../Find/FindApi';
+import { useState } from 'react';
 import FindShelter from '../../Find/FindShelter';
 
 export default function TailReviewForm({handleFormSubmit,handleCancel,detail}) {
