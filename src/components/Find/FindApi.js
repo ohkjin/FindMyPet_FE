@@ -3,7 +3,7 @@ import axios from "axios"
 
 const instance = axios.create({
     baseURL:'https://apis.data.go.kr/1543061/abandonmentPublicSrvc',
-    timeout:2000,
+    timeout:3000,
 }) 
 
 instance.interceptors.request.use(
