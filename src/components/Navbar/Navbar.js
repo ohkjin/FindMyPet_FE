@@ -52,13 +52,13 @@ export default function Navbar() {
     // ];
     const linkShape = ' block pt-3 pb-2 px-3 rounded-md lg:inline-block lg:mt-0 mr-4 flex flex-row justify-center items-center'
     const linkFont = ' text-slate-800 font-tenada '
-    const linkDesign = ' text-sm border border-yellow-300 border-2 bg-white/[0.5] '
+    const linkDesign = ' text-sm border border-yellow-300 border-2 bg-white/[0.7] '
     const linkHover = ' hover:bg-orange-400 hover:text-white '
     return (
         <nav className="totalContainer">
             <div className=" w-full min-w-96 p-4 flex justify-center items-center">
                 {/* inline: 한줄 처리, flex 랑 충돌 (display-flex,display-inline,display-block) */}
-                <div className='hidden lg:flex basis-3/6 justify-evenly'>
+                <div className='hidden lg:flex basis-5/12 justify-evenly'>
                     <Link to="/home" className={`${linkShape} ${linkDesign} ${linkHover} ${linkFont}`}>
                         홈
                     </Link>
@@ -69,24 +69,24 @@ export default function Navbar() {
                         유기동물
                     </Link>
                 </div>
-                <Link to="/home" className={`basis-1/6 flex justify-center items-center text-2xl ${linkFont} `}>
+                <Link to="/home" className={`basis-2/12 flex justify-center items-center text-2xl ${linkFont} `}>
                     MyPetFinder
                 </Link>
-                <div className='hidden lg:flex basis-2/6 justify-evenly items-center'>
+                <div className='hidden lg:flex basis-4/12 justify-evenly items-center'>
                     <WriteDropDown maintxt={boards_maintxt} droplist={boards_droplist} />
                     <WriteDropDown maintxt={write_maintxt} droplist={write_droplist} />
 
                 </div>
-                <div className='basis-1/6'></div>
+                <div className='basis-1/12'/>
             </div>
-            <div className='fixed top-0 right-0 z-40 flex flex-row justify-center items-center'>
-                {isLogin ?
+            <div className='fixed top-2 right-2 z-40 flex flex-row justify-center items-center'>
+                {isLogin?
                     <div className='inline-block'>
                         <TailWriter writer={nickname} />
                     </div>
                     :
-                    <Link to="/user/login" className={`${linkShape} ${linkDesign} ${linkHover} ${linkFont}`}>
-                        로그인
+                    <Link to="/user/login" className={`pt-1 px-1 rounded-lg flex justify-center items-center border-[3px] border-dotted border-yellow-400 ${linkHover} ${linkFont}`}>
+                        Login
                     </Link>
                 }
                 <NavDropDown maintxt={nav_maintxt} droplist={nav_droplist} />

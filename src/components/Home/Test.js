@@ -12,6 +12,8 @@ import { userNickname } from "../user/token/TokenAtom";
 import TailReviewForm from "../boards/Reviews/TailReviewForm";
 import { useEffect, useRef } from "react";
 import FindShelterDetail from "../Find/api/FindShelterDetail";
+import MyPage from "../user/MyPage/MyPage";
+import MyPageEdit from "../user/MyPage/MyPageEdit";
 export default function Test() {
     // const [test,setTest] = useState(<></>)
     // const [cookies,setCookies] = useCookies(["accessToken","refreshToken"])
@@ -129,6 +131,8 @@ export default function Test() {
                   </div>
                   </form>
           </div>
+          <MyPage/>
+          <MyPageEdit/>
     </div>
   )
 }

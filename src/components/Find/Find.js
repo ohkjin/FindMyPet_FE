@@ -17,7 +17,6 @@ export default function Find() {
   //유기날짜 시작과 검색 종료는 무조건 한달차이로
   const [petObjList, setPetObjList] = useState([]);
   const [petCardList, setPetCardList] = useState('');
-  const [breedList, setBreedList] = useState('')
   // const [selected, setSelected] = useState({
   //   speciesCd:'',
   // });
@@ -38,35 +37,56 @@ export default function Find() {
   const lastMonth = formatDate(current);
 
   
-  //-- 축종 고르기 --//
+  //-- 축종 고르기 (초기데이터)--//
+  // 모든 하위 항목 초기화
   const [species,setSpecies] = useState('');
   const onSelectSpecies = (sp) => {
     setSpecies(sp);
   }
-  // useEffect(()=>{
-  //   const apikey = process.env.REACT_APP_API_KEY;
-  //   let url = 'https://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic?'
-  //   url += 'serviceKey=' + apikey
-  //   url += `&bgnde=${lastMonth}&endde=${today}`
-  //   url += `&upkind=${species}`
-  //   url += '&state=notice&pageNo=1&numOfRows=100&_type=json'
-  //   axios.get(url)
-  //     .then(res => {
-  //       if(res.data){
-  //         // console.log(url)
-  //         // console.log("data", res.data.response.body.items.item)
-  //         let tmp = res.data.response.body.items.item;
-  //         setPetObjList(tmp);
-  //         setTotalPages(res.data.response.body.numOfRows)
-  //         tmp = tmp.map((dog,idx)=><TailFindCard k={`${dog.desertionNo}dog${idx}`} theme='white' imgSrc={dog.popfile.replace("http","https")} title={dog.kindCd} subtitle={`${dog.age} ${dog.sexCd} ${dog.neuterYn}`} by={`${dog.orgNm}`}/>)
-  //         setPetCardList(tmp);
-  //       }
-  //       })
-  // },[species])
+  useEffect(()=>{
+    const apikey = process.env.REACT_APP_API_KEY;
+    let url = 'https://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic?'
+    url += 'serviceKey=' + apikey
+    url += `&bgnde=${lastMonth}&endde=${today}`
+    url += `&upkind=${species}`
+    url += '&state=notice&pageNo=1&numOfRows=100&_type=json'
+    axios.get(url)
+      .then(res => {
+        if(res.data){
+          // console.log(url)
+          // console.log("data", res.data.response.body.items.item)
+          let tmp = res.data.response.body.items.item;
+          setPetObjList(tmp);
+          setTotalPages(res.data.response.body.numOfRows)
+          tmp = tmp.map((dog,idx)=><TailFindCard k={`${dog.desertionNo}dog${idx}`} theme='white' imgSrc={dog.popfile.replace("http","https")} title={dog.kindCd} subtitle={`${dog.age} ${dog.sexCd} ${dog.neuterYn}`} by={`${dog.orgNm}`}/>)
+          setPetCardList(tmp);
+          // 품종은 PetObjList에 dependent함으로 초기화 필요 없음
+          // 지역 초기화
+          setCodes({
+            sido:'',
+            gungu:'',
+            shelter:'',
+          })
+        }
+        })
+  },[species])
 
-  // useEffect(()=>{
-
-  // },[page,breed])
+  //-- 품종리스트, 페이지, 카드 --//
+  // ObjectList에서 다 뽑아낸후 자르고 카드화
+  const [breedList, setBreedList] = useState('')
+  useEffect(() => {
+    if(!petObjList){
+      return
+    }
+    //dog json이 있는 경우 각종 리스트
+    //1. 견종리스트
+    let breedtmp = petObjList.map(d=>d.kindCd.replace(/^\[.*?\]\s/, ''));
+    // let breedtmp = dog.map(d=>d.kindCd.replace('[강아지] ', ''));
+    breedtmp = new Set(breedtmp);
+    breedtmp = [...breedtmp].sort();
+    // console.log(breedtmp)
+    setBreedList(breedtmp);
+  }, [petObjList])
 
   //-- 품종 고르기 --//
   const handleSelectBreed = (e) => {
@@ -79,6 +99,7 @@ export default function Find() {
     setPetCardList(tmp);
   }
   //-- 보호소 고르기 --//
+  // e.target.name의 값을 받는 법을 찾을수 없어 filter를 못함
    const [codes,setCodes] = useState({
         sido:'',
         gungu:'',
@@ -93,6 +114,9 @@ export default function Find() {
   })
   }
   useEffect(()=>{
+    if(codes.sido===''){
+      return
+    }
     console.log("codes",codes)
     console.log("spec",species)
     // https://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic?serviceKey=W4298Kl3xl0gOfyeKSAkiQQObfABjtbHzbcmfAuJAhKztl9AzOAGLFDS2xyrwq4xA%2B53iQM0jx8vzT28xfYdVg%3D%3D&bgnde=20240130&endde=20240226&upkind=417000&upr_cd=6110000&org_cd=3220000&care_reg_no=311322200900001&state=notice&pageNo=1&numOfRows=100&_type=json
@@ -147,25 +171,8 @@ export default function Find() {
     //       setPetCardList(tmp);
     //     }
     //     })
-  },[species,codes])
+  },[codes])
 
-  //-- 품종리스트 --//
-  // ObjectList에서 다 뽑아내기
-  useEffect(() => {
-    if(!petObjList){
-      return
-    }
-    //dog json이 있는 경우 각종 리스트
-    //1. 견종리스트
-    let breedtmp = petObjList.map(d=>d.kindCd.replace(/^\[.*?\]\s/, ''));
-    // let breedtmp = dog.map(d=>d.kindCd.replace('[강아지] ', ''));
-    breedtmp = new Set(breedtmp);
-    breedtmp = [...breedtmp].sort();
-    // console.log(breedtmp)
-    setBreedList(breedtmp);
-  }, [petObjList])
-
-   
   //-- 페이징 --//
   //바뀐 카드데이터를 잘라서 내보냄
   const [page,setPage] = useState(1);

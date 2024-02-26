@@ -22,8 +22,8 @@ function App() {
   return (
       <BrowserRouter>
       <RecoilRoot>
-        <div className="flex flex-col justify-center items-center">
-        <div className={` w-screen min-h-screen bg-welcomeHome bg-contain bg-no-repeat `}>
+        <div className="flex flex-col justify-center items-center overflow-y-hidden overflow-hidden">
+        <div className={` w-screen min-h-screen bg-welcomeHome bg-contain bg-no-repeat`}>
         {/* <div className="w-screen h-screen bg-welcomeHome"> */}
         <Navbar/>
         <Routes>

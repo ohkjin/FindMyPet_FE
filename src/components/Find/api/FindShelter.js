@@ -49,6 +49,7 @@ export default function FindShelter({handleSelectShelter,codes,setCodes}) {
     }
     const handleSelectSigungu = (e) => {
         e.preventDefault();
+        console.log("name",e.target)
         if (e.target.value !== '') {
             findApi(`/shelter?serviceKey=${apikey}&upr_cd=${sidoRef.current.value}&org_cd=${e.target.value}&_type=json`)
                 .then((body) => {

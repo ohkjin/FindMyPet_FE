@@ -67,16 +67,28 @@ export default function MyPageEdit() {
         <div className='totalContainer'>
       <div className='innerContainer whiteContainer min-w-96 p-10 flex flex-col items-center'>
                 <div>
-                </div>
-                <div>
                     {errMessage&&<div className='text-red-500 text-sm'>{errMessage}</div>}
-                    <form onSubmit={handleSubmit} className='flex flex-col justify-center items-center'>
+                    <form onSubmit={handleSubmit} className='flex flex-col justify-center items-center space-y-4 min-w-72'>
                         {/* <label htmlFor='inputId'/> */}
-                        <input type='email' name='inputId' value={userId} readOnly/>
-                        <input type='text' name='nickname'maxLength={10} value={inputs.nickname} onChange={handleChange} placeholder={nickname}/>
-                        <input type='password' name='password' maxLength={20} value={inputs.password} onChange={handleChange} placeholder='변경할 비밀번호'/>
-                        <input type='password' name='passwordCheck' maxLength={20} onChange={handleChange} placeholder='비밀번호 재확인'/>
-                        <button type='submit' className='w-10 h-10 bg-yellow-400'/>
+                        <input type='email' name='inputId' value={userId} readOnly className='border-[3px] rounded-xl border-yellow-300 w-full h-10 p-5'/>
+                        <input type='text' name='nickname'maxLength={10} value={inputs.nickname} onChange={handleChange} placeholder={nickname} className='border-[3px] rounded-xl h-10 border-yellow-300 border-dashed w-full p-5'/>
+                        <input type='password' name='password' maxLength={20} value={inputs.password} onChange={handleChange} placeholder='변경할 비밀번호'className='rounded-xl h-10 border-[3px] border-yellow-300 border-dashed w-full p-5'/>
+                        <input type='password' name='passwordCheck' maxLength={20} onChange={handleChange} placeholder='비밀번호 재확인'className='rounded-xl h-10 border-[3px] border-yellow-300 border-dashed w-full p-5'/>
+                        <div className="mt-6 flex items-center justify-end gap-x-6">
+        <button
+          type="submit"
+          className="rounded-xl bg-yellow-500 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          변경
+        </button>
+        <button
+          type="button"
+          onClick={()=>navigate('/user/mypage')}
+          className="rounded-xl bg-gray-400 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          취소
+        </button>
+      </div>
                     </form>
                 </div>
             </div>

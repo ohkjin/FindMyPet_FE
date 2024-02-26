@@ -1,67 +1,90 @@
 import React, { useEffect, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import { userAuth, userNickname } from '../token/TokenAtom'
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import welcome from '../../../assets/images/welcome/tricatwelcome.jpg'
 import { removeAllToken } from '../token/TokenManager';
 import { privateApi } from '../token/PrivateApi';
 export default function MyPage() {
-  const [userDetail,setUserDetail]=useState('')
+  const [userDetail, setUserDetail] = useState('')
   const navigate = useNavigate()
   const setUserToken = useSetRecoilState(userAuth);
   const setUserNick = useSetRecoilState(userNickname);
 
   //-- 유저정보 --//
-  useEffect(()=>{
+  useEffect(() => {
     privateApi({
-      url:`/mypage`,
-      method:'get',})
-    .then((content)=>{
-      console.log(content)
-      setUserDetail(content);
+      url: `/mypage`,
+      method: 'get',
     })
-    .catch((err)=>
-      console.log(err)
-    )
-  },[])
- 
+      .then((content) => {
+        console.log(content)
+        setUserDetail(content);
+      })
+      .catch((err) =>
+        console.log(err)
+      )
+  }, [])
+
   //-- 로그아웃 --//
   const handleLogout = () => {
     removeAllToken();
-    setUserToken(null);  
+    setUserToken(null);
     setUserNick(null);
     navigate('/user/login')
   }
   //-- 회원탈퇴 --//
   const handleWithdraw = () => {
     privateApi({
-      url:`/mypage`,
-      method:'delete',})
-    .then((res)=>{
+      url: `/mypage`,
+      method: 'delete',
+    })
+      .then((res) => {
         removeAllToken();
         setUserToken(null);
         setUserNick(null);
         navigate('/home')
-    })
-    .catch((err)=>
-      console.log(err)
-    )
+      })
+      .catch((err) =>
+        console.log(err)
+      )
   }
-  
+
   return (
     <div className='totalContainer'>
-      <div className='innerContainer whiteContainer flex flex-col justify-center items-center'>
-      <img src={welcome} alt='welcome cat' className='w-[400px]' />
-      <div>
-        {userDetail.nickname&&<div>{userDetail.nickname}님의 개인페이지입니다</div>}
-        {userDetail.userId&&<div>{userDetail.userId}</div>}
+      <div className='innerContainer flex flex-col justify-center items-center'>
+        <div className='grid grid-cols-3'>
+          <div className='whiteContainer max-w-72'>
+            <img src={welcome} alt='welcome cat' className='w-full rounded-full border-4 border-yellow-300' />
+            <div className='w-full my-4'>
+              {userDetail.nickname && <div className='border-2 border-yellow-300 rounded-lg'>{userDetail.nickname}님의 개인페이지입니다</div>}
+              {userDetail.userId && <div className='border-2 border-yellow-300 rounded-lg'>{userDetail.userId}</div>}
+            </div>
+            <div className='w-full flex flex-col my-4 space-y-3'>
+              <button onClick={() => navigate(`/user/mypage/edit?userId=${userDetail.userId}&nickname=${userDetail.nickname}`)} className=' h-[42px] rounded-xl text-sm font-bold bg-gray-700 border-2 border-yellow-300 text-yellow-400'>회원정보 수정</button>
+              <button onClick={handleLogout} className=' h-[42px] rounded-xl text-sm bg-yellow-700 font-bold border-2 border-yellow-300 text-yellow-400'>로그아웃</button>
+              <button onClick={handleWithdraw} className=' h-[42px] rounded-xl text-sm font-bold border-2 border-yellow-300 text-yellow-400'>회원탈퇴</button>
+            </div>
+          </div>
+          <div className='col-start-2 col-span-2 grid grid-cols-2 lg:grid-cols-3'>
+          <div className='whiteContainer flex flex-col justify-center items-center aspect-square'>
+            <div className='text-2xl'>✍</div>
+            <div className='font-bold text-3xl'>0</div>
+            <div className='text-gray-300'>게시글</div>
+            </div>
+            <div className='whiteContainer flex flex-col justify-center items-center aspect-square'>
+            <div className='text-2xl'>⭐</div>
+            <div className='font-bold text-3xl'>0</div>
+            <div className='text-gray-300'>리뷰</div>
+            </div>
+            <div className='whiteContainer flex flex-col justify-center items-center aspect-square'>
+            <div className='text-2xl'>🔖</div>
+            <div className='font-bold text-3xl'>0</div>
+            <div className='text-gray-300'>댓글</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className='flex flex-col my-5'>
-      <button onClick={()=>navigate(`/user/mypage/edit?userId=${userDetail.userId}&nickname=${userDetail.nickname}`)} className='mt-5 w-[300px] h-[42px] rounded-xl text-sm font-bold bg-gray-700 border-2 border-yellow-300 text-yellow-400'>회원정보 수정</button>
-      <button onClick={handleLogout} className='mt-5 w-[300px] h-[42px] rounded-xl text-sm bg-yellow-700 font-bold border-2 border-yellow-300 text-yellow-400'>로그아웃</button>
-      <button onClick={handleWithdraw} className='mt-5 w-[300px] h-[42px] rounded-xl text-sm font-bold border-2 border-yellow-300 text-yellow-400'>회원탈퇴</button>
-      </div>
-    </div>
     </div>
   )
 }
