@@ -3,12 +3,16 @@ import { useRecoilValue } from 'recoil';
 import { userNickname } from '../../user/token/TokenAtom';
 import { privateApi } from '../../user/token/PrivateApi';
 import { useNavigate } from 'react-router-dom';
+import TailWriter from '../../../UI/TailWriter';
 
 export default function TailComment({comment}) {
   const nickname = useRecoilValue(userNickname);
   const [isEditing,setIsEditing] = useState(false);
   const commentRef = useRef();
   const navigate = useNavigate();
+  console.log("nick",typeof nickname,`c${nickname}c`)
+  console.log("comment nick",typeof comment.writer,`c${comment.writer}c`)
+  console.log(comment.writer==nickname)
   const handleEdit = (e)=>{
     e.preventDefault();
     if(isEditing===false){
@@ -35,6 +39,7 @@ export default function TailComment({comment}) {
   }
   const handleDelete = (e)=>{
     e.preventDefault();
+    window.confirm('삭제하시겠습니까?');
     privateApi({
       url:`/comment/${comment.commentId}`,
       method:'delete',
@@ -49,20 +54,20 @@ export default function TailComment({comment}) {
   
   // console.log("user",userNick,"commenter",comment.writer)
   // console.log(userNickname===comment.writer)
-  const icons =['🦮','🐕‍🦺','🐕','🐈','🐇','🦔','🐢','🐟','🐓','🦜','🐍','🐩']
-  const randomIconIdx = Math.floor(Math.random()*icons.length);
+  // const randomIconIdx = Math.floor(Math.random()*icons.length);
 
   return (
     <div className='whiteContainer'>
       <div className='flex flex-row justify-between items-center'>
-        <div className='Name font-bold'>{icons[randomIconIdx]} {comment.writer}</div>
+        {/* <div className='Name font-bold'>{icons[comment.commentId%icons.length]} {comment.writer}</div> */}
+        <TailWriter writer={comment.writer}/>
         <div className='Date text-sm text-gray-300'>{comment.registered}</div>
       </div>
       <div className='flex flex-row justify-between items-center'>
         {isEditing?
         <input type='text' ref={commentRef} maxLength={45} defaultValue={comment.content} className='w-3/4 rounded-md border-2 border-dashed border-gray-200'/>
         :
-        <div className='Content'>{comment.content}</div>
+        <div className='Content m-3'>{comment.content}</div>
         }
         {nickname===comment.writer&&
         <div className='Buttons flex flex-col md:flex-row  justify-between items-center'>

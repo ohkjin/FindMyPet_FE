@@ -22,8 +22,8 @@ function App() {
   return (
       <BrowserRouter>
       <RecoilRoot>
-        <div className="">
-        <div className={`w-screen min-h-screen self-stretch bg-welcomeHome bg-contain bg-no-repeat `}>
+        <div className="flex flex-col justify-center items-center">
+        <div className={` w-screen min-h-screen bg-welcomeHome bg-contain bg-no-repeat `}>
         {/* <div className="w-screen h-screen bg-welcomeHome"> */}
         <Navbar/>
         <Routes>
@@ -39,7 +39,7 @@ function App() {
             <Route path="/boards" element={<Boards/>}/>
             <Route path="/board/:boardId" element={<Board/>}/>
             <Route path="/board/write/:write_type" element={<BoardWrite/>}/>
-            <Route path="/reviews" element={<Reviews/>}/>
+            <Route path="/reviews/:shelterPath" element={<Reviews/>}/>
             <Route path="/user/loginalert" element={<LoginAlertPage/>}/>
         </Routes>
         

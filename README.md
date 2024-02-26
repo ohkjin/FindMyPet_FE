@@ -17,6 +17,8 @@
 
 `npm install react-js-pagination`
 
+`npm install react-icons --save`
+
 ├── @headlessui/react@1.7.18
 ├── @heroicons/react@2.1.1
 ├── @testing-library/jest-dom@5.17.0

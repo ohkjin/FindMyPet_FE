@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import FindShelter from '../../Find/FindShelter';
+import FindShelter from '../../Find/api/FindShelter';
 
 export default function TailReviewForm({handleFormSubmit,handleCancel,detail}) {
  

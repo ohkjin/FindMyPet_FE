@@ -6,6 +6,7 @@ import WriteDropDown from './WriteDropDown';
 import { Disclosure } from '@headlessui/react';
 import dogpaw from '../../assets/images/button/dogpaw_boldyellow_button.png'
 import NavDropDown from './NavDropDown';
+import TailWriter from '../../UI/TailWriter';
 // import dogpaw from '../../assets/images/button/dogpaw_button.png'
 
 export default function Navbar() {
@@ -19,7 +20,7 @@ export default function Navbar() {
     const boards_maintxt = '보드'
     const boards_droplist = [
         {name:'커뮤니티/Q&A',to:'/boards'},
-        {name:'보호소 리뷰',to:'/reviews'},
+        {name:'보호소 리뷰',to:'/reviews/0'},
     ];
     const nav_maintxt = <img src={dogpaw} className='w-8 h-8' alt='dogpaw_button'/>
     const nav_droplist = [
@@ -30,7 +31,7 @@ export default function Navbar() {
           list:[{name:'유기동물',icon:'🐇',to:'/find'}],},
         {title:'보드', 
           list:[{name:'게시판',icon:'🙋‍♀️',to:'/boards'},
-                {name:'보호소',icon:'🏦',to:'/reviews'}],},
+                {name:'보호소',icon:'🏦',to:'/reviews/0'}],},
         {title:'글쓰기', 
           list:[{name:'게시글',icon:'✍',to:'/board/write/0'},
                 {name:'리뷰',icon:'⭐',to:'/board/write/1'}],},
@@ -69,9 +70,7 @@ export default function Navbar() {
             </div>
             <div className='inline  fixed top-0 right-0 flex flex-row'>
             {isLogin?
-                <Link to="/user/mypage" className={`${linkShape} ${linkDesign} ${linkHover} ${linkFont}`}>
-                    {nickname} 님
-                </Link>
+                <TailWriter writer={nickname}/>
                 :
                 <Link to="/user/login" className={`${linkShape} ${linkDesign} ${linkHover} ${linkFont}`}>
                     로그인

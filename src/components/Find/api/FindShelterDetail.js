@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { findApi } from "../FindApi";
+import { findApi } from "./FindApi";
 
 
 export default function FindShelterDetail({shelter}) {
@@ -39,51 +39,87 @@ const lastMonth = formatDate(current);
     //async func는 promise를 리턴하기에 async func은 따로 안에서 만들어야한다
     useEffect(()=>{
       // console.log(url)
-      async function getShelterDetail(url){
+      if(shelter==0){
+        return
+      }
+      async function getShelterDetail(){
+        for(let i=0;i<3;i++){
+          let url = `/abandonmentPublic?serviceKey=${apikey}`
+          url =`${url}&bgnde=${lastMonth}&endde=${today}&upkind=${upkindArr[i]}&care_reg_no=${shelter}`
+          url = url + '&pageNo=1&numOfRows=1&_type=json'
         try{
           const item = await findApi(url);
+          // console.log("shelterDetail",i,item)
           if(item){
-            return item[0];
+            setDetail({
+              careNm:item[0].careNm,
+              careAddr:item[0].careAddr,
+              careTel:item[0].careTel,
+              orgNm:item[0].orgNm,
+            });
+            break;
+          }else{
+            setDetail({
+              careNm:'보호중인 동물이 없습니다',
+              careAddr:'',
+              careTel:'',
+              orgNm:'',
+            });
           }
         }catch(err){
-          console.log("공공데이터 api Error:",err)
+          console.log("공공데이터 api Error:",err);
         }
       }
-  
-      for(let i=0;i<3;i++){
-        let url = `/abandonmentPublic?serviceKey=${apikey}`
-        url =`${url}&bgnde=${lastMonth}&endde=${today}&upkind=${upkindArr[i]}&care_reg_no=${shelter}`
-        url = url + '&pageNo=1&numOfRows=1&_type=json'
-        const item0 = getShelterDetail(url)
-        .then((item0)=>{
-          // console.log("shelterDetail",item0)
-          setDetail({
-            careNm:item0.careNm,
-            careAddr:item0.careAddr,
-            careTel:item0.careTel,
-            chargeNm:item0.chargeNm,
-            officetel:item0.officetel,
-            orgNm:item0.orgNm,
-          })
-        })
-        .catch(err=>console.log(err))
-        if(item0){
-          break;
-        }
-      }
-    },[])
+    }
+      getShelterDetail();
+      // for(let i=0;i<3;i++){
+      //   let url = `/abandonmentPublic?serviceKey=${apikey}`
+      //   url =`${url}&bgnde=${lastMonth}&endde=${today}&upkind=${upkindArr[i]}&care_reg_no=${shelter}`
+      //   url = url + '&pageNo=1&numOfRows=1&_type=json'
+      //   const item0 = getShelterDetail(url)
+      //   .then((item0)=>{
+      //     console.log("shelterDetail",i,item0)
+      //     if(item0){
+      //     setDetail({
+      //       careNm:item0.careNm,
+      //       careAddr:item0.careAddr,
+      //       careTel:item0.careTel,
+      //       orgNm:item0.orgNm,
+      //     })
+      //   }
+      //   })
+      //   if(item0){
+      //     break;
+      //   }
+      // }
+    },[shelter])
    
 
 
   return (
-    <div>
-      <div>
-        <div>{detail.careNm}</div>
-        <div>{detail.orgNm}</div>
-        <div>{detail.careAddr}</div>
-        <div>{detail.careTel}</div>
-        <div>{detail.officetel}</div>
-        <div>{detail.chargeNm}</div>
+    <div className="m-5">
+      <div className="space-y-3">
+        <div className='px-5 py-1 text-amber-950 font-bold border-[3px]  bg-yellow-100/50 border-yellow-400/50 rounded-full'>
+          {detail.careNm}
+          </div>
+          <div className="px-5 text-sm text-gray-500">
+          <table>
+            <tbody>
+        <tr>
+          <td>관할기간: </td>
+          <td>{detail.orgNm}</td>
+        </tr>
+        <tr className="">
+          <td>보호 주소: </td>
+          <td>{detail.careAddr}</td>
+        </tr>
+        <tr className="">
+          <td>보호소 전화번호: </td>
+          <td>{detail.careTel}</td>
+        </tr>
+        </tbody>
+        </table>
+        </div>
       </div>
     </div>
   )

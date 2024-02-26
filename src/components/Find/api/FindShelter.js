@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { findApi } from "./FindApi";
-import TailSelectSigungu from "./UI/TailSelectSigungu";
-import TailSelectShelter from "./UI/TailSelectShelter"
-import sidoObjList from '../../data/find/sido.json'
+import TailSelectSigungu from "../UI/TailSelectSigungu";
+import TailSelectShelter from "../UI/TailSelectShelter"
+import sidoObjList from '../../../data/find/sido.json'
 
 export default function FindShelter({handleSelectShelter}) {
     const apikey = process.env.REACT_APP_API_KEY
@@ -48,10 +48,10 @@ export default function FindShelter({handleSelectShelter}) {
     return (
         <div className="Category sm:col-span-4">
             <>
-                <div className="mt-4 block font-tenada text-sm font-medium leading-6 text-gray-900">
+                <div className="mt-4 block font-tenada  md:text-lg font-medium leading-6 text-gray-900">
                     보호소 선택
                 </div>
-                <div className=" mt-2 flex flex-col">
+                <div className="bg-[#fffef5] shadow rounded-md p-2 mt-2 flex flex-col">
                     <TailSelectSigungu handleChange={handleSelectSido} selRef={sidoRef} optionWithValue={sidoObjList} init={`-- 시도 선택 --`} />
                     {sidoRef !== '' && <TailSelectSigungu handleChange={handleSelectSigungu} selRef={gunguRef} optionWithValue={sigunguObjList} init={`-- 시군구 선택 --`} />}
                     {gunguRef !== '' && <TailSelectShelter handleChange={handleSelectShelter} selRef={shelterRef} optionWithValue={shelterObjList} init={`-- 보호소 선택 --`} />}

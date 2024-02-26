@@ -26,24 +26,25 @@ export default function BoardWrite() {
                 setErrMessage('제목과 내용을 전부 입력해주세요')
                 return
             }
-            prefix = '/user/board';
+            prefix = '/board';
         }else if(write_type==='1'){
             if(inputs.shelter===''||inputs.rating===0||inputs.content===''){
                 setErrMessage('보호소를 선택하고 내용을 입력해주세요')
                 return
             }
-            prefix = '/user/review';
+            prefix = '/review';
         }else{
             return
         }
        
         setErrMessage('');
+     
         privateApi({
-            url:'/board',
+            url:prefix,
             method:'post',
             data:inputs})
           .then((res)=>{
-            navigate('/boards');
+            write_type==='0'?navigate('/boards'):navigate(`/reviews/${inputs.shelter}`);
           })
           .catch((err)=>
             console.log(err)

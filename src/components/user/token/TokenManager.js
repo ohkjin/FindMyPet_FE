@@ -24,8 +24,12 @@ export const removeAllToken=()=>{
     cookies.remove("nickname",{path:'/'});
 }
 
+// 타입을 확실시 하기 위해서 String으로
+// number 를 돌려준다
 export const getToken=(tokenName)=>{
-    return cookies.get(tokenName)
+    const tokenValue = cookies.get(tokenName);
+    const stringValue = typeof tokenValue === 'string' ? tokenValue : String(tokenValue);
+    return stringValue
 }
 
 export const getAllToken=()=>{

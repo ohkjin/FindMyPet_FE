@@ -10,7 +10,7 @@ if(userToken){
 
 export const privateApi = axios.create({
     baseURL:API_SERVER+'/user',
-    timeout:3000,
+    timeout:5000,
 }) 
 
 //사용법

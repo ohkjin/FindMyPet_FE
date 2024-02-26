@@ -4,6 +4,7 @@ import { useRecoilValue } from 'recoil';
 import { userAuth, userNickname } from '../../user/token/TokenAtom';
 import { useNavigate } from 'react-router-dom';
 import { privateApi } from '../../user/token/PrivateApi';
+import TailWriter from '../../../UI/TailWriter';
 
 export default function TailBoardDetail({ detail, handleEdit,handleDelete }) {
   const commentRef = useRef();
@@ -18,7 +19,7 @@ export default function TailBoardDetail({ detail, handleEdit,handleDelete }) {
     // const formData = new FormData(form);
     // const formJson = Object.fromEntries(formData.entries())
     // console.log(formJson)
-    console.log(commentRef.current.value)
+    // console.log(commentRef.current.value)
     if(commentRef.current.value===''||commentRef.current.value===null){
       return
     }
@@ -57,10 +58,8 @@ return (
         <div className='Content my-16'>
           {detail.content}
         </div>
-        <div className='flex flex-row justify-between items-center text-gray-500'>
-          <div className='UserInfo m-3 bg-yellow-100 p-2 py-3 rounded-3xl'>
-            🐾 {detail.writer}
-          </div>
+        <div className='flex flex-row justify-between items-center text-gray-700'>
+          <TailWriter writer={detail.writer}/>
           <div className='Buttons flex flex-col md:flex-row  justify-between items-center'>
             {nickname===detail.writer&&<>
             <button onClick={handleEdit} className='w-50 h-50 bg-gray-100 text-gray-400 text-sm rounded-lg m-1 py-1 px-2 '>수정</button>

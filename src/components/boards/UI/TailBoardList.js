@@ -7,8 +7,8 @@ import { Link, useNavigate } from 'react-router-dom'
 export default function TailBoardList({ board }) {
 
   const pics = [dog, tabbyCat, triCat]
-  const randomIdx = Math.floor(Math.random() * pics.length);
-  const icons =['🦮','🐕‍🦺','🐕','🐈','🐇','🦔','🐢','🐟','🐓','🦜','🐍','🐩']
+  // const randomIdx = Math.floor(Math.random() * pics.length);
+  const icons =['🦮','🐈','🐇','🦔','🐢','🐕','🐟','🐓','🐕‍🦺','🦜','🐍','🐩','🐆']
   const randomIconIdx = Math.floor(Math.random()*icons.length);
   const navigate =useNavigate();
 
@@ -19,7 +19,7 @@ export default function TailBoardList({ board }) {
           {board.category}
         </div>
         <img
-          src={pics[randomIdx]}
+          src={pics[board.boardId%pics.length]}
           alt='random images'
           className="h-full w-full object-cover object-center"
         />
