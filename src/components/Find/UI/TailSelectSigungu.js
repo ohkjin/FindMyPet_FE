@@ -8,7 +8,7 @@ export default function TailSelectSigungu({optionWithValue,selRef,handleChange,i
     // options = optionWithValue.map((op,idx)=>(<option key={`op${idx}`} value={op[keys[keys.length-2]]} className='hover:bg-black'>
     //   {op[keys[keys.length-1]]}
     //   </option>));
-    options = optionWithValue.map((op,idx)=>(<option key={`op${idx}`} value={op.orgCd} className='hover:bg-black'>
+    options = optionWithValue.map((op,idx)=>(<option key={`op${idx}`} value={op.orgCd} name={op.orgdownNm} id={op.orgdownNm} className='hover:bg-black'>
       {op.orgdownNm}
     </option>))
   }

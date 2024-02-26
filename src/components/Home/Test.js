@@ -10,7 +10,7 @@ import { getToken } from "../user/token/TokenManager";
 import { useRecoilValue } from "recoil";
 import { userNickname } from "../user/token/TokenAtom";
 import TailReviewForm from "../boards/Reviews/TailReviewForm";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import FindShelterDetail from "../Find/api/FindShelterDetail";
 export default function Test() {
     // const [test,setTest] = useState(<></>)
@@ -51,7 +51,19 @@ export default function Test() {
       return formattedDate;
   }
     console.log(formatDate(originalDate)); // Output: "20240224"
-    
+    const fileRef = useRef();
+    const handleChange = (e)=>{
+      e.preventDefault();
+      console.log(e.target.value)
+      
+    }
+  
+    const uploadFileBt = (e) =>{
+      e.preventDefault();
+      console.log(fileRef)
+      console.log(e.target.value)
+      fileRef.current.click()
+    }
     // console.log(new Date())
     // const handleTestForm = (e, inputs) =>{
     //   e.preventDefault();
@@ -102,8 +114,20 @@ export default function Test() {
           <button onClick={()=>handleNavigate('/board/6')} className="h-20 w-20 bg-blue-800"/>
           </div>
           <div>
-            <FindShelterDetail shelter={344452202300001}/>
+            {/* <FindShelterDetail shelter={344452202300001}/> */}
             {/* <TailReviewForm/> */}
+            <form>
+            <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                    <label
+                      htmlFor="file-upload"
+                      className="relative cursor-pointer rounded-md font-semibold text-indigo-300 focus-within:outline-none focus-within:ring-2 focus-within:ring-yellow-300 focus-within:ring-offset-2 hover:text-indigo-500"
+                    >
+                      <input id="file" name="file" type="file" ref={fileRef} onChange={handleChange} className="w-100 h-100 bg-yellow-400 sr-only"/>
+                      <button onClick={uploadFileBt}>Upload a file</button>
+                    </label>
+                    <p className="pl-1">or drag and drop</p>
+                  </div>
+                  </form>
           </div>
     </div>
   )

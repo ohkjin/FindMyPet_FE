@@ -10,9 +10,9 @@ export default function TailSelect({optItems,selRef,handleChange,init}) {
   return (
     <select ref={selRef}
             onChange={handleChange}
-            className='bg-yellow-200 h-8 w-48 rounded-lg focus:bg-yellow-300 flex justify-center items-center'
+            className='bg-yellow-200 h-8 w-48 rounded-lg focus:bg-yellow-300'
             >
-            <option value='' className='flex justify-center items-center'>{init}</option>
+            <option value='' className=''>{init}</option>
             {options&&options}
     </select>
   )

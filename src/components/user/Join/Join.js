@@ -4,7 +4,6 @@ import kakao from '../../../assets/images/oauth/kakao_join_medium_wide.png'
 // import welsh from '../../../assets/images/welcome/tricatwelcome.jpg'
 import { userJoin } from './JoinApi'
 import { useNavigate } from 'react-router-dom'
-// import axios from 'axios'
 
 function Join() {
   const [email, setEmail] = useState('');

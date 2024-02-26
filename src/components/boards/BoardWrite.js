@@ -6,6 +6,7 @@ import { useState } from 'react';
 import TailReviewForm from './Reviews/TailReviewForm';
 import LoginAlertPage from '../../UI/LoginAlertPage'
 import { privateApi } from '../user/token/PrivateApi';
+import { fileApi } from '../user/token/FileApi';
 
 //-- 글쓰기 --//
 // board/write/write_type 으로 write_type에서 받고 일반글과 후기로 나뉜다
@@ -15,11 +16,13 @@ export default function BoardWrite() {
     const userToken = useRecoilValue(userAuth);
     const navigate = useNavigate();
     const [errMessage,setErrMessage] = useState(<></>);
-    
+    const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
     const handleSubmit = (e,inputs) => {
         console.log(inputs)
-        console.log(userToken)
+        // console.log(userToken)
         e.preventDefault();
+        
+
         let prefix = ''
         if(write_type==='0'){
             if(inputs.title===''||inputs.content===''){
@@ -36,9 +39,6 @@ export default function BoardWrite() {
         }else{
             return
         }
-       
-        setErrMessage('');
-     
         privateApi({
             url:prefix,
             method:'post',
@@ -49,8 +49,27 @@ export default function BoardWrite() {
           .catch((err)=>
             console.log(err)
           )
-
-    }
+        // const formData = new FormData();
+        // // Assuming 'inputs' is your state object
+        // // Object.entries(inputs).forEach(([key, value]) => {
+        // // formData.append(key, value);
+        // // });
+        // formData.append('boardRequest',JSON.stringify(inputs))
+        // formData.append('file',file)
+        // console.log('file',formData.get('file'))
+        // setErrMessage('');
+        // fileApi({
+        //     url:prefix,
+        //     method:'post',
+        //     // automatic when using FormData
+        //     data:formData})
+        //   .then((res)=>{
+        //     write_type==='0'?navigate('/boards'):navigate(`/reviews/${inputs.shelter}`);
+        //   })
+        //   .catch((err)=>
+        //     console.log(err)
+        //   )
+        }
     
     return (
         <div className='totalContainer'>

@@ -8,7 +8,7 @@ if(userToken){
     preventNullToken = userToken;
 }
 
-export const privateApi = axios.create({
+export const fileApi = axios.create({
     baseURL:API_SERVER+'/user',
     timeout:5000,
 }) 
@@ -21,13 +21,13 @@ export const privateApi = axios.create({
 //  data:data
 // })
 
-privateApi.interceptors.request.use(
+fileApi.interceptors.request.use(
     (config) => {
         // Modify the request config if needed
         // if(!config.headers||config.headers.get('Content-Type')){
         //     config.headers.set('Content-Type','application/json');
         // }
-        config.headers["Content-Type"] = 'application/json';
+        config.headers["Content-Type"] = 'multipart/form-data';
         config.headers["Authorization"] =  'Bearer ' + preventNullToken;
         return config;
       },
@@ -37,7 +37,7 @@ privateApi.interceptors.request.use(
         return Promise.reject(err);
    }
 )
-privateApi.interceptors.response.use(
+fileApi.interceptors.response.use(
     (res)=>{
     if(!res.data){
             return res;

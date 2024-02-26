@@ -1,9 +1,9 @@
 import axios from "axios"
 
-
+// https://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic?serviceKey=W4298Kl3xl0gOfyeKSAkiQQObfABjtbHzbcmfAuJAhKztl9AzOAGLFDS2xyrwq4xA%2B53iQM0jx8vzT28xfYdVg%3D%3D&bgnde=20240130&endde=20240226&upkind=417000&upr_cd=6110000&org_cd=3220000&care_reg_no=311322200900001&state=notice&pageNo=1&numOfRows=100&_type=json
 const instance = axios.create({
     baseURL:'https://apis.data.go.kr/1543061/abandonmentPublicSrvc',
-    timeout:3000,
+    timeout:5000,
 }) 
 
 instance.interceptors.request.use(
@@ -32,7 +32,7 @@ export const findApi = async (prefix)=>{
     // if(res.data.response.body.items.item){
     //     item = res.data.response.body.items.item
     // }
-    return res.data.response.body.items.item;
+    return res.data.response.body;
 }
 
 //--//-- findApi 응용 --//--//
@@ -58,7 +58,7 @@ export const findApi = async (prefix)=>{
 
 // //-- 보호소 정보 뽑아내기 --//
 // //얻은 셀터 코드로 api를 호출하여(모든 품종 확인) 보호소 상세 정보 뽑아내기 
-// //abandonmentPublic?serviceKey=&bgnde=20240124&endde=20240124&upkind=417000&care_reg_no=328350202100001&pageNo=1&numOfRows=10&_type=json
+// /https://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic?serviceKey=&bgnde=20240124&endde=20240124&upkind=417000&care_reg_no=328350202100001&pageNo=1&numOfRows=10&_type=json
 //  const findShelterDetailApi = (shelter) => {
 //     const upkindArr = [417000,422400,429900];
 //     let url = `/abandonmentPublic?serviceKey=${apikey}`

@@ -4,7 +4,7 @@ export default function TailSelectSigungu({optionWithValue,selRef,handleChange,i
   
   let options = '';
   if(optionWithValue){
-    options = optionWithValue.map((op,idx)=>(<option key={`op${idx}`} value={op.careRegNo} className='hover:bg-black'>
+    options = optionWithValue.map((op,idx)=>(<option key={`op${idx}`} value={op.careRegNo} name={op.careNm} id={op.careNm} className='hover:bg-black'>
       {op.careNm}
     </option>))
   }

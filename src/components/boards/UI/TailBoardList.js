@@ -3,13 +3,14 @@ import triCat from '../../../assets/images/welcome/tricatwelcome.jpg'
 import tabbyCat from '../../../assets/images/welcome/tabbywelcome.jpg'
 import dog from '../../../assets/images/welcome/welshcorgiwavingpaw.jpg'
 import { Link, useNavigate } from 'react-router-dom'
+import TailWriter from '../../../UI/TailWriter'
 
 export default function TailBoardList({ board }) {
 
   const pics = [dog, tabbyCat, triCat]
   // const randomIdx = Math.floor(Math.random() * pics.length);
-  const icons =['🦮','🐈','🐇','🦔','🐢','🐕','🐟','🐓','🐕‍🦺','🦜','🐍','🐩','🐆']
-  const randomIconIdx = Math.floor(Math.random()*icons.length);
+  // const icons =['🦮','🐈','🐇','🦔','🐢','🐕','🐟','🐓','🐕‍🦺','🦜','🐍','🐩','🐆']
+  // const randomIconIdx = Math.floor(Math.random()*icons.length);
   const navigate =useNavigate();
 
   return (
@@ -36,7 +37,7 @@ export default function TailBoardList({ board }) {
           <p className="mt-1 text-sm text-gray-500">{board.content}</p>
         </div>
         <div className="flex flex-1 items-end justify-between text-xs md:text-sm text-gray-500">
-          <p className='px-1 border-[3px] hover:bg-orange-400 bg-yellow-100/50 border-yellow-400/50 rounded-full'>
+          {/* <p className='px-1 border-[3px] hover:bg-orange-400 bg-yellow-100/50 border-yellow-400/50 rounded-full'>
              <button
               type="button"
               className="font-bold hover:text-indigo-500"
@@ -44,7 +45,8 @@ export default function TailBoardList({ board }) {
             >
               {icons[randomIconIdx]} {board.writer}
             </button>
-          </p>
+          </p> */}
+          <TailWriter writer={board.writer}/>
           <p>조회수: {board.view} </p>
           <p>댓글수: {board.commentCount} </p>
         </div>

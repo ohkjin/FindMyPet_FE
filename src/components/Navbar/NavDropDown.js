@@ -18,7 +18,7 @@ export default function NavDropDown({ maintxt, droplist }) {
     let menulist = <></>;
     if (droplist) {
         menulist = droplist.map((eachCate, idx) =>
-            <div key={eachCate.title}  className='p-1 my-1  rounded-md bg-white/[0.95] shadow-lg ring-1 ring-black ring-opacity-5'>
+            <div key={eachCate.title}  className='p-1 my-1 rounded-md bg-white/[0.95] shadow-lg ring-1 ring-black ring-opacity-5'>
                 <div className='text-sm  font-tenada text-amber-950/70 flex justify-center'>{eachCate.title}</div>
                 <div className='my-0 border border-dashed border-yellow-800/10 ' />
                 <div className='flex flex-row justify-center space-x-2'>
@@ -57,8 +57,8 @@ export default function NavDropDown({ maintxt, droplist }) {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
             >
-                <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right focus:outline-none">
-                    <div className='p-2  flex flex-col'>
+                <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right focus:outline-none">
+                    <div className='p-2 z-50 flex flex-col'>
                         {menulist}
                     </div>
                 </Menu.Items>

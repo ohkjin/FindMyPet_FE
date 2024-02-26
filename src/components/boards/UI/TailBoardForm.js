@@ -1,7 +1,8 @@
 
 import { PhotoIcon } from '@heroicons/react/24/solid'
 import TailAnimalButton from '../../Find/UI/TailAnimalButton'
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+
 
 export default function TailBoardForm({handleFormSubmit,handleCancel,detail}) {
   const handleSelCate = (e,seletedCate) =>{
@@ -15,17 +16,50 @@ export default function TailBoardForm({handleFormSubmit,handleCancel,detail}) {
     'COMMUNITY':0,
     'QA':1,
   }
+  
   const [inputs, setInputs] = useState({
     category: detail?cate[detail.category]:0,
     title: detail?detail.title:'',
     content: detail?detail.content:'',
+    // file:detail?detail.file:'',
 })
+const [file,setFile] = useState('');
+const [preview,setPreview] = useState('');
 const handleChange = (e) => {
   e.preventDefault();
+  // console.log("input",fileRef.current.value)
+  // const formData = new FormData();
+  // formData.append('file',e.target.files[0])
+  // console.log("formData",formData.get('file'))
+  if(e.target.name==='file'){
+    // 파일 프리뷰
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onloadend = () =>{
+      // console.log('reader',reader.result)
+      setPreview(reader.result)
+    }
+    // setFile(fileRef.current.value)
+    
+    setFile(e.target.files[0]);
+  //   setInputs({
+  //     ...inputs,
+  //     [e.target.name]:e.target.files[0],
+  // })
+  // 사진도 경로로
+  }
+  else{
+  console.log("value",e.target.value)
   setInputs({
       ...inputs,
       [e.target.name]:e.target.value,
   })
+}
+}
+const fileRef = useRef();
+const uploadFileBt = (e) =>{
+  e.preventDefault();
+  fileRef.current.click();
 }
 
   return (
@@ -86,14 +120,18 @@ const handleChange = (e) => {
               </label>
               <div className="mt-2 flex justify-center rounded-lg border border-dashed border-yellow-900/25 bg-yellow-100 px-6 py-10">
                 <div className="text-center">
+                  {preview!==''?
+                  <img src={preview} alt='Image preview' className='mt-2 max-w-full max-h-64 rounded-lg'/>
+                  :
                   <PhotoIcon className="mx-auto h-12 w-12 text-gray-400" aria-hidden="true" />
+                  }
                   <div className="mt-4 flex text-sm leading-6 text-gray-600">
                     <label
                       htmlFor="file-upload"
                       className="relative cursor-pointer rounded-md font-semibold text-indigo-300 focus-within:outline-none focus-within:ring-2 focus-within:ring-yellow-300 focus-within:ring-offset-2 hover:text-indigo-500"
                     >
-                      <span>Upload a file</span>
-                      <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+                      <input id="file" name="file" type="file" ref={fileRef} onChange={handleChange} defaultValue={inputs.file} className="w-full h-full sr-only" />
+                      <button onClick={uploadFileBt}>Upload a file</button>
                     </label>
                     <p className="pl-1">or drag and drop</p>
                   </div>
@@ -107,7 +145,7 @@ const handleChange = (e) => {
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-tenada leading-7 text-gray-900">체크 사항</h2>
 
-          <div className="mt-2 space-y-10">
+          {/* <div className="mt-2 space-y-10">
             <fieldset>
               <div className="mt-6 space-y-6">
                 <div className="relative flex gap-x-3">
@@ -144,7 +182,7 @@ const handleChange = (e) => {
                 </div>
               </div>
             </fieldset>
-          </div>
+          </div> */}
         </div>
       </div>
 

@@ -48,9 +48,10 @@ const lastMonth = formatDate(current);
           url =`${url}&bgnde=${lastMonth}&endde=${today}&upkind=${upkindArr[i]}&care_reg_no=${shelter}`
           url = url + '&pageNo=1&numOfRows=1&_type=json'
         try{
-          const item = await findApi(url);
+          const body = await findApi(url);
           // console.log("shelterDetail",i,item)
-          if(item){
+          if(body.items.item){
+            const item = body.items.item
             setDetail({
               careNm:item[0].careNm,
               careAddr:item[0].careAddr,
@@ -97,6 +98,7 @@ const lastMonth = formatDate(current);
 
 
   return (
+
     <div className="m-5">
       <div className="space-y-3">
         <div className='px-5 py-1 text-amber-950 font-bold border-[3px]  bg-yellow-100/50 border-yellow-400/50 rounded-full'>

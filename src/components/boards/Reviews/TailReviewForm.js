@@ -83,7 +83,7 @@ const handleSelectShelter = (e) =>{
         </div>
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-tenada leading-7 text-gray-900">체크 사항</h2>
-          <div className="mt-2 space-y-10">
+          {/* <div className="mt-2 space-y-10">
             <fieldset>
               <div className="mt-6 space-y-6">
                 <div className="relative flex gap-x-3">
@@ -120,7 +120,7 @@ const handleSelectShelter = (e) =>{
                 </div>
               </div>
             </fieldset>
-          </div>
+          </div> */}
         </div>
       </div>
 
