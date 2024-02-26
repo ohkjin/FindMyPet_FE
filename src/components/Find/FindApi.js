@@ -3,7 +3,7 @@ import axios from "axios"
 
 const instance = axios.create({
     baseURL:'https://apis.data.go.kr/1543061/abandonmentPublicSrvc',
-    timeout:2000,
+    timeout:3000,
 }) 
 
 instance.interceptors.request.use(
@@ -28,10 +28,11 @@ instance.interceptors.response.use(
 
 export const findApi = async (prefix)=>{
     const res = await instance.get(prefix)
-    if(res.data){
-        return res.data.response.body.items.item
-    }
-    return [];
+    // let item =[];
+    // if(res.data.response.body.items.item){
+    //     item = res.data.response.body.items.item
+    // }
+    return res.data.response.body.items.item;
 }
 
 //--//-- findApi 응용 --//--//

@@ -9,11 +9,8 @@ import { privateApi } from '../user/token/PrivateApi';
 export default function Board() {
   const { boardId } = useParams();
   const userToken = useRecoilValue(userAuth);
-  const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
   const [edit,setEdit] = useState(false);
-  const apiLink = `${API_SERVER}/user/board/${boardId}`
   const navigate = useNavigate();
-  // const apiLink = `${API_SERVER}/user/board/6`
   const [errMessage,setErrMessage] = useState(<></>);
   const [boardDetail, setBoardDetail] = useState({
     boardId:1,
