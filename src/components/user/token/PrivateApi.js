@@ -10,7 +10,7 @@ if(userToken){
 
 export const privateApi = axios.create({
     baseURL:API_SERVER+'/user',
-    timeout:5000,
+    timeout:20000,
 }) 
 
 //사용법
@@ -27,7 +27,7 @@ privateApi.interceptors.request.use(
         // if(!config.headers||config.headers.get('Content-Type')){
         //     config.headers.set('Content-Type','application/json');
         // }
-        config.headers["Content-Type"] = 'application/json';
+        config.headers["Content-Type"] = 'application/json; charset=utf-8';
         config.headers["Authorization"] =  'Bearer ' + preventNullToken;
         return config;
       },
@@ -42,11 +42,12 @@ privateApi.interceptors.response.use(
     if(!res.data){
             return res;
             }
+    console.log(preventNullToken)
      return res.data.content;
     },
     (err)=>{
         // console.log(err);
-        alert(err.response.data.status.message)
+        err.response.data.status.message?alert(err.response.data.status.message):alert(err.message)
         return Promise.reject(err);
     }
 )

@@ -34,7 +34,7 @@ export default function TailBoardList({ board }) {
             </h3>
             <p className="ml-4 text-xs md:text-sm text-gray-300">{board.registered}</p>
           </div>
-          <p className="mt-1 text-sm text-gray-500">{board.content}</p>
+          <p className="mt-1 text-sm text-gray-500 overflow-ellipsis overflow-hidden h-10">{board.content}</p>
         </div>
         <div className="flex flex-1 items-end justify-between text-xs md:text-sm text-gray-500">
           {/* <p className='px-1 border-[3px] hover:bg-orange-400 bg-yellow-100/50 border-yellow-400/50 rounded-full'>

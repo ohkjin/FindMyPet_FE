@@ -15,7 +15,7 @@ export default function WriteDropDown({maintxt,droplist}) {
   return (
     <Menu as='div' className="relative inline-block text-left">
         <div>
-            <Menu.Button className='flex flex-row font-tenada px-3 pt-3 pb-2 mx-5 my-2 text-sm font-bold bg-yellow-300 border-2 border-yellow-300 rounded-xl hover:bg-slate-800 hover:text-yellow-300'>
+            <Menu.Button className='flex flex-row justify-around items-center font-tenada w-24 px-3 pt-3 pb-2 mx-5 my-2 text-sm font-bold bg-white/[0.7] border-2 border-yellow-300 rounded-xl hover:bg-slate-800 hover:text-yellow-300'>
             {maintxt}
                 <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
             </Menu.Button>

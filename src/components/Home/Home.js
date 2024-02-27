@@ -1,6 +1,7 @@
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { useEffect, useState } from "react"
 import TailOnScroll from "./TailOnScroll";
+import Main from "../Main/Main";
 
 // import welcomeHome from '../../assets/images/welcome/welcomeHome.jpg'
 export default function Home() {
@@ -28,7 +29,7 @@ export default function Home() {
   return (
     // <div className='totalContainer w-full flex flex-col justify-center items-center'>
       <div>
-        
+        <Main/>
       </div>
       
     // </div>

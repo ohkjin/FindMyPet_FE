@@ -16,14 +16,15 @@ import BoardWrite from "./components/boards/BoardWrite";
 import Board from "./components/boards/Board";
 import Footer from "./components/Footer/Footer";
 import LoginAlertPage from "./UI/LoginAlertPage";
+import UserPage from "./components/user/MyPage/UserPage";
 
 function App() {
 
   return (
       <BrowserRouter>
       <RecoilRoot>
-        <div className="flex flex-col justify-center items-center overflow-y-hidden overflow-hidden">
-        <div className={` w-screen min-h-screen bg-welcomeHome bg-contain bg-no-repeat`}>
+        <div className="flex flex-col justify-center items-center overflow-hidden">
+        <div className={` w-screen min-h-[100vh] bg-welcomeHome lg:bg-cover bg-contain bg-no-repeat`}>
         {/* <div className="w-screen h-screen bg-welcomeHome"> */}
         <Navbar/>
         <Routes>
@@ -35,6 +36,7 @@ function App() {
             <Route path="/user/findpwd" element={<FindPwd/>}/>
             <Route path="/user/join" element={<Join/>}/>
             <Route path="/user/mypage" element={<MyPage/>}/>
+            <Route path="/userpage/:user_name" element={<UserPage/>}/>
             <Route path="/user/mypage/edit" element={<MyPageEdit/>}/>
             <Route path="/boards" element={<Boards/>}/>
             <Route path="/board/:boardId" element={<Board/>}/>
@@ -42,10 +44,10 @@ function App() {
             <Route path="/reviews/:shelterPath" element={<Reviews/>}/>
             <Route path="/user/loginalert" element={<LoginAlertPage/>}/>
         </Routes>
+        {/* <Footer/> */}
+        </div>
+        </div>
         
-        </div>
-        </div>
-        <Footer/>
       </RecoilRoot>
       </BrowserRouter>
   );

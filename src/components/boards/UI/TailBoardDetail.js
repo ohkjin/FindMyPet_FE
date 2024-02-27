@@ -1,10 +1,12 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import TailComment from './TailComment'
 import { useRecoilValue } from 'recoil';
 import { userAuth, userNickname } from '../../user/token/TokenAtom';
 import { useNavigate } from 'react-router-dom';
 import { privateApi } from '../../user/token/PrivateApi';
 import TailWriter from '../../../UI/TailWriter';
+import TailBoardList from './TailBoardList';
+import { publicApi } from '../../user/token/PublicApi';
 
 export default function TailBoardDetail({ detail, handleEdit,handleDelete }) {
   const commentRef = useRef();
@@ -38,6 +40,30 @@ export default function TailBoardDetail({ detail, handleEdit,handleDelete }) {
     )
   }
 
+  // 밑에 글 나열
+  // const params= {
+  //   page: 1,
+  //   category:detail.category==='COMMUNITY'?0:1,
+  //   order:'view',
+  //   keyword:'',
+  // }
+  // const [boardDetails, setBoardDetails] = useState([])
+  //  //-- 인기많은 글 로딩 --//
+  // useEffect(() => {
+  //   publicApi({
+  //     url:'/boards',
+  //     method:'get',
+  //     params:params,
+  //   })
+  //   .then((content)=>{
+  //     console.log(content)
+  //     setBoardDetails(content.content);
+  //   })
+  //   .catch((err)=>
+  //     console.log(err)
+  //   )
+  // }, [])
+
 return (
   <div className='w-full'>
     <div className='whiteContainer'>
@@ -53,7 +79,7 @@ return (
           <div className='ml-2'>view: {detail.view}</div>
         </div>
       </div>
-      <div className='border border-gray-200' />
+      <div className='border border-gray-200  rounded-lg' />
       <div className='my-5'>
         <div className='Content my-16'>
           {detail.content}
@@ -69,7 +95,7 @@ return (
         </div>
       </div>
       </div>
-      <div className='border-2 border-gray-100' />
+      <div className='border-2 border-gray-100  rounded-lg' />
       <div className='Comments'>
         <div className='Comment_Label my-3 text-lg font-bold '>
           댓글
@@ -81,6 +107,10 @@ return (
         <div className='Comment_List'>
           {detail.commentList && detail.commentList.map((c, idx) => <div key={`comment${idx}`}><TailComment comment={c} /></div>)}
         </div>
+      </div>
+      <div className='mt-10 border-4 border-yellow-100/70 rounded-lg' />
+      <div className='Board_contents w-full my-5'>
+      {/* {boardDetails.map((b, idx) => <div key={`boardList${idx}`}><TailBoardList board={b} /><div className='border-2 border-yellow-200/20'/><div className='border-2 border-gray-200/20'/></div>)} */}
       </div>
     </div>
 )

@@ -66,7 +66,7 @@ export default function Login() {
           }
           //토큰 저장
           const accessToken = res.headers.authorization.slice(7);
-          // console.log(accessToken);
+          console.log(accessToken);
           setAccessToken(accessToken);
           setIsLogin(accessToken);
           //닉네임 저장
@@ -74,14 +74,12 @@ export default function Login() {
           setUserCookie(res.data.nickname);
           setUserNick(res.data.nickname);
           navigate('/');
+          // Cookie가 제대로 들어가게 새로고침
+          navigate(0);
         }).catch(err => {
           console.log(err)
-          setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.data.status.code}) ${err.response.data.status.message}`:err.message}</div>)
-          setPopup({
-            open: true,
-            title: 'Error',
-            message: err.message,
-          })
+          // setErrMessage(<div className='text-red-400'>{err.response?`(${err.response.data.status.code}) ${err.response.data.status.message}`:err.message}</div>)
+          err.response?alert(err.response.data.status.message):alert(err.message)
         })
     } catch (e) {
       console.log(e)

@@ -4,7 +4,7 @@ const API_SERVER = process.env.REACT_APP_API_SERVER_HOST;
 
 export const publicApi = axios.create({
     baseURL:API_SERVER,
-    timeout:3000,
+    timeout:20000,
 }) 
 
 //사용법

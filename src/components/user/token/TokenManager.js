@@ -26,10 +26,12 @@ export const removeAllToken=()=>{
 
 // 타입을 확실시 하기 위해서 String으로
 // number 를 돌려준다 => null이 아닌 ''값이 됨
+// 이걸 다른곳에서 해주자
 export const getToken=(tokenName)=>{
     const tokenValue = cookies.get(tokenName);
-    const stringValue = typeof tokenValue === 'string' ? tokenValue : String(tokenValue);
-    return tokenValue?stringValue:null;
+    if(tokenName==='nickname'){return typeof tokenValue === 'string' ? tokenValue : String(tokenValue);}
+    // const stringValue = typeof tokenValue === 'string' ? tokenValue : String(tokenValue);
+    return tokenValue;
 }
 
 export const getAllToken=()=>{

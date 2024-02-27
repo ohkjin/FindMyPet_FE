@@ -108,7 +108,7 @@ const handleSelectShelter = (e) =>{
 }
   return (
     <div className='totalContainer'>
-      <div className='innerContainer mt-10 min-w-96 p-5 md:p-24 lg:p-32 flex flex-col items-center'>
+      <div className='innerContainer min-w-96 p-5 md:p-24 lg:p-32 flex flex-col items-center'>
         <div className="w-full flex flex-col md:flex-row justify-between items-start md:space-x-8">
         <div><FindShelter handleSelectShelter={handleSelectShelter} className='whiteContainer'/></div>
         <div className='whiteContainer'>{shelterPathLong!=0&&<FindShelterDetail shelter={shelterPathLong}/>}</div>

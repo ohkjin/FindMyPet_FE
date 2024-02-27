@@ -73,8 +73,7 @@ export default function FindShelter({handleSelectShelter,codes,setCodes}) {
  
 
     return (
-        <div className="Category sm:col-span-4">
-            <>
+        <div className="Category">
                 <div className="mt-4 block font-tenada  md:text-lg font-medium leading-6 text-gray-900">
                     보호소 선택
                 </div>
@@ -83,7 +82,6 @@ export default function FindShelter({handleSelectShelter,codes,setCodes}) {
                     <TailSelectSigungu handleChange={handleSelectSigungu} selRef={gunguRef} optionWithValue={sigunguObjList} init={`-- 시군구 선택 --`} />
                     <TailSelectShelter handleChange={handleSelectShelter} selRef={shelterRef} optionWithValue={shelterObjList} init={`-- 보호소 선택 --`} />
                 </div>
-            </>
         </div>
     )
 }

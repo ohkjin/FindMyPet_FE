@@ -16,7 +16,6 @@ export default function BoardWrite() {
     const userToken = useRecoilValue(userAuth);
     const navigate = useNavigate();
     const [errMessage,setErrMessage] = useState(<></>);
-    const API_SERVER = process.env.REACT_APP_API_SERVER_HOST
     const handleSubmit = (e,inputs) => {
         console.log(inputs)
         // console.log(userToken)
@@ -55,6 +54,10 @@ export default function BoardWrite() {
         // // formData.append(key, value);
         // // });
         // formData.append('boardRequest',JSON.stringify(inputs))
+        formData.append(
+            "boardRequest",
+            new Blob([JSON.stringify(inputs)], { type: "application/json" })
+          );
         // formData.append('file',file)
         // console.log('file',formData.get('file'))
         // setErrMessage('');

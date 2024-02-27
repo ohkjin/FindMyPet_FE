@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import FindShelter from '../../Find/api/FindShelter';
+import FindShelterDetail from '../../Find/api/FindShelterDetail';
 
 export default function TailReviewForm({handleFormSubmit,handleCancel,detail}) {
  
@@ -45,25 +46,32 @@ const handleSelectShelter = (e) =>{
       <div className="whiteContainer space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
    
-          <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div className='md:p-20 space-y-10'>
+            <div className="mt-5 grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-8 ">
+            <div>
             <FindShelter handleSelectShelter={handleSelectShelter}/>
+            </div>
+            <div className='col-span-2'>
+            {inputs.shelter!==''&&<FindShelterDetail shelter={inputs.shelter}/>}
+            </div>
+            </div>
             <div className="Title sm:col-span-4">
-              <label htmlFor="username" className="block font-tenada text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="username" className="block font-tenada text-base md:text-lg font-medium leading-6 text-gray-900">
                 평점
               </label>
               <div className="mt-2">
               <div className="flex flex-row">
-                <button onClick={(e)=>handleRating(e,1)}>{inputs.rating>=1?'😺':'⚪'}</button>
-                <button onClick={(e)=>handleRating(e,2)}>{inputs.rating>=2?'😺':'⚪'}</button>
-                <button onClick={(e)=>handleRating(e,3)}>{inputs.rating>=3?'😺':'⚪'}</button>
-                <button onClick={(e)=>handleRating(e,4)}>{inputs.rating>=4?'😺':'⚪'}</button>
-                <button onClick={(e)=>handleRating(e,5)}>{inputs.rating>=5?'😺':'⚪'}</button>
+                <button onClick={(e)=>handleRating(e,1)} className='text-xl'>{inputs.rating>=1?'😺':'🔘'}</button>
+                <button onClick={(e)=>handleRating(e,2)} className='text-xl'>{inputs.rating>=2?'😺':'🔘'}</button>
+                <button onClick={(e)=>handleRating(e,3)} className='text-xl'>{inputs.rating>=3?'😺':'🔘'}</button>
+                <button onClick={(e)=>handleRating(e,4)} className='text-xl'>{inputs.rating>=4?'😺':'🔘'}</button>
+                <button onClick={(e)=>handleRating(e,5)} className='text-xl'>{inputs.rating>=5?'😺':'🔘'}</button>
               </div>
               </div>
             </div>
 
             <div className="col-span-full">
-              <label htmlFor="about" className="block font-tenada text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="about" className="block font-tenada text-base md:text-lg font-medium leading-6 text-gray-900">
                 내용
               </label>
               <div className="mt-2">
@@ -81,9 +89,9 @@ const handleSelectShelter = (e) =>{
             </div>
           </div>
         </div>
-        <div className="border-b border-gray-900/10 pb-12">
+        {/* <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-tenada leading-7 text-gray-900">체크 사항</h2>
-          {/* <div className="mt-2 space-y-10">
+          <div className="mt-2 space-y-10">
             <fieldset>
               <div className="mt-6 space-y-6">
                 <div className="relative flex gap-x-3">
@@ -120,8 +128,8 @@ const handleSelectShelter = (e) =>{
                 </div>
               </div>
             </fieldset>
-          </div> */}
-        </div>
+          </div>
+        </div> */}
       </div>
 
       <div className="mt-6 flex items-center justify-end gap-x-6">

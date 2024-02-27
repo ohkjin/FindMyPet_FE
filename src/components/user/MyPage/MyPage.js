@@ -18,7 +18,7 @@ export default function MyPage() {
       method: 'get',
     })
       .then((content) => {
-        console.log(content)
+        // console.log(content)
         setUserDetail(content);
       })
       .catch((err) =>
@@ -26,6 +26,9 @@ export default function MyPage() {
       )
   }, [])
 
+  useEffect(()=>{
+    console.log(userDetail)
+  },[userDetail])
   //-- 로그아웃 --//
   const handleLogout = () => {
     removeAllToken();
@@ -57,8 +60,8 @@ export default function MyPage() {
           <div className='whiteContainer max-w-72'>
             <img src={welcome} alt='welcome cat' className='w-full rounded-full border-4 border-yellow-300' />
             <div className='w-full my-4'>
-              {userDetail.nickname && <div className='border-2 border-yellow-300 rounded-lg'>{userDetail.nickname}님의 개인페이지입니다</div>}
-              {userDetail.userId && <div className='border-2 border-yellow-300 rounded-lg'>{userDetail.userId}</div>}
+              {userDetail.nickname && <div className='p-1 border-b-2 border-dashed border-yellow-300 rounded-lg font-bold flex justify-center'>{userDetail.nickname}님의 개인페이지</div>}
+              {userDetail.userId && <div className='p-1 border-b-2 border-dashed border-yellow-300 rounded-lg font-bold flex justify-center'>{userDetail.userId}</div>}
             </div>
             <div className='w-full flex flex-col my-4 space-y-3'>
               <button onClick={() => navigate(`/user/mypage/edit?userId=${userDetail.userId}&nickname=${userDetail.nickname}`)} className=' h-[42px] rounded-xl text-sm font-bold bg-gray-700 border-2 border-yellow-300 text-yellow-400'>회원정보 수정</button>

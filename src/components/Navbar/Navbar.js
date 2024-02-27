@@ -22,12 +22,13 @@ export default function Navbar() {
         { name: '커뮤니티/Q&A', to: '/boards' },
         { name: '보호소 리뷰', to: '/reviews/0' },
     ];
-    const nav_maintxt = <img src={dogpaw} className='w-8 h-8' alt='dogpaw_button' />
+    const nav_maintxt = <img src={dogpaw} className='w-8 h-8 md:w-10 md:h-10' alt='dogpaw_button' />
     const nav_droplist = [
         {
             title: 'Main',
             list: [{ name: '홈', icon: '🏡', to: '/home' },
-            { name: '테스트', icon: '🧺', to: '/test' }],
+            // { name: '테스트', icon: '🧺', to: '/test' }
+        ],
         },
         {
             title: '유기동물',
@@ -50,7 +51,7 @@ export default function Navbar() {
     //     {name:'테스트',to:'/test',current:false},
 
     // ];
-    const linkShape = ' block pt-3 pb-2 px-3 rounded-md lg:inline-block lg:mt-0 mr-4 flex flex-row justify-center items-center'
+    const linkShape = 'w-24 block pt-3 pb-2 px-3 rounded-md lg:mt-0 mr-4 flex flex-row justify-center items-center'
     const linkFont = ' text-slate-800 font-tenada '
     const linkDesign = ' text-sm border border-yellow-300 border-2 bg-white/[0.7] '
     const linkHover = ' hover:bg-orange-400 hover:text-white '
@@ -59,17 +60,17 @@ export default function Navbar() {
             <div className=" w-full min-w-96 p-4 flex justify-center items-center">
                 {/* inline: 한줄 처리, flex 랑 충돌 (display-flex,display-inline,display-block) */}
                 <div className='hidden lg:flex basis-5/12 justify-evenly'>
-                    <Link to="/home" className={`${linkShape} ${linkDesign} ${linkHover} ${linkFont}`}>
+                    <Link to="/" className={` ${linkShape} ${linkDesign} ${linkHover} ${linkFont}`}>
                         홈
                     </Link>
-                    <Link to="/test" className={`${linkShape} ${linkDesign} ${linkHover} ${linkFont}`}>
+                    {/* <Link to="/test" className={`${linkShape} ${linkDesign} ${linkHover} ${linkFont}`}>
                         테스트
-                    </Link>
+                    </Link> */}
                     <Link to="/find" className={`${linkShape} ${linkDesign} ${linkHover} ${linkFont}`}>
                         유기동물
                     </Link>
                 </div>
-                <Link to="/home" className={`basis-2/12 flex justify-center items-center text-2xl ${linkFont} `}>
+                <Link to="/" className={`basis-2/12 flex justify-center items-center text-2xl ${linkFont} `}>
                     MyPetFinder
                 </Link>
                 <div className='hidden lg:flex basis-4/12 justify-evenly items-center'>
@@ -79,13 +80,13 @@ export default function Navbar() {
                 </div>
                 <div className='basis-1/12'/>
             </div>
-            <div className='fixed top-2 right-2 z-40 flex flex-row justify-center items-center'>
+            <div className='fixed top-1 right-1 z-40 flex flex-row justify-center items-center'>
                 {isLogin?
-                    <div className='inline-block'>
+                    <div className='inline-block text-sm md:text-base'>
                         <TailWriter writer={nickname} />
                     </div>
                     :
-                    <Link to="/user/login" className={`pt-1 px-1 rounded-lg flex justify-center items-center border-[3px] border-dotted border-yellow-400 ${linkHover} ${linkFont}`}>
+                    <Link to="/user/login" className={` pt-1 px-1 rounded-lg flex justify-center items-center border-[3px] border-dotted border-yellow-400 ${linkHover} ${linkFont}`}>
                         Login
                     </Link>
                 }

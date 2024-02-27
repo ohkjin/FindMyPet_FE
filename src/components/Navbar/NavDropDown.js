@@ -13,7 +13,7 @@ export default function NavDropDown({ maintxt, droplist }) {
     //TailMenuButton Component 를 들고 오면 
     // react-dom.development.js:86 Warning: Function components cannot be given refs. Attempts to access this ref will fail.
     // 오류가 뜨므로 내부로 저장
-    const btDesign = 'text-amber-950  shadow bg-yellow-50/80 border-dashed border-yellow-300/80 border-[3px] w-14 h-14   rounded-xl p32 m-1 flex flex-col justify-center items-center';
+    const btDesign = 'text-amber-950  shadow bg-yellow-50/80 border-dashed border-yellow-300/80 border-[3px] w-16 h-16   rounded-xl p32 m-1 flex flex-col justify-center items-center';
     const btHover = 'hover:text-white hover:bg-orange-400 hover:border-solid'
     let menulist = <></>;
     if (droplist) {
@@ -44,7 +44,7 @@ export default function NavDropDown({ maintxt, droplist }) {
     return (
         <Menu as='div' className="relative inline-block text-left">
             <div>
-                <Menu.Button className='p-1 m-3 border-4 transition duration-100 ease-in-out hover:bg-orange-500 border-yellow-400 rounded-full bg-yellow-50'>
+                <Menu.Button className='p-1 m-3 shadow-md border-4 transition duration-100 ease-in-out hover:bg-orange-500 border-yellow-400 rounded-full bg-yellow-50'>
                     {maintxt}
                 </Menu.Button>
             </div>

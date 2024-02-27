@@ -16,7 +16,7 @@
          /* max-w-[61rem] */
     }
     .whiteContainer{
-        @apply bg-white/[0.95] rounded-3xl shadow p-5 m-5; 
+        @apply bg-white/[0.95] rounded-3xl shadow p-5 m-2; 
     }
     /* .pagination {
         @apply  flex justify-center mt-4;

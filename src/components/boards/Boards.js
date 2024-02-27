@@ -25,7 +25,7 @@ export default function Boards() {
   //제일 처음에,그후 param이 변할떄 페이지 가져오기
   useEffect(() => {
     // console.log("params",params);
-    console.log("tp",totalPages)
+    // console.log("tp",totalPages)
     publicApi({
       url:'/boards',
       method:'get',
@@ -94,36 +94,41 @@ export default function Boards() {
   //   setPageArray(tmp);
   // }
 
-  // 항목 선택시 검색 초기화
+  // 항목 선택시 검색 초기화, 페이지 초기화
   const handleSelCate = (e,cate) => {
     e.preventDefault();
     //카테고리 변경일떄만 전체 페이지 초기화
     setTotalPages(0);
+    
     searchRef.current.value = '';
     setParams({
       ...params,
+      page:1,
       category:cate,
       keyword:'',
     })
   }
-  //default가 최신순
+  // Order 방법, 페이지 초기화, 검색 초기화
   const handleSelOrder = (e,order) => {
     e.preventDefault();
     searchRef.current.value = '';
     setParams({
       ...params,
+      page:1,
       order:order,
       keyword:'',
     })
   }
 
   //검색 마다 조회 => 서버부하 가능성 => (onChange -> onSubmit)
+  // 페이지 초기화
   const searchRef = useRef();
   const handleSearch = (e) => {
     e.preventDefault();
     // console.log("searchRef",searchRef);
     setParams({
       ...params,
+      page:1,
       keyword:searchRef.current.value,
     })
   }

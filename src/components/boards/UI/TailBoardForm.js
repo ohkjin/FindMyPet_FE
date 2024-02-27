@@ -31,36 +31,37 @@ const handleChange = (e) => {
   // const formData = new FormData();
   // formData.append('file',e.target.files[0])
   // console.log("formData",formData.get('file'))
-  if(e.target.name==='file'){
-    // 파일 프리뷰
-    const reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onloadend = () =>{
-      // console.log('reader',reader.result)
-      setPreview(reader.result)
-    }
-    // setFile(fileRef.current.value)
+  // if(e.target.name==='file'){
+  //   // 파일 프리뷰
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(e.target.files[0]);
+  //   reader.onloadend = () =>{
+  //     // console.log('reader',reader.result)
+  //     setPreview(reader.result)
+  //   }
+  //   setFile(fileRef.current.value)
     
-    setFile(e.target.files[0]);
+  //   setFile(e.target.files[0]);
   //   setInputs({
   //     ...inputs,
   //     [e.target.name]:e.target.files[0],
   // })
-  // 사진도 경로로
-  }
-  else{
-  console.log("value",e.target.value)
+  // // 사진도 경로로
+  // }
+  // else{
+  // console.log("value",e.target.value)
   setInputs({
       ...inputs,
       [e.target.name]:e.target.value,
   })
+// }
 }
-}
-const fileRef = useRef();
-const uploadFileBt = (e) =>{
-  e.preventDefault();
-  fileRef.current.click();
-}
+//-- 파일 업로드 클릭 호출 --//
+// const fileRef = useRef();
+// const uploadFileBt = (e) =>{
+//   e.preventDefault();
+//   fileRef.current.click();
+// }
 
   return (
     <div className='whiteContainer px-10 lg:px-32'>
@@ -93,6 +94,7 @@ const uploadFileBt = (e) =>{
                     maxLength={45}
                     onChange={handleChange}
                     defaultValue={inputs.title}
+                    required
                   />
                 </div>
               </div>
@@ -106,15 +108,16 @@ const uploadFileBt = (e) =>{
                   id="content"
                   name="content"
                   rows={3}
-                  className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-yellow-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-300 sm:text-sm sm:leading-6"
+                  className="block w-full min-h-52 rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-yellow-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-300 sm:text-sm sm:leading-6"
                   placeholder='내용을 입력해주세요'
                   maxLength={256}
                   onChange={handleChange}
                   defaultValue={inputs.content}
+                  required
                 />
               </div>
             </div>
-            <div className="col-span-full">
+            {/* <div className="col-span-full">
               <label htmlFor="cover-photo" className="block text-sm font-tenada leading-6 text-gray-900">
                 사진 업로드
               </label>
@@ -138,12 +141,12 @@ const uploadFileBt = (e) =>{
                   <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 
-        <div className="border-b border-gray-900/10 pb-12">
-          <h2 className="text-base font-tenada leading-7 text-gray-900">체크 사항</h2>
+        {/* <div className="border-b border-gray-900/10 pb-12"> */}
+          {/* <h2 className="text-base font-tenada leading-7 text-gray-900">체크 사항</h2> */}
 
           {/* <div className="mt-2 space-y-10">
             <fieldset>
@@ -183,7 +186,7 @@ const uploadFileBt = (e) =>{
               </div>
             </fieldset>
           </div> */}
-        </div>
+        {/* </div> */}
       </div>
 
       <div className="mt-6 flex items-center justify-end gap-x-6">
